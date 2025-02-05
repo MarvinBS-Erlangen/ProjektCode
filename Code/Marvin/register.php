@@ -41,12 +41,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/register.css">
     <title>Registrieren</title>
 </head>
+
 <body>
     <div class="form-container">
         <h2 class="signup-title">Registrieren</h2>
@@ -63,12 +65,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <label for="password">Passwort:</label>
             <input type="password" id="password" name="Password_Hash" required><br>
 
-            <div class="agb-container"><div class="label-container"><label for="agb">Ich stimme den <a href="agb.html" target="_blank">AGB</a> zu:</label></div>
-            <div class="checkbox-container"><input type="checkbox" id="agb" name="AGB" required></div></div><br>
+            <div class="agb-container">
+                <div class="label-container"><label for="agb">Ich stimme den <a href="agb.html" target="_blank">AGB</a> zu:</label></div>
+                <div class="checkbox-container"><input type="checkbox" id="agb" name="AGB" required></div>
+            </div><br>
 
             <input type="submit" id="btn-signup" value="Registrieren">
         </form>
         <p class="already-registered">Bereits registriert? <a href="login.php">Anmelden</a></p>
     </div>
 </body>
+
 </html>

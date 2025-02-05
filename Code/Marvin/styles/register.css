@@ -56,9 +56,8 @@ input {
     font-size: 14px; /* Smaller font size for "already registered" text */
 }
 
-.already-registered:hover{
+.already-registered:hover {
     cursor: pointer;
-
 }
 
 .already-registered > a {
@@ -66,7 +65,6 @@ input {
     color: green;
     font-size: 14px; /* Same font size for the link */
     cursor: pointer;
-
 }
 
 .agb-container {
