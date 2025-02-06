@@ -7,7 +7,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $vornameKunde = $_POST['Vorname'];
     $nachnameKunde = $_POST['Nachname'];
     $emailKunde = $_POST['EMail'];
+    $passwordKundeUnhashed = $_POST['Password_Hash'];
     $passwordKunde = password_hash($_POST['Password_Hash'], PASSWORD_DEFAULT);
+    $confirmPassword = $_POST['Confirm_Password'];
+
+     // Überprüfen, ob die Passwörter übereinstimmen
+     if ($passwordKundeUnhashed !== $confirmPassword) {
+        echo "<p class='error'>Passwörter not the Uebereinstimming.</p>";
+    } else {
 
     // Benutzungung von prst -> Prepared statement um SQL Injections zu verhindern
     $prst = $conn->prepare("SELECT KundenID FROM kunde WHERE EMail = ?");
@@ -39,6 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $prst->close();
     $conn->close();
 }
+}
 ?>
 
 <!DOCTYPE html>
@@ -66,6 +74,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <label for="password">Passwort:</label>
             <input type="password" id="password" name="Password_Hash" required><br>
+
+            <label for="Confirm_Password">Passwort bestätigen:</label>
+            <input type="password" id="Confirm_Password" name="Confirm_Password" required>
 
             <div class="agb-container">
                 <div class="label-container"><label for="agb">Ich stimme den <a href="agb.html" target="_blank">AGB</a> zu:</label></div>
