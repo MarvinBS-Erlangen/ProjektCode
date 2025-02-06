@@ -6,35 +6,37 @@ if (!isset($_SESSION['warenkorb'])) {
     $_SESSION['warenkorb'] = [];
 }
 
-if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['id'])) {
-    $produkt_id = $_GET['id'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $data = json_decode(file_get_contents('php://input'), true);
+    $action = $data['action'] ?? '';
+    $produkt_id = $data['id'] ?? '';
 
-    // SQL-Abfrage, um das Produkt abzurufen
-    $sql = "SELECT ProduktID, Produktname, Preis FROM produkt WHERE ProduktID = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $produkt_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $produkt = $result->fetch_assoc();
+    if ($action === 'add' && $produkt_id) {
+        $sql = "SELECT ProduktID, Produktname, Preis FROM produkt WHERE ProduktID = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $produkt_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $produkt = $result->fetch_assoc();
 
-    if ($produkt) {
-        // Produkt zum Warenkorb hinzufügen
-        if (isset($_SESSION['warenkorb'][$produkt_id])) {
-            $_SESSION['warenkorb'][$produkt_id]['menge']++;
-        } else {
-            $_SESSION['warenkorb'][$produkt_id] = [
-                'ProduktID' => $produkt['ProduktID'],
-                'Produktname' => $produkt['Produktname'],
-                'Preis' => $produkt['Preis'],
-                'menge' => 1
-            ];
+        if ($produkt) {
+            if (isset($_SESSION['warenkorb'][$produkt_id])) {
+                $_SESSION['warenkorb'][$produkt_id]['menge']++;
+            } else {
+                $_SESSION['warenkorb'][$produkt_id] = [
+                    'ProduktID' => $produkt['ProduktID'],
+                    'Produktname' => $produkt['Produktname'],
+                    'Preis' => $produkt['Preis'],
+                    'menge' => 1
+                ];
+            }
         }
+        echo json_encode(['status' => 'success']);
+        exit();
     }
-    header("Location: warenkorb.php");
-    exit();
 }
 
-if (isset($_GET['action']) && $_GET['action'] == 'remove' && isset($_GET['id'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] == 'remove' && isset($_GET['id'])) {
     $produkt_id = $_GET['id'];
     if (isset($_SESSION['warenkorb'][$produkt_id])) {
         unset($_SESSION['warenkorb'][$produkt_id]);
