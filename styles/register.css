@@ -7,38 +7,115 @@ body {
     min-height: 100vh;
     width: 100vw;
     font-family: 'Roboto', sans-serif;
+    position: relative;
+}
+
+/* Header Styles */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 0.5px solid black;
+    background-color: #C2F1C8; /* Light green */
+    /* box-shadow: 0 3px 30px rgba(0, 0, 0, 0.5); */
+    height: clamp(3rem, 5rem, 7rem);
+    width: 100vw;
+    top: 0;
+    position: absolute;
+}
+
+/* Title Styles */
+.header-title {
+    flex: 1;
+    font-size: 1.5rem;
+    margin-left: 2rem;
+    color: black;
+}
+
+.title > a {
+    text-decoration: none;
+}
+.title {
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: black;
+}
+
+/* Navigation Links */
+.nav-links {
+    display: flex;
+    gap: 1rem;
+    margin-right: 2rem;
+    width: 40vw;
+}
+
+.nav-list {
+    display: flex;
+    list-style-type: none;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-list li a {
+    text-decoration: none;
+    font-size: 1.2rem;
+    color: black;
+}
+
+/* Cart Container */
+.cart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-right: 2rem;
+    margin-left: 2rem;
+}
+
+.cart-icon {
+    font-size: 1.5rem;
+}
+
+.cart-icon:hover{
+    cursor: pointer;
+}
+
+.items-in-cart {
+    font-size: 1rem;
 }
 
 .form-container {
-    /* border: 1px solid black; */
-    border-radius: 10px;
-    padding: 20px; /* Reduce padding to make the form more compact */
+    border-radius: 8px;  /* Etwas kleinere Abrundung */
+    padding: 15px;  /* Etwas weniger Padding */
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 350px; /* Smaller width */
+    max-width: 300px;  /* Noch kleinere Breite */
     box-sizing: border-box;
-    box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);  /* Dezenterer Schatten */
+    height: auto;  /* Höhe automatisch anpassen */
+    margin: 0 auto;  /* Zentrieren */
 }
 
 label {
-    width: 100%;
-    margin-bottom: 5px;
-    font-size: 14px; /* Smaller font size */
+    margin-bottom: 4px;  /* Weniger Abstand zwischen Label und Input */
+    font-size: 12px;  /* Kleinere Schriftgröße */
 }
 
 input {
     width: 100%;
-    padding: 6px; /* Smaller padding for inputs */
-    margin-bottom: 10px;
-    font-size: 14px; /* Smaller font size for inputs */
+    padding: 5px;  /* Weniger Innenabstand für die Inputs */
+    margin-bottom: 8px;  /* Weniger Abstand zwischen den Eingabefeldern */
+    font-size: 12px;  /* Kleinere Schriftgröße */
     box-sizing: border-box;
+    height: 1.5rem;  /* Kleinere Höhe */
 }
 
 .signup-title {
     text-align: center;
-    margin-bottom: 15px; /* Reduced space below title */
-    font-size: 20px; /* Smaller font size for title */
+    margin: 0 auto;
+    font-size: 18px;  /* Kleinere Schriftgröße */
 }
 
 #btn-signup {
@@ -46,45 +123,71 @@ input {
     color: white;
     border: none;
     border-radius: 5px;
-    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.5);
-    padding: 8px 12px; /* Adjusted button padding */
-    font-size: 14px; /* Smaller font size for button */
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);  /* Dezenterer Schatten */
+    padding: 6px 10px;  /* Kleinere Button-Padding */
+    font-size: 12px;  /* Kleinere Schriftgröße für den Button */
+    height: 30px;
+
 }
 
 .already-registered {
     text-align: center;
-    font-size: 14px; /* Smaller font size for "already registered" text */
-}
-
-.already-registered:hover {
-    cursor: pointer;
+    font-size: 12px;  /* Kleinere Schriftgröße für den Text */
 }
 
 .already-registered > a {
     text-decoration: none;
     color: green;
-    font-size: 14px; /* Same font size for the link */
-    cursor: pointer;
+    font-size: 12px;  /* Gleiche Schriftgröße für den Link */
 }
 
 .agb-container {
     display: flex;
-    align-items: center; /* Vertically align label and checkbox */
+    align-items: center;
     justify-content: flex-start;
-    gap: 5px; /* Adjust space between label and checkbox */
-}
-
-.label-container {
-    display: flex;
-    align-items: center; /* Center the label vertically */
-    margin-right: 5px; /* Optional: space between the label and checkbox */
+    gap: 4px;  /* Weniger Abstand zwischen Label und Checkbox */
 }
 
 .checkbox-container {
     display: flex;
-    align-items: center; /* Center the checkbox vertically */
+    align-items: center;
     justify-content: center;
     text-align: center;
 }
 
 
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0.5px solid black;
+    background-color: #C2F1C8; /* Light green */
+    /* box-shadow: 0 3px 30px rgba(0, 0, 0, 0.5); */
+    height: clamp(3rem, 5rem, 7rem);
+    width: 100vw;
+    bottom: 0;
+    position: absolute;
+}
+
+.footer-list {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 1rem;
+    margin-right: 30px;
+    width: 80vw;
+}
+
+.footer-list > li {
+    display: flex;
+    list-style-type: none;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-list li a {
+    text-decoration: none;
+    font-size: 1.2rem;
+    color: black;
+}

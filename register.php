@@ -56,24 +56,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/register.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Registrieren</title>
 </head>
 
 <body>
+
+<?php include 'header.php'; ?>
+
     <div class="form-container">
         <h2 class="signup-title">Registrieren</h2>
         <form action="register.php" method="post">
             <label for="vorname">Vorname:</label>
-            <input type="text" id="vorname" name="Vorname" required><br>
+            <input type="text" id="vorname" name="Vorname" required>
 
             <label for="nachname">Nachname:</label>
-            <input type="text" id="nachname" name="Nachname" required><br>
+            <input type="text" id="nachname" name="Nachname" required>
 
             <label for="email">Email:</label>
-            <input type="email" id="email" name="EMail" required><br>
+            <input type="email" id="email" name="EMail" required>
 
             <label for="password">Passwort:</label>
-            <input type="password" id="password" name="Password_Hash" required><br>
+            <input type="password" id="password" name="Password_Hash" required>
 
             <label for="Confirm_Password">Passwort bestätigen:</label>
             <input type="password" id="Confirm_Password" name="Confirm_Password" required>
@@ -81,13 +87,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="agb-container">
                 <div class="label-container"><label for="agb">Ich stimme den <a href="agb.html" target="_blank">AGB</a> zu:</label></div>
                 <div class="checkbox-container"><input type="checkbox" id="agb" name="AGB" required></div>
-            </div><br>
+            </div>
 
             <input type="submit" id="btn-signup" value="Registrieren">
         </form>
         <p class="already-registered">Bereits registriert? <a href="login.php">Anmelden</a></p>
     </div>
+
+    <?php include 'footer.php'; ?>
+
 </body>
-<!-- test 1 -->
 
 </html>
