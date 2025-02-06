@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 body {
     display: flex;
     flex-direction: column;
@@ -88,3 +89,95 @@ input {
 }
 
 /*  */
+=======
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    min-height: 100vh;
+    width: 100vw;
+    font-family: 'Roboto', sans-serif;
+}
+
+.form-container {
+    /* border: 1px solid black; */
+    border-radius: 10px;
+    padding: 20px; /* Reduce padding to make the form more compact */
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 350px; /* Smaller width */
+    box-sizing: border-box;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+}
+
+label {
+    width: 100%;
+    margin-bottom: 5px;
+    font-size: 14px; /* Smaller font size */
+}
+
+input {
+    width: 100%;
+    padding: 6px; /* Smaller padding for inputs */
+    margin-bottom: 10px;
+    font-size: 14px; /* Smaller font size for inputs */
+    box-sizing: border-box;
+}
+
+.signup-title {
+    text-align: center;
+    margin-bottom: 15px; /* Reduced space below title */
+    font-size: 20px; /* Smaller font size for title */
+}
+
+#btn-signup {
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.5);
+    padding: 8px 12px; /* Adjusted button padding */
+    font-size: 14px; /* Smaller font size for button */
+}
+
+.already-registered {
+    text-align: center;
+    font-size: 14px; /* Smaller font size for "already registered" text */
+}
+
+.already-registered:hover {
+    cursor: pointer;
+}
+
+.already-registered > a {
+    text-decoration: none;
+    color: green;
+    font-size: 14px; /* Same font size for the link */
+    cursor: pointer;
+}
+
+.agb-container {
+    display: flex;
+    align-items: center; /* Vertically align label and checkbox */
+    justify-content: flex-start;
+    gap: 5px; /* Adjust space between label and checkbox */
+}
+
+.label-container {
+    display: flex;
+    align-items: center; /* Center the label vertically */
+    margin-right: 5px; /* Optional: space between the label and checkbox */
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center; /* Center the checkbox vertically */
+    justify-content: center;
+    text-align: center;
+}
+
+/*  */
+>>>>>>> newCoffeOnTheLaptopMacTop-branch
