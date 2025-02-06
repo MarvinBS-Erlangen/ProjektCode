@@ -11,7 +11,7 @@ try {
 
 // Verarbeitung des Formulars
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $zutatname = $_POST['zutatname'] ?? '';
+    $zutatname = $_POST['zutatenname'] ?? '';
     $beschreibung = $_POST['beschreibung'] ?? '';
 
     // Validierung
@@ -19,11 +19,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "<p style='color: red;'>Zutatname ist ein Pflichtfeld.</p>";
     } else {
         // SQL-Befehl zum Einfügen einer Zutat
-        $sql = "INSERT INTO Zutat (Zutatname, Beschreibung) VALUES (:zutatname, :beschreibung)";
+        $sql = "INSERT INTO Zutat (Zutatenname, Beschreibung) VALUES (:zutatenname, :beschreibung)";
         
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
-            ':zutatname' => $zutatname,
+            ':zutatenname' => $zutatname,
             ':beschreibung' => $beschreibung
         ]);
         
@@ -41,8 +41,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <h1>Zutat hinzufügen</h1>
     <form method="POST" action="ZutatAdmin.php">
-        <label for="zutatname">Zutatname:</label>
-        <input type="text" id="zutatname" name="zutatname" required><br><br>
+        <label for="zutatenname">Zutatenname:</label>
+        <input type="text" id="zutatenname" name="zutatenname" required><br><br>
         
         <label for="beschreibung">Beschreibung:</label>
         <textarea id="beschreibung" name="beschreibung"></textarea><br><br>
