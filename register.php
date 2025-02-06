@@ -1,6 +1,6 @@
 <?php
 session_start();
-//Verbindung zur Datenbank herstellen 
+// Verbindung zur Datenbank herstellen
 include 'connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $prst->bind_param("s", $emailKunde);
     // ausfuehren des prst
     $prst->execute();
-    // Speichern der ergebnisse 
+    // Speichern der ergebnisse
     $prst->store_result();
 
     if ($prst->num_rows > 0) {
@@ -41,30 +41,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/register.css">
     <title>Registrieren</title>
 </head>
+
 <body>
-    <h2>Registrieren</h2>
-    <form action="register.php" method="post">
-        <label for="vorname">Vorname:</label>
-        <input type="text" id="vorname" name="Vorname" required><br><br>
-        
-        <label for="nachname">Nachname:</label>
-        <input type="text" id="nachname" name="Nachname" required><br><br>
-        
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="EMail" required><br><br>
-        
-        <label for="password">Passwort:</label>
-        <input type="password" id="password" name="Password_Hash" required><br><br>
-        
-        <label for="agb">Ich stimme den <a href="agb.html" target="_blank">AGB</a> zu:</label>
-        <input type="checkbox" id="agb" name="AGB" required><br><br>
-        
-        <input type="submit" value="Registrieren">
-    </form>
+    <div class="form-container">
+        <h2 class="signup-title">Registrieren</h2>
+        <form action="register.php" method="post">
+            <label for="vorname">Vorname:</label>
+            <input type="text" id="vorname" name="Vorname" required><br>
+
+            <label for="nachname">Nachname:</label>
+            <input type="text" id="nachname" name="Nachname" required><br>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="EMail" required><br>
+
+            <label for="password">Passwort:</label>
+            <input type="password" id="password" name="Password_Hash" required><br>
+
+            <div class="agb-container">
+                <div class="label-container"><label for="agb">Ich stimme den <a href="agb.html" target="_blank">AGB</a> zu:</label></div>
+                <div class="checkbox-container"><input type="checkbox" id="agb" name="AGB" required></div>
+            </div><br>
+
+            <input type="submit" id="btn-signup" value="Registrieren">
+        </form>
+        <p class="already-registered">Bereits registriert? <a href="login.php">Anmelden</a></p>
+    </div>
 </body>
+<!-- test 1 -->
+
 </html>
