@@ -29,6 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // schaue ob das prst erfolreich ausgefuehrt wurde
         if ($prst->execute()) {
             echo "<p class='success'>Registration successful!</p>";
+            header("Location: login.php");
+            exit();
         } else {
             echo "<p class='error'>Error: " . $prst->error . "</p>";
         }
