@@ -1,0 +1,39 @@
+/* Reset margin, padding, and border for all elements */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Remove default list styling */
+ul, ol {
+    list-style: none;
+}
+
+/* Remove default table styling */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* Remove default form styling */
+input, button, textarea, select {
+    border: none;
+    background: none;
+    font: inherit;
+    color: inherit;
+}
+
+/* Remove default styling for links */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Make sure images and videos are responsive */
+img, video {
+    max-width: 100%;
+    height: auto;
+}

@@ -2,7 +2,7 @@
 session_start();
 
 // Verbindung zur Datenbank herstellen
-include 'connection.php';
+include '../database/connection.php';
 
 if (!isset($_SESSION['warenkorb'])) {
     $_SESSION['warenkorb'] = [];
@@ -41,19 +41,48 @@ if ($result->num_rows > 0) {
 }
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../public/styles/reset.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="../public/styles/index.css">
+        <title>Home</title>
+</head>
+
+<body>
+    <?php include './partials/header.php'; ?>
+
+
+    <main style="width: clamp(20rem, 70%, 100%);" class="main">
+
+    </main>
+    <?php include './partials/footer.php'; ?>
+
+
+</body>
+
+</html>
+
+
 <!-- Einbinden von Axios -->
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-function addToCart(produktID) {
-    axios.post('warenkorb.php', {
-        action: 'add',
-        id: produktID
-    })
-    .then(function (response) {
-        alert("Produkt wurde zum Warenkorb hinzugefügt");
-    })
-    .catch(function (error) {
-        console.error("Es gab einen Fehler beim Hinzufügen des Produkts zum Warenkorb:", error);
-    });
-}
+    function addToCart(produktID) {
+        axios.post('warenkorb.php', {
+                action: 'add',
+                id: produktID
+            })
+            .then(function(response) {
+                alert("Produkt wurde zum Warenkorb hinzugefügt");
+            })
+            .catch(function(error) {
+                console.error("Es gab einen Fehler beim Hinzufügen des Produkts zum Warenkorb:", error);
+            });
+    }
 </script>
