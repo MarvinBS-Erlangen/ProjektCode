@@ -75,5 +75,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <p class="already-registered">Bereits registriert? <a href="login.php">Anmelden</a></p>
     </div>
 </body>
+<!-- test 1 -->
 
 </html>
