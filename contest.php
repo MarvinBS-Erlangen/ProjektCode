@@ -12,9 +12,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['upload'])) {
 
     // Validierung der Bild-URL
     if (filter_var($bildurl, FILTER_VALIDATE_URL)) {
-        $sql = "INSERT INTO Bild (Bilddatei, Titel, KundenID) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO Bild (Bilddatei, Titel) VALUES (?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssi", $bildurl, $titel, $kundenID);
+        $stmt->bind_param("ss", $bildurl, $titel);
         $stmt->execute();
 
         echo "Bild erfolgreich hochgeladen.";
