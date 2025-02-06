@@ -27,11 +27,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['upload'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['bewerten'])) {
     $bildID = $_POST['bild_id'];
     $bewertungspunkte = (int)$_POST['bewertungspunkte'];
-    $kommentar = $_POST['kommentar'];
 
-    $sql = "INSERT INTO Bewertung (BildID, Bewertungspunkte, Kommentar, Bewertungsdatum) VALUES (?, ?, ?, NOW())";
+    $sql = "INSERT INTO Bewertung (BildID, Bewertungspunkte) VALUES (?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("iis", $bildID, $bewertungspunkte, $kommentar);
+    $stmt->bind_param("ii", $bildID, $bewertungspunkte);
     $stmt->execute();
 
     echo "Bewertung erfolgreich gespeichert.";
@@ -70,7 +69,6 @@ if ($result->num_rows > 0) {
         echo "<form action='' method='POST'>";
         echo "<input type='hidden' name='bild_id' value='" . $row['BildID'] . "'>";
         echo "Bewertung (1-5 Sterne): <input type='number' name='bewertungspunkte' min='1' max='5' required><br>";
-        echo "Kommentar: <input type='text' name='kommentar'><br>";
         echo "<button type='submit' name='bewerten'>Bewerten</button>";
         echo "</form>";
         echo "</div><hr>";
