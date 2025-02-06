@@ -3,7 +3,7 @@ session_start();
 
 
 // Verbindung zur Datenbank herstellen
-include 'connection.php';
+include '../database/connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $emailKunde = $_POST['EMail'];
@@ -45,16 +45,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="./styles/login.css">
+    <link rel="stylesheet" href="../public/styles/reset.css">
+    <link rel="stylesheet" href="../public/styles/login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../public/styles/index.css">
+    <title>Login</title>
+
+
 </head>
 
 <body>
 
-      <?php include 'header.php'; ?>
+    <?php include './partials/header.php'; ?>
 
 
 
@@ -73,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <p class="not-registered">Noch kein Konto? <a href="register.php">Registrieren</a></p>
     </div>
 
-    <?php include 'footer.php'; ?>
+    <?php include './partials/footer.php'; ?>
 
 </body>
 

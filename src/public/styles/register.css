@@ -1,0 +1,88 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    min-height: 100vh;
+    width: 100vw;
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+}
+
+
+.form-container {
+    border-radius: 8px;  /* Etwas kleinere Abrundung */
+    padding: 15px;  /* Etwas weniger Padding */
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;  /* Noch kleinere Breite */
+    box-sizing: border-box;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);  /* Dezenterer Schatten */
+    height: auto;  /* Höhe automatisch anpassen */
+    margin: 0 auto;  /* Zentrieren */
+}
+
+label {
+    margin-bottom: 4px;  /* Weniger Abstand zwischen Label und Input */
+    font-size: 12px;  /* Kleinere Schriftgröße */
+}
+
+input {
+    width: 100%;
+    padding: 5px;  /* Weniger Innenabstand für die Inputs */
+    margin-bottom: 8px;  /* Weniger Abstand zwischen den Eingabefeldern */
+    font-size: 12px;  /* Kleinere Schriftgröße */
+    box-sizing: border-box;
+    height: 1.5rem;  /* Kleinere Höhe */
+    border: 1px solid black;
+    border-radius: 3px;
+}
+
+.signup-title {
+    text-align: center;
+    margin: 0 auto;
+    font-size: 18px;  /* Kleinere Schriftgröße */
+}
+
+#btn-signup {
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);  /* Dezenterer Schatten */
+    padding: 6px 10px;  /* Kleinere Button-Padding */
+    font-size: 12px;  /* Kleinere Schriftgröße für den Button */
+    height: 30px;
+
+}
+
+/* #btn-signup:hover {
+    cursor: pointer;
+} */
+
+.already-registered {
+    text-align: center;
+    font-size: 12px;  /* Kleinere Schriftgröße für den Text */
+}
+
+.already-registered > a {
+    text-decoration: none;
+    color: green;
+    font-size: 12px;  /* Gleiche Schriftgröße für den Link */
+}
+
+.agb-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 4px;  /* Weniger Abstand zwischen Label und Checkbox */
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
