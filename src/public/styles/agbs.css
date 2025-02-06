@@ -1,0 +1,18 @@
+.button-container{
+    width: 60px;
+    height: 20px;
+    border-radius: 10px;
+    background-color: green;
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+}
+
+#btn-return {
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+}

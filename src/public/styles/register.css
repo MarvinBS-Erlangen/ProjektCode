@@ -58,6 +58,10 @@ input {
 
 }
 
+/* #btn-signup:hover {
+    cursor: pointer;
+} */
+
 .already-registered {
     text-align: center;
     font-size: 12px;  /* Kleinere Schriftgröße für den Text */
