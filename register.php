@@ -1,6 +1,6 @@
 <?php
 session_start();
-// Verbindung zur Datenbank herstellen
+// Verbindung zur Datenbank herstelle
 include 'connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
