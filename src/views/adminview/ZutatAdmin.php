@@ -1,6 +1,8 @@
 <?php
+// Admin check Script aufrufen
+include '../../comps/admincheck.php';
 // Verbindung zur Datenbank herstellen
-include '../database/connection.php';
+include '../../database/connection.php';
 
 try {
     $pdo = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);

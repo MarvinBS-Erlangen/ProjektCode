@@ -1,10 +1,8 @@
 <?php
-session_start();
-// Check if the User is in the Admin Session
-
-
+// Admin check Script aufrufen
+include '../../comps/admincheck.php';
 // Datenbankverbindung herstellen
-include '../database/connection.php';
+include '../../database/connection.php';
 
 // Bilder anzeigen und Bewertungsformular bereitstellen
 $sql = "SELECT b.BildID, b.Titel, b.Bilddatei, k.EMail 
