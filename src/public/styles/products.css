@@ -1,82 +1,98 @@
 html,
 body {
     height: 100%;
-    margin: 0;
     display: flex;
     flex-direction: column;
+    margin: 0 auto;
 }
 
 main {
+    padding: 1rem;
+    box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin: 5% auto;
-    border: 1px solid green;
-    width: 85vw;
-    background-color: lightblue;
-    min-height: 100vh;
-    flex: 1;
-    padding: 1%;
+}
+
+.main-title {
+    align-self: flex-start;
+    margin: 0 0 1% 5%;
 }
 
 .product-container {
-    width: 100%;
-    height: 100%;
-    border: 1px solid red;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: 150px; /* Erstellt automatisch so viele Zeilen mit 150px Höhe, wie nötig */
-    gap: 5%;
-    box-sizing: border-box;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(200px, 1fr)
+    ); /* Adjust the minmax value as needed */
+    gap: 2rem;
+    /* border: 1px solid red; */
+    box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
+    width: 90%; /* Ensures the container does not exceed the width of its parent */
 }
 
 .product {
+    position: relative;
+    min-height: 40vh;
     height: auto;
-    border: 1px solid orange;
+    padding: 1rem;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.8);
+    overflow: hidden; /* Ensure the image does not overflow the container */
 }
 
 .product-image {
     width: 100%;
-    height: 150px;
+    height: 70%;
     overflow: hidden; /* Prevents the image from overflowing */
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: transform 0.3s ease; /* Smooth transition for the zoom effect */
 }
 
 .product-image > img {
     width: 100%;
     height: 100%;
     object-fit: contain;
+    border: 1px solid purple;
+    transition: transform 0.3s ease; /* Smooth transition for the zoom effect */
+}
+
+.product:hover .product-image > img {
+    transform: scale(0.95); /* Zoom out the image slightly */
 }
 
 .product-info {
-    width: 100%;
-    height: 50%;
-    border: 1px solid blue;
     position: relative;
+    width: 100%;
+    min-height: clamp(3rem, 5rem, 7rem);
 }
 
-.product-info > .product-name {
+.product-name {
     position: absolute;
-    top: 5px;
-    left: 0;
+    top: 1%;
+    left: 1%;
     font-weight: bold;
+    font-size: 1.5rem;
 }
 
-.product-info > .product-price {
+.product-price {
     position: absolute;
-    bottom: 5px;
-    left: 0;
-    color: green;
-    font-weight: 500;
+    bottom: 1%;
+    left: 1%;
+    font-weight: bold;
+    font-size: 1.2rem;
 }
 
-.product-info > .cart-icon-container {
+.cart-icon {
     position: absolute;
-    bottom: 5px;
-    right: 5px;
+    bottom: 1%;
+    right: 1%;
+    font-size: 1.5rem;
+    cursor: pointer;
 }
 
 .product-info > .cart-icon-container > .cart-icon:hover {
@@ -87,8 +103,26 @@ main {
     transform: scale(0.95);
 }
 
-@media screen and (max-width: 748px) {
+@media (max-width: 1280px) {
     .product-container {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(
+            3,
+            1fr
+        ); /* 3 items per row on smaller screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .product-container {
+        grid-template-columns: repeat(
+            2,
+            1fr
+        ); /* 2 items per row on smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .product-container {
+        grid-template-columns: 1fr; /* 1 item per row on the smallest screens */
     }
 }

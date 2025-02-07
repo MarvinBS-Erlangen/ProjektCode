@@ -19,7 +19,68 @@
     <?php include './partials/header.php'; ?>
 
     <main class="main">
+        <h1 class="main-title">Produkte</h1>
         <div class="product-container">
+            <div class="product">
+                <div class="product-image">
+                    <img src="../public/assets/burger.png" alt="#">
+                </div>
+                <div class="product-info">
+                    <div class="product-name">Product Name</div>
+                    <div class="product-price">12.99€</div>
+                    <div class="cart-icon-container">
+                        <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="product">
+                <div class="product-image">
+                    <img src="../public/assets/burger.png" alt="#">
+                </div>
+                <div class="product-info">
+                    <div class="product-name">Product Name</div>
+                    <div class="product-price">12.99€</div>
+                    <div class="cart-icon-container">
+                        <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="product">
+                <div class="product-image">
+                    <img src="../public/assets/burger.png" alt="#">
+                </div>
+                <div class="product-info">
+                    <div class="product-name">Product Name</div>
+                    <div class="product-price">12.99€</div>
+                    <div class="cart-icon-container">
+                        <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="product">
+                <div class="product-image">
+                    <img src="../public/assets/burger.png" alt="#">
+                </div>
+                <div class="product-info">
+                    <div class="product-name">Product Name</div>
+                    <div class="product-price">12.99€</div>
+                    <div class="cart-icon-container">
+                        <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="product">
+                <div class="product-image">
+                    <img src="../public/assets/burger.png" alt="#">
+                </div>
+                <div class="product-info">
+                    <div class="product-name">Product Name</div>
+                    <div class="product-price">12.99€</div>
+                    <div class="cart-icon-container">
+                        <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                    </div>
+                </div>
+            </div>
             <div class="product">
                 <div class="product-image">
                     <img src="../public/assets/burger.png" alt="#">
