@@ -2,7 +2,7 @@
 session_start();
 
 // Datenbankverbindung herstellen
-include 'connection.php';
+include '../database/connection.php';
 
 
 // Bild hochladen und speichern
