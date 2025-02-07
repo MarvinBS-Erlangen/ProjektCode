@@ -6,4 +6,3 @@
         <li><a href="/kontakt">Kontakt</a></li>
     </ul>
 </footer>
-
