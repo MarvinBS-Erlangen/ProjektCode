@@ -1,6 +1,6 @@
 <?php
 // Verbindung zur Datenbank herstellen
-include 'connection.php';
+include '../database/connection.php';
 
 try {
     //erstelle eines PDO Objectes fuer den zugriff auf die Datenbank
