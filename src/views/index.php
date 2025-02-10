@@ -10,6 +10,26 @@ if (!isset($_SESSION['warenkorb'])) {
     $_SESSION['warenkorb'] = [];
 }
 
+// Funktion zum Hinzufügen eines Produkts zum Warenkorb
+function addToCart($produktID) {
+    if (!isset($_SESSION['warenkorb'][$produktID])) {
+        $_SESSION['warenkorb'][$produktID] = 0;
+    }
+    $_SESSION['warenkorb'][$produktID]++;
+}
+
+// Überprüfen, ob ein Produkt zum Warenkorb hinzugefügt werden soll
+if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['id'])) {
+    addToCart($_GET['id']);
+    header("Location: index.php");
+    exit();
+}
+
+// Anzahl der Artikel im Warenkorb zählen
+function getCartCount() {
+    return array_sum($_SESSION['warenkorb']);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -22,12 +42,6 @@ if (!isset($_SESSION['warenkorb'])) {
     <link rel="stylesheet" href="../public/styles/index.css">
     <link rel="stylesheet" href="../public/styles/partialStyles/header.css">
     <link rel="stylesheet" href="../public/styles/partialStyles/footer.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- Einbinden von Axios -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="../handlers/cart-icon-handler.js" defer></script>
     <title>Home</title>
 </head>
 
@@ -36,6 +50,7 @@ if (!isset($_SESSION['warenkorb'])) {
 
     <main class="main">
         <a href='warenkorb.php'>Warenkorb anzeigen</a><br><br>
+        <span id="cart-count" style="font-size: 1.5em; font-weight: bold;"><?php echo getCartCount(); ?></span>
 
         <?php
         $sql = "SELECT ProduktID, Produktname, Beschreibung, Preis, Energiewert, BildURL FROM produkt";
@@ -60,7 +75,7 @@ if (!isset($_SESSION['warenkorb'])) {
                         <td>{$row['Preis']} €</td>
                         <td>{$row['Energiewert']} kcal</td>
                         <td><img src='{$row['BildURL']}' alt='{$row['Produktname']}' width='100'></td>
-                        <td><button onclick='addToCart({$row['ProduktID']})'>In den Warenkorb</button></td>
+                        <td><a href='index.php?action=add&id={$row['ProduktID']}'>In den Warenkorb</a></td>
                       </tr>";
             }
             echo "</table>";
@@ -71,22 +86,6 @@ if (!isset($_SESSION['warenkorb'])) {
     </main>
 
     <?php include './partials/footer.php'; ?>
-
-
-    <script>
-        function addToCart(produktID) {
-            axios.post('warenkorb.php', {
-                    action: 'add',
-                    id: produktID
-                })
-                .then(function(response) {
-                    alert("Produkt wurde zum Warenkorb hinzugefügt");
-                })
-                .catch(function(error) {
-                    console.error("Fehler beim Hinzufügen zum Warenkorb:", error);
-                });
-        }
-    </script>
 
 </body>
 
