@@ -2,17 +2,17 @@
 session_start();
 include '../database/connection.php';
 
-if (!isset($_SESSION['warenkorb'])) {
-    $_SESSION['warenkorb'] = [];
+if (!isset($_SESSION['warenkorb_Produkt'])) {
+    $_SESSION['warenkorb_Produkt'] = [];
 }
 
 // Produkt aus dem Warenkorb entfernen
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] == 'remove' && isset($_GET['id'])) {
     $produkt_id = $_GET['id'];
-    if (isset($_SESSION['warenkorb'][$produkt_id])) {
-        $_SESSION['warenkorb'][$produkt_id]--;
-        if ($_SESSION['warenkorb'][$produkt_id] <= 0) {
-            unset($_SESSION['warenkorb'][$produkt_id]);
+    if (isset($_SESSION['warenkorb_Produkt'][$produkt_id])) {
+        $_SESSION['warenkorb_Produkt'][$produkt_id]--;
+        if ($_SESSION['warenkorb_Produkt'][$produkt_id] <= 0) {
+            unset($_SESSION['warenkorb_Produkt'][$produkt_id]);
         }
     }
     header("Location: warenkorb.php");
@@ -21,14 +21,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['act
 
 // Warenkorb leeren
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] === 'clear') {
-    $_SESSION['warenkorb'] = [];
+    $_SESSION['warenkorb_Produkt'] = [];
     header("Location: warenkorb.php");
     exit();
 }
 
 // Warenkorb anzeigen
 echo "<h1>Warenkorb</h1>";
-if (!empty($_SESSION['warenkorb'])) {
+if (!empty($_SESSION['warenkorb_Produkt'])) {
     echo "<table border='1'>
             <tr>
                 <th>ProduktID</th>
@@ -39,7 +39,7 @@ if (!empty($_SESSION['warenkorb'])) {
                 <th>Aktion</th>
             </tr>";
     $gesamtpreis = 0;
-    foreach ($_SESSION['warenkorb'] as $produkt_id => $menge) {
+    foreach ($_SESSION['warenkorb_Produkt'] as $produkt_id => $menge) {
         $sql = "SELECT ProduktID, Produktname, Preis FROM produkt WHERE ProduktID = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $produkt_id);

@@ -1,0 +1,3 @@
+UserID = Saves the session ID of the cureent logedin user
+AdminID = Saves the Session ID of the current logedin admin
+Warenkorb = Saves Produkt ID of useradds products

@@ -6,16 +6,16 @@ if (session_status() === PHP_SESSION_NONE) {
 // Verbindung zur Datenbank herstellen
 include '../database/connection.php';
 
-if (!isset($_SESSION['warenkorb'])) {
-    $_SESSION['warenkorb'] = [];
+if (!isset($_SESSION['warenkorb_Produkt'])) {
+    $_SESSION['warenkorb_Produkt'] = [];
 }
 
 // Funktion zum Hinzufügen eines Produkts zum Warenkorb
 function addToCart($produktID) {
-    if (!isset($_SESSION['warenkorb'][$produktID])) {
-        $_SESSION['warenkorb'][$produktID] = 0;
+    if (!isset($_SESSION['warenkorb_Produkt'][$produktID])) {
+        $_SESSION['warenkorb_Produkt'][$produktID] = 0;
     }
-    $_SESSION['warenkorb'][$produktID]++;
+    $_SESSION['warenkorb_Produkt'][$produktID]++;
 }
 
 // Überprüfen, ob ein Produkt zum Warenkorb hinzugefügt werden soll
@@ -27,7 +27,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['id'])) {
 
 // Anzahl der Artikel im Warenkorb zählen
 function getCartCount() {
-    return array_sum($_SESSION['warenkorb']);
+    return array_sum($_SESSION['warenkorb_Produkt']);
 }
 
 ?>

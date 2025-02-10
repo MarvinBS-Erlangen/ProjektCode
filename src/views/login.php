@@ -26,6 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (password_verify($passwordKunde, $hashedPassword)) {
             echo "<p class='success'>Login successful!</p>";
+            $_SESSION['UserID'] = $kundeID;
         } else {
             echo "<p class='error'>Invalid password. Please try again.</p>";
         }
