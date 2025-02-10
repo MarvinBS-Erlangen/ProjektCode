@@ -28,6 +28,14 @@
     margin-right: 1rem;
 }
 
+.cart-counter-container {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    justify-content: flex-end;
+    margin-right: 1%;
+}
+
 .cart-container {
     display: flex;
     align-items: center;
@@ -45,6 +53,6 @@
     cursor: pointer;
 }
 
-.items-in-cart {
+.items-counter {
     font-size: 1.2rem;
 }
