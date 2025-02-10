@@ -11,12 +11,8 @@
             <li class="btn-signup"><a href="./register.php">Sign Up</a></li>
         </ul>
     </div>
-    <div class="cart-counter-container">
     <div class="cart-container">
         <i class="fa-solid fa-cart-shopping cart-icon"></i>
-    </div>
-    <div class="counter-container">
-        <span class="items-counter">0</span>
-    </div>
+        <span class="items-in-cart">0</span>
     </div>
 </header>
