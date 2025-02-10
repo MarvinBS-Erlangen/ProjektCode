@@ -6,8 +6,10 @@
     border: 0.5px solid black;
     background-color: #c2f1c8; /* Light green */
     /* box-shadow: 0 3px 30px rgba(0, 0, 0, 0.5); */
-    min-height: 80px;
+    height: clamp(3rem, 5rem, 7rem);
     width: 100vw;
+    top: 0;
+    position: absolute;
 }
 
 /* Title Styles */
