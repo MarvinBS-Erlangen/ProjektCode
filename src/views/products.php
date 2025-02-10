@@ -23,7 +23,7 @@
         <div class="product-container">
             <div class="product">
                 <div class="product-image">
-                    <img src="../public/assets/burger.png" alt="#">
+                    <img src="../public/assets/test1.png" alt="#">
                 </div>
                 <div class="product-info">
                     <div class="product-name">Product Name</div>

@@ -22,12 +22,8 @@ main {
 
 .product-container {
     display: grid;
-    grid-template-columns: repeat(
-        auto-fit,
-        minmax(200px, 1fr)
-    ); /* Adjust the minmax value as needed */
+    grid-template-columns: repeat(4, 1fr); /* 4 items per row */
     gap: 2rem;
-    /* border: 1px solid red; */
     box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
     width: 90%; /* Ensures the container does not exceed the width of its parent */
 }
@@ -37,15 +33,14 @@ main {
     min-height: 40vh;
     height: auto;
     padding: 1rem;
-    border-radius: 10px;
     background-color: rgb(255, 255, 255);
-    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.8);
     overflow: hidden; /* Ensure the image does not overflow the container */
 }
 
 .product-image {
     width: 100%;
-    height: 70%;
+    height: auto;
+    aspect-ratio: 1 / 1; /* This makes the container square */
     overflow: hidden; /* Prevents the image from overflowing */
     display: flex;
     justify-content: center;
@@ -56,9 +51,9 @@ main {
 .product-image > img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    border: 1px solid purple;
+    object-fit: cover; /* Ensures the image covers the container */
     transition: transform 0.3s ease; /* Smooth transition for the zoom effect */
+    border: 1px solid red;
 }
 
 .product:hover .product-image > img {
@@ -75,8 +70,7 @@ main {
     position: absolute;
     top: 1%;
     left: 1%;
-    font-weight: bold;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
 }
 
 .product-price {
@@ -85,6 +79,7 @@ main {
     left: 1%;
     font-weight: bold;
     font-size: 1.2rem;
+    color: green;
 }
 
 .cart-icon {

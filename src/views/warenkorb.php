@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'connection.php';
+include '../database/connection.php';
 
 if (!isset($_SESSION['warenkorb'])) {
     $_SESSION['warenkorb'] = [];
@@ -79,4 +79,3 @@ if (!empty($_SESSION['warenkorb'])) {
 } else {
     echo "<p>Ihr Warenkorb ist leer.</p>";
 }
-?>
