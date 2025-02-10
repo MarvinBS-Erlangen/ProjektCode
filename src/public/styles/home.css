@@ -1,0 +1,36 @@
+body {
+    width: 100vw;
+    position: relative;
+}
+
+img {
+    display: block;
+
+    max-width: 70%;
+
+    margin: 0 auto;
+
+    padding-top: 50px;
+}
+
+h1 {
+    text-align: center;
+
+    font-weight: 500;
+
+    text-transform: uppercase;
+
+    font-family: roboto;
+}
+
+p {
+    font-family: roboto;
+
+    max-width: 70%;
+
+    margin: 0 auto;
+
+    text-align: justify;
+
+    padding-top: 50px;
+}
