@@ -6,41 +6,22 @@ if (!isset($_SESSION['warenkorb'])) {
     $_SESSION['warenkorb'] = [];
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $data = json_decode(file_get_contents('php://input'), true);
-    $action = $data['action'] ?? '';
-    $produkt_id = $data['id'] ?? '';
-
-    if ($action === 'add' && $produkt_id) {
-        $sql = "SELECT ProduktID, Produktname, Preis FROM produkt WHERE ProduktID = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("i", $produkt_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $produkt = $result->fetch_assoc();
-
-        if ($produkt) {
-            if (isset($_SESSION['warenkorb'][$produkt_id])) {
-                $_SESSION['warenkorb'][$produkt_id]['menge']++;
-            } else {
-                $_SESSION['warenkorb'][$produkt_id] = [
-                    'ProduktID' => $produkt['ProduktID'],
-                    'Produktname' => $produkt['Produktname'],
-                    'Preis' => $produkt['Preis'],
-                    'menge' => 1
-                ];
-            }
-        }
-        echo json_encode(['status' => 'success']);
-        exit();
-    }
-}
-
+// Produkt aus dem Warenkorb entfernen
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] == 'remove' && isset($_GET['id'])) {
     $produkt_id = $_GET['id'];
     if (isset($_SESSION['warenkorb'][$produkt_id])) {
-        unset($_SESSION['warenkorb'][$produkt_id]);
+        $_SESSION['warenkorb'][$produkt_id]--;
+        if ($_SESSION['warenkorb'][$produkt_id] <= 0) {
+            unset($_SESSION['warenkorb'][$produkt_id]);
+        }
     }
+    header("Location: warenkorb.php");
+    exit();
+}
+
+// Warenkorb leeren
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] === 'clear') {
+    $_SESSION['warenkorb'] = [];
     header("Location: warenkorb.php");
     exit();
 }
@@ -58,24 +39,35 @@ if (!empty($_SESSION['warenkorb'])) {
                 <th>Aktion</th>
             </tr>";
     $gesamtpreis = 0;
-    foreach ($_SESSION['warenkorb'] as $item) {
-        $gesamt = $item['Preis'] * $item['menge'];
-        $gesamtpreis += $gesamt;
-        echo "<tr>
-                <td>{$item['ProduktID']}</td>
-                <td>{$item['Produktname']}</td>
-                <td>{$item['Preis']}</td>
-                <td>{$item['menge']}</td>
-                <td>{$gesamt}</td>
-                <td><a href='warenkorb.php?action=remove&id={$item['ProduktID']}'>Entfernen</a></td>
-              </tr>";
+    foreach ($_SESSION['warenkorb'] as $produkt_id => $menge) {
+        $sql = "SELECT ProduktID, Produktname, Preis FROM produkt WHERE ProduktID = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $produkt_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $produkt = $result->fetch_assoc();
+
+        if ($produkt) {
+            $gesamt = $produkt['Preis'] * $menge;
+            $gesamtpreis += $gesamt;
+            echo "<tr>
+                    <td>{$produkt['ProduktID']}</td>
+                    <td>{$produkt['Produktname']}</td>
+                    <td>{$produkt['Preis']} €</td>
+                    <td>{$menge}</td>
+                    <td>{$gesamt} €</td>
+                    <td><a href='warenkorb.php?action=remove&id={$produkt['ProduktID']}'>Entfernen</a></td>
+                  </tr>";
+        }
     }
     echo "<tr>
             <td colspan='4'>Gesamtpreis</td>
-            <td>{$gesamtpreis}</td>
+            <td>{$gesamtpreis} €</td>
             <td></td>
           </tr>";
     echo "</table>";
+    echo "<br><a href='warenkorb.php?action=clear'><button>Warenkorb leeren</button></a>";
 } else {
     echo "<p>Ihr Warenkorb ist leer.</p>";
 }
+?>
