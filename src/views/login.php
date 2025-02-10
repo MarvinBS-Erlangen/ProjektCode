@@ -64,20 +64,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 
-    <div class="form-container">
-        <h2 class="login-title">Login</h2>
-        <form action="login.php" method="post">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="EMail" required>
+    <main>
+        <div class="form-container">
+            <h2 class="login-title">Login</h2>
+            <form action="login.php" method="post">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="EMail" required>
 
-            <label for="password">Passwort:</label>
-            <input type="password" id="password" name="Password" required>
+                <label for="password">Passwort:</label>
+                <input type="password" id="password" name="Password" required>
 
-            <input type="submit" id="btn-login" value="Login">
-        </form>
+                <input type="submit" id="btn-login" value="Login">
+            </form>
 
-        <p class="not-registered">Noch kein Konto? <a href="register.php">Registrieren</a></p>
-    </div>
+            <p class="not-registered">Noch kein Konto? <a href="register.php">Registrieren</a></p>
+        </div>
+    </main>
 
     <?php include './partials/footer.php'; ?>
 

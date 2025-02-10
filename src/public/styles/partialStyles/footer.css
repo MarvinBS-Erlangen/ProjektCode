@@ -6,7 +6,6 @@ footer {
     background-color: #c2f1c8; /* Light green */
     min-height: 80px;
     width: 100vw;
-
 }
 
 .footer-list {
@@ -30,4 +29,12 @@ footer {
     text-decoration: none;
     font-size: 1.2rem;
     color: black;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }

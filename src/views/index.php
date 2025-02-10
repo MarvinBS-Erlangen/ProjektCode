@@ -54,7 +54,6 @@ if ($result->num_rows > 0) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="../public/styles/index.css">
     <title>Home</title>
 </head>
 
@@ -62,9 +61,10 @@ if ($result->num_rows > 0) {
     <?php include './partials/header.php'; ?>
 
 
-    <main style="width: clamp(20rem, 70%, 100%);" class="main">
+    <main class="main">
 
     </main>
+
     <?php include './partials/footer.php'; ?>
 
 
@@ -74,7 +74,7 @@ if ($result->num_rows > 0) {
 
 
 <!-- Einbinden von Axios -->
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" defer></script>
 <script>
     function addToCart(produktID) {
         axios.post('warenkorb.php', {

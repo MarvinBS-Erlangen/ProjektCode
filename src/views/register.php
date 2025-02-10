@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Überprüfen, ob die Passwörter übereinstimmen
     if ($passwordKundeUnhashed !== $confirmPassword) {
-        echo "<p class='error'>Passwörter not the Uebereinstimming.</p>";
+        echo "<p class='error'>Passwörter stimmen nicht überein.</p>";
     } else {
 
         // Benutzungung von prst -> Prepared statement um SQL Injections zu verhindern
@@ -71,33 +71,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <?php include './partials/header.php'; ?>
 
-    <div class="form-container">
-        <h2 class="signup-title">Registrieren</h2>
-        <form action="register.php" method="post">
-            <label for="vorname">Vorname:</label>
-            <input type="text" id="vorname" name="Vorname" required>
+    <main>
+        <div class="form-container">
+            <h2 class="signup-title">Registrieren</h2>
+            <form action="register.php" method="post">
+                <label for="vorname">Vorname:</label>
+                <input type="text" id="vorname" name="Vorname" required>
 
-            <label for="nachname">Nachname:</label>
-            <input type="text" id="nachname" name="Nachname" required>
+                <label for="nachname">Nachname:</label>
+                <input type="text" id="nachname" name="Nachname" required>
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="EMail" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="EMail" required>
 
-            <label for="password">Passwort:</label>
-            <input type="password" id="password" name="Password_Hash" required>
+                <label for="password">Passwort:</label>
+                <input type="password" id="password" name="Password_Hash" required>
 
-            <label for="Confirm_Password">Passwort bestätigen:</label>
-            <input type="password" id="Confirm_Password" name="Confirm_Password" required>
+                <label for="Confirm_Password">Passwort bestätigen:</label>
+                <input type="password" id="Confirm_Password" name="Confirm_Password" required>
 
-            <div class="agb-container">
-                <div class="label-container"><label for="agb">Ich stimme den <a href="agb.html" target="_blank">AGB</a> zu:</label></div>
-                <div class="checkbox-container"><input type="checkbox" id="agb" name="AGB" required></div>
-            </div>
+                <div class="agb-container">
+                    <div class="label-container"><label for="agb">Ich stimme den <a href="agb.html" target="_blank">AGB</a> zu:</label></div>
+                    <div class="checkbox-container"><input type="checkbox" id="agb" name="AGB" required></div>
+                </div>
 
-            <input type="submit" id="btn-signup" value="Registrieren">
-        </form>
-        <p class="already-registered">Bereits registriert? <a href="login.php">Anmelden</a></p>
-    </div>
+                <input type="submit" id="btn-signup" value="Registrieren">
+            </form>
+            <p class="already-registered">Bereits registriert? <a href="login.php">Anmelden</a></p>
+        </div>
+    </main>
 
     <?php include './partials/footer.php'; ?>
 
