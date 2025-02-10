@@ -21,7 +21,7 @@ function addToCart($produktID) {
 // Überprüfen, ob ein Produkt zum Warenkorb hinzugefügt werden soll
 if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['id'])) {
     addToCart($_GET['id']);
-    header("Location: index.php");
+    header("Location: products.php");
     exit();
 }
 
@@ -75,7 +75,7 @@ function getCartCount() {
                         <td>{$row['Preis']} €</td>
                         <td>{$row['Energiewert']} kcal</td>
                         <td><img src='{$row['BildURL']}' alt='{$row['Produktname']}' width='100'></td>
-                        <td><a href='index.php?action=add&id={$row['ProduktID']}'>In den Warenkorb</a></td>
+                        <td><a href='products.php?action=add&id={$row['ProduktID']}'>In den Warenkorb</a></td>
                       </tr>";
             }
             echo "</table>";
