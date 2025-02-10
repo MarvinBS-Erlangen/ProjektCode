@@ -25,9 +25,10 @@ if (isset($_GET['action']) && $_GET['action'] == 'logout') {
     <p>Sie sind erfolgreich eingeloggt.</p>
     
     <ul>
-        <li><a href="contestAdmin.php">Contest Admin</a></li>
-        <li><a href="produktAdmin.php">Produkt Admin</a></li>
+        <li><a href="contestAdmin.php">Contest Freischalten</a></li>
+        <li><a href="produktAdmin.php">Produkte Bearbeiten</a></li>
         <li><a href="ZutatAdmin.php">Zutat Admin</a></li>
+        <li><a href="bestellungAdmin.php">Bestellungen</a></li>
         <li><a href="adminDashboard.php?action=logout">Abmelden</a></li>
     </ul>
 </body>
