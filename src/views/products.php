@@ -26,11 +26,6 @@ if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['id'])) {
     exit();
 }
 
-// // Anzahl der Artikel im Warenkorb zählen
-// function getCartCount()
-// {
-//     return array_sum($_SESSION['warenkorb_Produkt']);
-// }
 
 ?>
 
@@ -55,44 +50,38 @@ if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['id'])) {
     <?php include './partials/header.php'; ?>
 
     <main class="main">
+        <h1 class="main-title">Produkte</h1>
         <a href='warenkorb.php'>Warenkorb anzeigen</a><br><br>
         <span id="cart-count" style="font-size: 1.5em; font-weight: bold;"><?php echo getCartCount(); ?></span>
 
-        <?php
-        $sql = "SELECT ProduktID, Produktname, Beschreibung, Preis, Energiewert, BildURL FROM produkt";
-        $result = $conn->query($sql);
+        <div class="product-container">
+            <?php
+            $sql = "SELECT ProduktID, Produktname, Beschreibung, Preis, Energiewert, BildURL FROM produkt";
+            $result = $conn->query($sql);
 
-        if ($result->num_rows > 0) {
-            echo "<table border='1'>
-                    <tr>
-                        <th>ProduktID</th>
-                        <th>Produktname</th>
-                        <th>Beschreibung</th>
-                        <th>Preis</th>
-                        <th>Energiewert</th>
-                        <th>Bild</th>
-                        <th>Aktion</th>
-                    </tr>";
-            while ($row = $result->fetch_assoc()) {
-                echo "<tr>
-                        <td>{$row['ProduktID']}</td>
-                        <td>{$row['Produktname']}</td>
-                        <td>{$row['Beschreibung']}</td>
-                        <td>{$row['Preis']} €</td>
-                        <td>{$row['Energiewert']} kcal</td>
-                        <td><img src='{$row['BildURL']}' alt='{$row['Produktname']}' width='100'></td>
-                        <td><a href='products.php?action=add&id={$row['ProduktID']}'>In den Warenkorb</a></td>
-                      </tr>";
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo "<div class='product'>
+                            <div class='product-image'>
+                                <img src='{$row['BildURL']}' alt='{$row['Produktname']}'>
+                            </div>
+                            <div class='product-info'>
+                                <div class='product-name'>{$row['Produktname']}</div>
+                                <div class='product-price'>{$row['Preis']} €</div>
+                                <a href='products.php?action=add&id={$row['ProduktID']}' class='cart-icon'>
+                                    <i class='fa-solid fa-cart-shopping'></i>
+                                </a>
+                            </div>
+                          </div>";
+                }
+            } else {
+                echo "<p>Keine Produkte gefunden.</p>";
             }
-            echo "</table>";
-        } else {
-            echo "<p>Keine Produkte gefunden.</p>";
-        }
-        ?>
+            ?>
+        </div>
     </main>
 
     <?php include './partials/footer.php'; ?>
-
 </body>
 
 </html>
