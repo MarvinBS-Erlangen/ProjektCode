@@ -9,7 +9,6 @@ include '../database/connection.php';
 if (!isset($_SESSION['warenkorb'])) {
     $_SESSION['warenkorb'] = [];
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -20,6 +19,7 @@ if (!isset($_SESSION['warenkorb'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../public/styles/reset.css">
     <link rel="stylesheet" href="../public/styles/index.css">
+    <link rel="stylesheet" href="../public/styles/index-products.css">
     <link rel="stylesheet" href="../public/styles/partialStyles/header.css">
     <link rel="stylesheet" href="../public/styles/partialStyles/footer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
@@ -35,58 +35,31 @@ if (!isset($_SESSION['warenkorb'])) {
     <?php include './partials/header.php'; ?>
 
     <main class="main">
-        <a href='warenkorb.php'>Warenkorb anzeigen</a><br><br>
-
         <?php
         $sql = "SELECT ProduktID, Produktname, Beschreibung, Preis, Energiewert, BildURL FROM produkt";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
-            echo "<table border='1'>
-                    <tr>
-                        <th>ProduktID</th>
-                        <th>Produktname</th>
-                        <th>Beschreibung</th>
-                        <th>Preis</th>
-                        <th>Energiewert</th>
-                        <th>Bild</th>
-                        <th>Aktion</th>
-                    </tr>";
+            echo "<div class='product-grid'>";
             while ($row = $result->fetch_assoc()) {
-                echo "<tr>
-                        <td>{$row['ProduktID']}</td>
-                        <td>{$row['Produktname']}</td>
-                        <td>{$row['Beschreibung']}</td>
-                        <td>{$row['Preis']} €</td>
-                        <td>{$row['Energiewert']} kcal</td>
-                        <td><img src='{$row['BildURL']}' alt='{$row['Produktname']}' width='100'></td>
-                        <td><button onclick='addToCart({$row['ProduktID']})'>In den Warenkorb</button></td>
-                      </tr>";
+                echo "<div class='product'>
+                    <img src='{$row['BildURL']}' alt='{$row['Produktname']}' class='product-image'>
+                    <h2 class='product-name'>{$row['Produktname']}</h2>
+                    <p class='product-description'>{$row['Beschreibung']}</p>
+                    <p class='product-price'>{$row['Preis']} €</p>
+                    <p class='product-energy'>{$row['Energiewert']} kcal</p>
+                    <button class='add-to-cart' data-produkt-id='{$row['ProduktID']}'>In den Warenkorb</button>
+                  </div>";
             }
-            echo "</table>";
+            echo "</div>";
         } else {
             echo "<p>Keine Produkte gefunden.</p>";
         }
         ?>
     </main>
 
+
     <?php include './partials/footer.php'; ?>
-
-
-    <script>
-        function addToCart(produktID) {
-            axios.post('warenkorb.php', {
-                    action: 'add',
-                    id: produktID
-                })
-                .then(function(response) {
-                    alert("Produkt wurde zum Warenkorb hinzugefügt");
-                })
-                .catch(function(error) {
-                    console.error("Fehler beim Hinzufügen zum Warenkorb:", error);
-                });
-        }
-    </script>
 
 </body>
 

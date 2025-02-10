@@ -1,5 +1,18 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Verbindung zur Datenbank herstellen
+include '../database/connection.php';
+
+if (!isset($_SESSION['warenkorb'])) {
+    $_SESSION['warenkorb'] = [];
+}
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 
 <head>
     <meta charset="UTF-8">
@@ -21,87 +34,32 @@
     <main class="main">
         <h1 class="main-title">Produkte</h1>
         <div class="product-container">
-            <div class="product">
-                <div class="product-image">
-                    <img src="../public/assets/test1.png" alt="#">
-                </div>
-                <div class="product-info">
-                    <div class="product-name">Product Name</div>
-                    <div class="product-price">12.99€</div>
-                    <div class="cart-icon-container">
-                        <i class="fa-solid fa-cart-shopping cart-icon"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="product">
-                <div class="product-image">
-                    <img src="../public/assets/burger.png" alt="#">
-                </div>
-                <div class="product-info">
-                    <div class="product-name">Product Name</div>
-                    <div class="product-price">12.99€</div>
-                    <div class="cart-icon-container">
-                        <i class="fa-solid fa-cart-shopping cart-icon"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="product">
-                <div class="product-image">
-                    <img src="../public/assets/burger.png" alt="#">
-                </div>
-                <div class="product-info">
-                    <div class="product-name">Product Name</div>
-                    <div class="product-price">12.99€</div>
-                    <div class="cart-icon-container">
-                        <i class="fa-solid fa-cart-shopping cart-icon"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="product">
-                <div class="product-image">
-                    <img src="../public/assets/burger.png" alt="#">
-                </div>
-                <div class="product-info">
-                    <div class="product-name">Product Name</div>
-                    <div class="product-price">12.99€</div>
-                    <div class="cart-icon-container">
-                        <i class="fa-solid fa-cart-shopping cart-icon"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="product">
-                <div class="product-image">
-                    <img src="../public/assets/burger.png" alt="#">
-                </div>
-                <div class="product-info">
-                    <div class="product-name">Product Name</div>
-                    <div class="product-price">12.99€</div>
-                    <div class="cart-icon-container">
-                        <i class="fa-solid fa-cart-shopping cart-icon"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="product">
-                <div class="product-image">
-                    <img src="../public/assets/burger.png" alt="#">
-                </div>
-                <div class="product-info">
-                    <div class="product-name">Product Name</div>
-                    <div class="product-price">12.99€</div>
-                    <div class="cart-icon-container">
-                        <i class="fa-solid fa-cart-shopping cart-icon"></i>
-                    </div>
-                </div>
-            </div>
+            <?php
+            $sql = "SELECT ProduktID, Produktname, Beschreibung, Preis, Energiewert, BildURL FROM produkt";
+            $result = $conn->query($sql);
 
-
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo "<div class='product'>
+                            <div class='product-image'>
+                                <img src='https://th.bing.com/th/id/OIP.gmNMTyBJy4LAshKKBsukZAHaFj?rs=1&pid=ImgDetMain' alt='{$row['Produktname']}'>
+                            </div>
+                            <div class='product-info'>
+                                <div class='product-name'>{$row['Produktname']}</div>
+                                <div class='product-price'>{$row['Preis']} €</div>
+                                <button class='add-to-cart' data-produkt-id='{$row['ProduktID']}'><i class='fa-solid fa-cart-shopping cart-icon'></i>
+                                </button>
+                            </div>
+                          </div>";
+                }
+            } else {
+                echo "<p>Keine Produkte gefunden.</p>";
+            }
+            ?>
         </div>
     </main>
 
-
     <?php include './partials/footer.php'; ?>
-
-
 </body>
 
 </html>

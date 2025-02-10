@@ -1,5 +1,5 @@
-const cartIcon = document.querySelector(".cart-icon");
+const cartIcon = document.querySelector('.cart-icon');
 
-cartIcon.addEventListener("click", () => {
+cartIcon.addEventListener('click', () => {
     window.location.href = './warenkorb.php';
 });

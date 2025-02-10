@@ -1,0 +1,69 @@
+/* Main container for the products */
+.main {
+    padding: 20px;
+}
+
+/* Grid layout for displaying products */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns in a row */
+    gap: 20px;
+}
+
+/* Product item styling */
+.product {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    text-align: center;
+}
+
+/* Product image styling */
+.product-image {
+    width: 100%;
+    height: auto;
+    max-width: 150px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+}
+
+/* Product name styling */
+.product-name {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+/* Description and other product details */
+.product-description {
+    font-size: 1em;
+    margin: 10px 0;
+    color: #555;
+}
+
+.product-price,
+.product-energy {
+    font-size: 1.1em;
+    margin: 5px 0;
+    color: #333;
+}
+
+/* Button styling */
+.add-to-cart {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.add-to-cart:hover {
+    background-color: #0056b3;
+}

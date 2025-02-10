@@ -13,6 +13,6 @@
     </div>
     <div class="cart-container">
         <i class="fa-solid fa-cart-shopping cart-icon"></i>
-        <span class="items-in-cart">0</span>
+        <span class="items-in-cart" id="cart-counter">0</span>
     </div>
 </header>
