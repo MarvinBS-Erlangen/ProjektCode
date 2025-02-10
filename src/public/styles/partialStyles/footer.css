@@ -7,8 +7,6 @@ footer {
     /* box-shadow: 0 3px 30px rgba(0, 0, 0, 0.5); */
     height: clamp(3rem, 5rem, 7rem);
     width: 100vw;
-    bottom: 0;
-    position: absolute;
 }
 
 .footer-list {
@@ -32,4 +30,12 @@ footer {
     text-decoration: none;
     font-size: 1.2rem;
     color: black;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }

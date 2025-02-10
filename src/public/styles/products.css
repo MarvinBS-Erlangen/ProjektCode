@@ -1,25 +1,125 @@
+html,
+body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+
 main {
+    padding: 1rem;
+    box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin: 5% auto;
-    border: 1px solid green;
-    max-width: 80vw;
-    background-color: lightblue;
-    min-height: 100vh;
+}
+
+.main-title {
+    align-self: flex-start;
+    margin: 0 0 1% 5%;
 }
 
 .product-container {
-    width: 100%;
-    height: 100%;
-    border: 1px solid red;
-    display: flex;
-    gap: 6%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 items per row */
+    gap: 2rem;
+    box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
+    width: 90%; /* Ensures the container does not exceed the width of its parent */
 }
 
 .product {
-    max-width: 20vw;
-    max-height: 20vh;
-    border: 1px solid orange;
+    position: relative;
+    min-height: 40vh;
+    height: auto;
+    padding: 1rem;
+    background-color: rgb(255, 255, 255);
+    overflow: hidden; /* Ensure the image does not overflow the container */
 }
+
+.product-image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1; /* This makes the container square */
+    overflow: hidden; /* Prevents the image from overflowing */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease; /* Smooth transition for the zoom effect */
+}
+
+.product-image > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the container */
+    transition: transform 0.3s ease; /* Smooth transition for the zoom effect */
+    border: 1px solid red;
+}
+
+.product:hover .product-image > img {
+    transform: scale(0.95); /* Zoom out the image slightly */
+}
+
+.product-info {
+    position: relative;
+    width: 100%;
+    min-height: clamp(3rem, 5rem, 7rem);
+}
+
+.product-name {
+    position: absolute;
+    top: 1%;
+    left: 1%;
+    font-size: 1.25rem;
+}
+
+.product-price {
+    position: absolute;
+    bottom: 1%;
+    left: 1%;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: green;
+}
+
+.cart-icon {
+    position: absolute;
+    bottom: 1%;
+    right: 1%;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.product-info > .cart-icon-container > .cart-icon:hover {
+    color: rgb(91, 91, 91);
+}
+
+.product-info > .cart-icon-container > .cart-icon:active {
+    transform: scale(0.95);
+}
+
+@media (max-width: 1280px) {
+    .product-container {
+        grid-template-columns: repeat(
+            3,
+            1fr
+        ); /* 3 items per row on smaller screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .product-container {
+        grid-template-columns: repeat(
+            2,
+            1fr
+        ); /* 2 items per row on smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .product-container {
+        grid-template-columns: 1fr; /* 1 item per row on the smallest screens */
+    }
+}
+
