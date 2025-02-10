@@ -6,6 +6,7 @@ body {
     margin: 0 auto;
 }
 
+
 main {
     padding: 1rem;
     box-sizing: border-box;
@@ -121,3 +122,4 @@ main {
         grid-template-columns: 1fr; /* 1 item per row on the smallest screens */
     }
 }
+

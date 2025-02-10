@@ -1,6 +1,8 @@
 <?php
+// Admin check Script aufrufen
+include '../../comps/admincheck.php';
 // Verbindung zur Datenbank herstellen
-include '../database/connection.php';
+include '../../database/connection.php';
 
 try {
     //erstelle eines PDO Objectes fuer den zugriff auf die Datenbank

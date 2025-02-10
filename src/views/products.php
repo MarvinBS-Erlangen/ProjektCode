@@ -85,16 +85,31 @@
                 <div class="product-image">
                     <img src="../public/assets/burger.png" alt="#">
                 </div>
+            </div>
+            <div class="product">
                 <div class="product-info">
                     <div class="product-name">Product Name</div>
                     <div class="product-price">12.99€</div>
-                    <div class="cart-icon-container">
-                        <i class="fa-solid fa-cart-shopping cart-icon"></i>
-                    </div>
+                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                    <div class="cart-icon-container"></div>
                 </div>
             </div>
-
-
+            <div class="product">
+                <div class="product-info">
+                    <div class="product-name">Product Name</div>
+                    <div class="product-price">12.99€</div>
+                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                    <div class="cart-icon-container"></div>
+                </div>
+            </div>
+            <div class="product">
+                <div class="product-info">
+                    <div class="product-name">Product Name</div>
+                    <div class="product-price">12.99€</div>
+                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                    <div class="cart-icon-container"></div>
+                </div>
+            </div>
         </div>
     </main>
 
