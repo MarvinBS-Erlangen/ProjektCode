@@ -26,7 +26,10 @@ main {
 
 .product-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Responsive grid with flexible columns */
+    grid-template-columns: repeat(
+        auto-fill,
+        minmax(200px, 1fr)
+    ); /* Responsive grid with flexible columns */
     gap: 2rem;
     box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
     width: 100%; /* Ensures the container does not exceed the width of its parent */
@@ -91,7 +94,8 @@ main {
     margin-bottom: 0.5rem;
 }
 
-.cart-icon {
+.product .cart-icon {
+    /* Make the selector more specific */
     position: absolute;
     bottom: 1%;
     right: 1%;
@@ -99,19 +103,26 @@ main {
     cursor: pointer;
 }
 
-.cart-icon:hover {
+.product .cart-icon:hover {
+    /* Make the selector more specific */
     color: #0056b3;
 }
 
 @media (max-width: 1280px) {
     .product-container {
-        grid-template-columns: repeat(3, 1fr); /* 3 items per row on smaller screens */
+        grid-template-columns: repeat(
+            3,
+            1fr
+        ); /* 3 items per row on smaller screens */
     }
 }
 
 @media (max-width: 768px) {
     .product-container {
-        grid-template-columns: repeat(2, 1fr); /* 2 items per row on smaller screens */
+        grid-template-columns: repeat(
+            2,
+            1fr
+        ); /* 2 items per row on smaller screens */
     }
 }
 
