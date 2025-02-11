@@ -74,6 +74,7 @@ main {
 #btn-view-your-uploads:hover,
 #btn-upload-picture:hover {
     cursor: pointer;
+    background-color: #8fbca1;
 }
 
 

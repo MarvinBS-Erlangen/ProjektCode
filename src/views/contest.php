@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['bewerten'])) {
     <main class="main">
 
         <div class="participate-container">
-            <div class="description">Hi, <span>"enter username here"</span>, participate in our Funny-Dinner-Contest.<br> Share your dinner pics with the community. There's a prize!!<br> Wink Wink</div>
+            <!-- <div class="description">Hi, <span>"enter username here"</span>, participate in our Funny-Dinner-Contest.<br> Share your dinner pics with the community. There's a prize!!<br> Wink Wink</div> -->
             <div class="button-container">
                 <div class="view-your-uploads-container">
                     <button type="button" id="btn-view-your-uploads">VIEW YOUR UPLOADS</button>

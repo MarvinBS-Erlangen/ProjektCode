@@ -14,6 +14,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     btnUploadPicture.addEventListener('click', () => {
+        window.location.href = 'uploadpicture.php'; // Redirect to viewuploads.php
+    });
+
+    btnUploadPicture.addEventListener('click', () => {
         fileUploadInput.click(); // Trigger the file input click
     });
 
