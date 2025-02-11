@@ -2,6 +2,11 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+
+if (!isset($_SESSION['warenkorb_Produkt'])) {
+    $_SESSION['warenkorb_Produkt'] = [];
+}
+
 function getCartCount()
 {
     return array_sum($_SESSION['warenkorb_Produkt']);

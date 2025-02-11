@@ -3,8 +3,9 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    background-color: #c2f1c8;
+    background-color: #a8d5ba;
     width: 100%;
+    color: white;
 }
 
 .header-title {
@@ -27,6 +28,10 @@
 
 .nav-links ul li {
     margin-right: 1rem;
+}
+
+.nav-links ul li a:hover {
+    color: black;
 }
 
 .cart-container {

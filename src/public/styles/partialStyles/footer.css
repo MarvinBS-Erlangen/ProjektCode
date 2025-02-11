@@ -2,11 +2,9 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 0.5px solid black;
-    background-color: #c2f1c8; /* Light green */
-    /* box-shadow: 0 3px 30px rgba(0, 0, 0, 0.5); */
-    height: clamp(3rem, 5rem, 7rem);
-    width: 100vw;
+    padding: 1rem;
+    background-color: #a8d5ba;
+    width: 100%;
 }
 
 .footer-list {
@@ -16,6 +14,7 @@ footer {
     gap: 1rem;
     margin-right: 30px;
     width: 80vw;
+
 }
 
 .footer-list > li {
@@ -29,6 +28,10 @@ footer {
 .footer-list li a {
     text-decoration: none;
     font-size: 1.2rem;
+    color: white;
+}
+
+.footer-list li a:hover {
     color: black;
 }
 
