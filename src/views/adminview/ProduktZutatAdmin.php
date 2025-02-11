@@ -1,6 +1,6 @@
 <?php
 // Admin check Script aufrufen
-// include '../../comps/admincheck.php';
+include '../../comps/admincheck.php';
 // Verbindung zur Datenbank herstellen
 include '../../database/connection.php';
 
