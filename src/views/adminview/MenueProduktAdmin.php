@@ -1,10 +1,10 @@
 <?php
 // Admin check Script aufrufen
-// include '../../comps/admincheck.php';
+include '../../comps/admincheck.php';
 // Verbindung zur Datenbank herstellen
 include '../../database/connection.php';
 
-// Funktion zum Aktualisieren des NormalPreises eines Menüs
+// Funktion zum Aktualisieren des NormalPreises und DiscountPreises eines Menüs
 function updateNormalPreis($conn, $menueID) {
     $sql = "SELECT SUM(p.Preis * mp.Menge) AS NormalPreis
             FROM Menue_Produkt mp
@@ -17,9 +17,13 @@ function updateNormalPreis($conn, $menueID) {
     $row = $result->fetch_assoc();
     $normalPreis = $row['NormalPreis'] ?? 0;
 
-    $sql = "UPDATE menue SET NormalPreis = ? WHERE MenueID = ?";
+    // DiscountPreis berechnen: -15% Endend auf eine xx.x9 Value fuer besser Darstellung
+    $discountPreis = $normalPreis * 0.85;
+    $discountPreis = floor($discountPreis * 10) / 10 + 0.09;
+
+    $sql = "UPDATE menue SET NormalPreis = ?, DiscountPreis = ? WHERE MenueID = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("di", $normalPreis, $menueID);
+    $stmt->bind_param("ddi", $normalPreis, $discountPreis, $menueID);
     $stmt->execute();
 }
 
@@ -43,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if ($result->num_rows > 0) {
                 // Wenn die Zuweisung bereits existiert, Anzahl erhöhen
-                $sql = "UPDATE Menue_Produkt SET Menge =  ? WHERE MenueID = ? AND ProduktID = ?";
+                $sql = "UPDATE Menue_Produkt SET Menge = ? WHERE MenueID = ? AND ProduktID = ?";
                 $stmt = $conn->prepare($sql);
                 $stmt->bind_param("iii", $menge, $menueID, $produktID);
                 $stmt->execute();
@@ -57,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo "<p style='color: green;'>Produkt erfolgreich zugewiesen.</p>";
             }
 
-            // NormalPreis des Menüs aktualisieren
+            // NormalPreis und DiscountPreis des Menüs aktualisieren
             updateNormalPreis($conn, $menueID);
         }
     } elseif (isset($_POST['delete_assignment'])) {
@@ -71,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute();
         echo "<p style='color: green;'>Zuweisung erfolgreich gelöscht.</p>";
 
-        // NormalPreis des Menüs aktualisieren
+        // NormalPreis und DiscountPreis des Menüs aktualisieren
         updateNormalPreis($conn, $menueID);
     } elseif (isset($_POST['reset_quantity'])) {
         $menueID = $_POST['menue_id'];
@@ -84,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute();
         echo "<p style='color: green;'>Menge erfolgreich auf 1 gesetzt.</p>";
 
-        // NormalPreis des Menüs aktualisieren
+        // NormalPreis und DiscountPreis des Menüs aktualisieren
         updateNormalPreis($conn, $menueID);
     }
 }
