@@ -55,46 +55,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['bewerten'])) {
 
 <body>
 
-<?php include './partials/header.php'; ?>
+    <?php include './partials/header.php'; ?>
 
 
-    <h1>Bild hochladen</h1>
-    <form action="" method="POST" enctype="multipart/form-data">
-        <label for="titel">Titel:</label>
-        <input type="text" name="titel" id="titel" required><br>
+    <main class="main">
 
-        <label for="bildurl">Bild-URL:</label>
-        <input type="url" name="bildurl" id="bildurl" required><br>
+        <div class="participate-container">
+            <div class="description">Hi, 'username', participate in our Funny-Dinner-Contest.<br> Share your dinner pics with the community. There's a prize!!<br> Wink Wink</div>
+            <div class="button-container">
+                <div class="view-your-uploads-container">
+                    <button type="button" id="btn-view-your-uploads">VIEW YOUR UPLOADS</button>
+                </div>
+                <div class="upload-picture-container">
+                    <button type="button" id="btn-upload-picture">UPLOAD PICTURE</button>
+                </div>
+            </div>
+        </div>
 
-        <button type="submit" name="upload">Bild hochladen</button>
-    </form>
+    </main>
 
-    <h1>Bestehende Bilder bewerten</h1>
-    <?php
-    // Bilder anzeigen und Bewertungsformular bereitstellen
-    $sql = "SELECT BildID, Titel, Bilddatei FROM Bild WHERE Freigabestatus = 1";
-    $result = $conn->query($sql);
-
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            echo "<div>";
-            echo "<img src='" . $row['Bilddatei'] . "' alt='" . $row['Titel'] . "' width='200'><br>";
-            echo "<strong>" . $row['Titel'] . "</strong><br>";
-            echo "<form action='' method='POST'>";
-            echo "<input type='hidden' name='bild_id' value='" . $row['BildID'] . "'>";
-            echo "Bewertung (1-5 Sterne): <input type='number' name='bewertungspunkte' min='1' max='5' required><br>";
-            echo "<button type='submit' name='bewerten'>Bewerten</button>";
-            echo "</form>";
-            echo "</div><hr>";
-        }
-    } else {
-        echo "Keine Bilder vorhanden.";
-    }
-
-    $conn->close();
-    ?>
-
-<?php include './partials/footer.php'; ?>
+    <?php include './partials/footer.php'; ?>
 
 </body>
 

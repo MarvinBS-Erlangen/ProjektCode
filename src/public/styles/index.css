@@ -32,7 +32,6 @@ main {
     flex: 1;
     display: flex;
     justify-content: center;
-    align-items: center;
     flex-direction: column;
     width: clamp(20rem, 70%, 100%);
     margin: 0 auto;

@@ -30,6 +30,10 @@
     margin-right: 1rem;
 }
 
+.nav-links ul li a:hover {
+    color: black;
+}
+
 .cart-container {
     display: flex;
     align-items: center;
