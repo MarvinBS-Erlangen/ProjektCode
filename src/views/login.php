@@ -1,6 +1,8 @@
 <?php
-session_start();
-
+// Session starten, falls noch nicht gestartet
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 // Verbindung zur Datenbank herstellen
 include '../database/connection.php';
@@ -9,29 +11,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $emailKunde = $_POST['EMail'];
     $passwordKunde = $_POST['Password'];
 
-    // Benutzungung von prst -> Prepared statement um SQL Injections zu verhindern
-    $prst = $conn->prepare("SELECT Password_Hash FROM kunde WHERE EMail = ?");
-    // Der Platzhalter ? wird durch den string wert "s" im emailKunde ersetzt
+    // Benutzung von Prepared Statements um SQL Injections zu verhindern
+    $prst = $conn->prepare("SELECT KundenID, Password_Hash FROM kunde WHERE EMail = ?");
+    // Der Platzhalter ? wird durch den string Wert "s" im emailKunde ersetzt
     $prst->bind_param("s", $emailKunde);
-    // ausfuehren des prst
+    // Ausführen des Prepared Statements
     $prst->execute();
     // Ergebnis speichern
-
     $prst->store_result();
 
     if ($prst->num_rows > 0) {
-        $prst->bind_result($hashedPassword);
+        $prst->bind_result($kundeID, $hashedPassword);
         $prst->fetch();
 
-
         if (password_verify($passwordKunde, $hashedPassword)) {
-            echo "<p class='success'>Login successful!</p>";
+            echo "<p class='success'>Login erfolgreich!</p>";
             $_SESSION['UserID'] = $kundeID;
         } else {
-            echo "<p class='error'>Invalid password. Please try again.</p>";
+            echo "<p class='error'>Ungültiges Passwort. Bitte versuchen Sie es erneut.</p>";
         }
     } else {
-        echo "<p class='error'>No account found with that email. Please register first.</p>";
+        echo "<p class='error'>Kein Konto mit dieser E-Mail gefunden. Bitte registrieren Sie sich zuerst.</p>";
     }
 
     $prst->close();
@@ -54,15 +54,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Login</title>
-
-
 </head>
 
 <body>
 
     <?php include './partials/header.php'; ?>
-
-
 
     <main>
         <div class="form-container">
