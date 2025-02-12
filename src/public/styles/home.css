@@ -1,36 +1,66 @@
-body {
+/* Welcome Section */
+.welcome-container {
     width: 100vw;
-    position: relative;
-}
-
-img {
-    display: block;
-
-    max-width: 70%;
-
-    margin: 0 auto;
-
-    padding-top: 50px;
-}
-
-h1 {
+    height: 100vh;
+    background-color: #a8d5ba; /* Pale green */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
+    color: white;
+    padding: 20px;
+}
 
-    font-weight: 500;
-
-    text-transform: uppercase;
-
-    font-family: roboto;
+/* Heading & Text */
+h1 {
+    font-size: 6rem;
+    margin-bottom: 10px;
+}
+h2 {
+    font-size: 3rem;
+    margin-bottom: 10px;
 }
 
 p {
-    font-family: roboto;
+    font-size: 2.5em;
+    margin-bottom: 90px;
+}
 
-    max-width: 70%;
+/* Button */
+.btn {
+    background-color: none;
+    color: white;
+    text-decoration: none;
+    padding: 12px 100px;
+    border-radius: 25px;
+    font-size: 2rem;
+    font-weight: bold;
+    transition: 0.5s;
+    border: 2px solid white;
+    border-radius: 25px;
+}
 
-    margin: 0 auto;
+.btn:hover {
+    background-color: white;
+    color: #4a7c59;
+}
 
-    text-align: justify;
+/* Fade-in Animation */
+.fade-in {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeIn 1s forwards;
+}
 
-    padding-top: 50px;
+.fade-in.delay {
+    animation-delay: 0.5s;
+}
+
+/* Animation Keyframes */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
