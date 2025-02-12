@@ -27,7 +27,7 @@ function getCartCount()
         </ul>
     </div>
     <div class="cart-container">
-        <i class="fa-solid fa-cart-shopping cart-icon"></i>
+        <a href="./warenkorb.php"><i class="fa-solid fa-cart-shopping cart-icon"></i></a>
         <span id="cart-count"><?php echo getCartCount(); ?></span>
     </div>
 </header>
