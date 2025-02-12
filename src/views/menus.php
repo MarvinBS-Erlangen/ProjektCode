@@ -51,7 +51,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['id'])) {
     <main class="main">
         <div class="product-container">
             <?php
-            $sql = "SELECT MenueID, Menuename, Beschreibung, NormalPreis, BildURL FROM menue";
+            $sql = "SELECT MenueID, Menuename, Beschreibung, DiscountPreis, NormalPreis, BildURL FROM menue";
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
@@ -62,7 +62,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['id'])) {
                             </div>
                             <div class='product-info'>
                                 <div class='product-name'>{$row['Menuename']}</div>
-                                <div class='product-price'>{$row['NormalPreis']} €</div>
+                                <div class='product-price'>{$row['DiscountPreis']} €</div>
                                 <a href='menus.php?action=add&id={$row['MenueID']}' class='cart-icon'>
                                     <i class='fa-solid fa-cart-shopping'></i>
                                 </a>

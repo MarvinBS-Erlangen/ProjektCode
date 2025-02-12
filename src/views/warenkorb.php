@@ -76,7 +76,7 @@ if (!empty($_SESSION['warenkorb_Produkt']) || !empty($_SESSION['warenkorb_Menue'
 
     // Menüs anzeigen
     foreach ($_SESSION['warenkorb_Menue'] as $menue_id => $menge) {
-        $sql = "SELECT MenueID, Menuename, NormalPreis FROM menue WHERE MenueID = ?";
+        $sql = "SELECT MenueID, Menuename, DiscountPreis FROM menue WHERE MenueID = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $menue_id);
         $stmt->execute();
@@ -84,12 +84,12 @@ if (!empty($_SESSION['warenkorb_Produkt']) || !empty($_SESSION['warenkorb_Menue'
         $menue = $result->fetch_assoc();
 
         if ($menue) {
-            $gesamt = $menue['NormalPreis'] * $menge;
+            $gesamt = $menue['DiscountPreis'] * $menge;
             $gesamtpreis += $gesamt;
             echo "<tr>
                     <td>{$menue['MenueID']}</td>
                     <td>{$menue['Menuename']}</td>
-                    <td>{$menue['NormalPreis']} €</td>
+                    <td>{$menue['DiscountPreis']} €</td>
                     <td>{$menge}</td>
                     <td>{$gesamt} €</td>
                     <td><a href='warenkorb.php?action=remove&id={$menue['MenueID']}&type=menue'>Entfernen</a></td>
