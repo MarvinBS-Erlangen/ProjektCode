@@ -1,7 +1,11 @@
 <?php
-session_start();
 // Verbindung zur Datenbank herstelle
 include '../database/connection.php';
+
+// Session starten, falls noch nicht gestartet
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $vornameKunde = $_POST['Vorname'];
