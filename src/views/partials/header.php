@@ -9,7 +9,7 @@ if (!isset($_SESSION['warenkorb_Produkt'])) {
 
 function getCartCount()
 {
-    return array_sum($_SESSION['warenkorb_Produkt']);
+    return (array_sum($_SESSION['warenkorb_Produkt']) + array_sum($_SESSION['warenkorb_Menue']));
 }
 ?>
 
