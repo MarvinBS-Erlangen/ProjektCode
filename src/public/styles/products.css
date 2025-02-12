@@ -1,133 +1,69 @@
-html,
-body {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    margin: 0;
-    padding: 0;
-}
-
-main {
-    padding: 1rem;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 70vw; /* Set the width to 70% of the viewport width */
-    margin: 0 auto; /* Center the main element */
-    background-color: #fff; /* Ensure the background is white */
-}
-
-.main-title {
-    align-self: flex-start;
-    margin: 0 0 1% 5%;
-}
-
 .product-container {
     display: grid;
-    grid-template-columns: repeat(
-        auto-fill,
-        minmax(200px, 1fr)
-    ); /* Responsive grid with flexible columns */
-    gap: 2rem;
-    box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
-    width: 100%; /* Ensures the container does not exceed the width of its parent */
+    grid-template-columns: repeat(4, 1fr); /* 4 products per row */
+    gap: 20px; /* Add a little more space between products */
+    padding: 20px;
+    max-width: 1200px; /* Restrict max width */
+    margin: auto; /* Center products on the page */
 }
 
 .product {
-    position: relative;
-    min-height: 30vh; /* Adjust the height to make products smaller */
-    height: auto;
-    padding: 1rem;
-    background-color: rgb(255, 255, 255);
-    overflow: hidden; /* Ensure the image does not overflow the container */
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    background: white;
+    padding: 15px;
+    border-radius: 0px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    text-align: left;
+    position: relative;
 }
 
-.product-image {
+.product img {
     width: 100%;
-    height: auto;
-    aspect-ratio: 1 / 1; /* This makes the container square */
-    overflow: hidden; /* Prevents the image from overflowing */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: transform 0.3s ease; /* Smooth transition for the zoom effect */
-}
-
-.product-image > img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensures the image covers the container */
-    transition: transform 0.3s ease; /* Smooth transition for the zoom effect */
-}
-
-.product:hover .product-image > img {
-    transform: scale(0.95); /* Zoom out the image slightly */
+    height: 200px; /* Adjusted height of the image */
+    object-fit: cover; /* Maintains aspect ratio without stretching */
+    border-radius: 5px;
 }
 
 .product-info {
-    position: relative;
-    width: 100%;
-    padding: 1rem 0;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .product-name {
-    position: absolute;
-    top: 1%;
-    left: 1%;
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
+    font-size: 1rem; /* Slightly bigger text */
+    font-weight: bold;
 }
 
 .product-price {
-    position: absolute;
-    bottom: 1%;
-    left: 1%;
-    font-weight: bold;
-    font-size: 1.2rem;
-    color: green;
-    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: #4a7c59;
 }
 
+/* Cart Icon positioned bottom right */
 .product .cart-icon {
-    /* Make the selector more specific */
-    position: absolute;
-    bottom: 1%;
-    right: 1%;
-    font-size: 1.5rem;
+    font-size: 1.3rem; /* Adjusted cart icon size */
+    color: black;
     cursor: pointer;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    transition: 0.3s;
 }
 
 .product .cart-icon:hover {
-    /* Make the selector more specific */
-    color: #0056b3;
+    color: grey;
 }
 
-@media (max-width: 1280px) {
+/* Responsive Design */
+@media (max-width: 1024px) {
     .product-container {
-        grid-template-columns: repeat(
-            3,
-            1fr
-        ); /* 3 items per row on smaller screens */
+        grid-template-columns: repeat(2, 1fr); /* 2 products per row on tablets */
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
     .product-container {
-        grid-template-columns: repeat(
-            2,
-            1fr
-        ); /* 2 items per row on smaller screens */
-    }
-}
-
-@media (max-width: 480px) {
-    .product-container {
-        grid-template-columns: 1fr; /* 1 item per row on the smallest screens */
+        grid-template-columns: repeat(1, 1fr); /* 1 product per row on mobile */
     }
 }

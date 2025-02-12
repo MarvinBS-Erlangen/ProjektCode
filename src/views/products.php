@@ -43,6 +43,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['id'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="../handlers/product-cart-icon-handler.js" defer></script>
     <title>Produkte</title>
 </head>
 
@@ -50,9 +51,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['id'])) {
     <?php include './partials/header.php'; ?>
 
     <main class="main">
-        <h1 class="main-title">Produkte</h1>
-        <a href='warenkorb.php'>Warenkorb anzeigen</a><br><br>
-        <span id="cart-count" style="font-size: 1.5em; font-weight: bold;"><?php echo getCartCount(); ?></span>
+  
 
         <div class="product-container">
             <?php
@@ -63,7 +62,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['id'])) {
                 while ($row = $result->fetch_assoc()) {
                     echo "<div class='product'>
                             <div class='product-image'>
-                                <img src='{$row['BildURL']}' alt='{$row['Produktname']}'>
+                                <img src='../public/assets/test1.png' alt='{$row['Produktname']}'>
                             </div>
                             <div class='product-info'>
                                 <div class='product-name'>{$row['Produktname']}</div>
