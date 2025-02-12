@@ -30,6 +30,7 @@
             <div class="product-details">
                 <h1 class="product-title">NACHOS SNACKERS</h1>
                 <div class="pricing">
+                    <!-- <span class="old-price">12.99 €</span> -->
                     <span class="new-price">12.99 €</span>
                 </div>
 

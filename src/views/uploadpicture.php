@@ -10,10 +10,10 @@ if (session_status() === PHP_SESSION_NONE) {
 // BenutzerID aus der Session abrufen
 $userID = $_SESSION['UserID'] ?? null;
 
-if ($userID === null) {
-    echo "<p style='color: red;'>Benutzer ist nicht eingeloggt.</p>";
-    exit;
-}
+// if ($userID === null) {
+//     echo "<p style='color: red;'>Benutzer ist nicht eingeloggt.</p>";
+//     exit;
+// }
 
 
 // Bild hochladen und speichern

@@ -9,20 +9,19 @@ include '../database/connection.php';
 // BenutzerID aus der Session abrufen
 $userID = $_SESSION['UserID'] ?? null;
 
-if ($userID === null) {
-    echo "<p style='color: red;'>Benutzer ist nicht eingeloggt.</p>";
-    exit;
-}
+// if ($userID === null) {
+//     echo "<p style='color: red;'>Benutzer ist nicht eingeloggt.</p>";
+//     exit;
+// }
 
 // Bewertung speichern
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['bewerten'])) {
     $bildID = $_POST['bild_id'];
-    $bewertungspunkte = (int)$_POST['bewertungspunkte'];
     $userID = $_POST['user_id'];
 
-    $sql = "INSERT INTO Bewertung (BildID, KundenID, Bewertungspunkte) VALUES (?, ?, ?)";
+    $sql = "INSERT INTO Bewertung (BildID, KundenID) VALUES (?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ii", $bildID, $bewertungspunkte);
+    $stmt->bind_param("ii", $bildID);
     $stmt->execute();
 
     echo "Bewertung erfolgreich gespeichert.";
@@ -42,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['bewerten'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="../handlers/star-rating-handler.js" defer></script>
+    <script src="../handlers/rating-handler.js" defer></script>
     <script src="../handlers/btns-view-upload-handlers.js" defer></script>
     <title>Bild hochladen und bewerten</title>
 </head>
@@ -67,9 +66,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['bewerten'])) {
 
         <?php
         // Bilder anzeigen und Bewertungsformular bereitstellen
-        $sql = "SELECT b.BildID, b.Titel, b.Bilddatei, k.EMail 
-                FROM Bild b 
-                JOIN Kunde k ON b.KundenID = k.KundenID 
+        $sql = "SELECT b.BildID, b.Titel, b.Bilddatei, k.EMail
+                FROM Bild b
+                JOIN Kunde k ON b.KundenID = k.KundenID
                 WHERE b.Freigabestatus = 1";
         $result = $conn->query($sql);
 
@@ -91,11 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['bewerten'])) {
                             <span class="image-description">' . htmlspecialchars($row['Titel']) . '</span>
                         </div>
                         <div class="rating-container">
-                            <i class="fa fa-star" data-value="1"></i>
-                            <i class="fa fa-star" data-value="2"></i>
-                            <i class="fa fa-star" data-value="3"></i>
-                            <i class="fa fa-star" data-value="4"></i>
-                            <i class="fa fa-star" data-value="5"></i>
+                            <a href="contest.php?action=bewerten"><i class="fa-regular fa-heart"></i></a>
                         </div>
                     </div>
                 </div>';
