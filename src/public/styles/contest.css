@@ -121,12 +121,12 @@ main {
     user-select: none;
 }
 
-.rating-container .fa-star {
+.rating-container .fa-heart {
     color: rgb(199, 199, 199); /* Initially white-filled */
     cursor: pointer;
 }
 
-.rating-container .fa-star.filled {
+.rating-container .fa-heart.filled {
     color: black; /* Black when filled */
 }
 
