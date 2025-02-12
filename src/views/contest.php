@@ -1,34 +1,26 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 // Datenbankverbindung herstellen
 include '../database/connection.php';
 
+// BenutzerID aus der Session abrufen
+$userID = $_SESSION['UserID'] ?? null;
 
-// Bild hochladen und speichern
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['upload'])) {
-    $titel = $_POST['titel'];
-    $bildurl = $_POST['bildurl'];
-
-    // Validierung der Bild-URL
-    if (filter_var($bildurl, FILTER_VALIDATE_URL)) {
-        $sql = "INSERT INTO Bild (Bilddatei, Titel) VALUES (?, ?)";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ss", $bildurl, $titel);
-        $stmt->execute();
-
-        echo "Bild erfolgreich hochgeladen.";
-    } else {
-        echo "Fehler: Bitte geben Sie eine gültige Bild-URL ein.";
-    }
+if ($userID === null) {
+    echo "<p style='color: red;'>Benutzer ist nicht eingeloggt.</p>";
+    exit;
 }
 
 // Bewertung speichern
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['bewerten'])) {
     $bildID = $_POST['bild_id'];
     $bewertungspunkte = (int)$_POST['bewertungspunkte'];
+    $userID = $_POST['user_id'];
 
-    $sql = "INSERT INTO Bewertung (BildID, Bewertungspunkte) VALUES (?, ?)";
+    $sql = "INSERT INTO Bewertung (BildID, KundenID, Bewertungspunkte) VALUES (?, ?, ?)";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ii", $bildID, $bewertungspunkte);
     $stmt->execute();
@@ -63,7 +55,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['bewerten'])) {
     <main class="main">
 
         <div class="participate-container">
-            <!-- <div class="description">Hi, <span>"enter username here"</span>, participate in our Funny-Dinner-Contest.<br> Share your dinner pics with the community. There's a prize!!<br> Wink Wink</div> -->
             <div class="button-container">
                 <div class="view-your-uploads-container">
                     <button type="button" id="btn-view-your-uploads">VIEW YOUR UPLOADS</button>
@@ -74,29 +65,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['bewerten'])) {
             </div>
         </div>
 
+        <?php
+        // Bilder anzeigen und Bewertungsformular bereitstellen
+        $sql = "SELECT b.BildID, b.Titel, b.Bilddatei, k.EMail 
+                FROM Bild b 
+                JOIN Kunde k ON b.KundenID = k.KundenID 
+                WHERE b.Freigabestatus = 1";
+        $result = $conn->query($sql);
 
-        <div class="uploads-container">
-            <div class="username-title">
-                <h3 class="username">@username</h3>
-            </div>
-            <div class="upload">
-                <div class="image-container">
-                    <img src="../public/assets/test1.png" alt="some image upload">
-                </div>
-            </div>
-            <div class="upload-info-container">
-                <div class="image-description-container">
-                    <span class="image-description">IT WAS AMAAAAAZING!!!</span>
-                </div>
-                <div class="rating-container">
-                    <i class="fa fa-star" data-value="1"></i>
-                    <i class="fa fa-star" data-value="2"></i>
-                    <i class="fa fa-star" data-value="3"></i>
-                    <i class="fa fa-star" data-value="4"></i>
-                    <i class="fa fa-star" data-value="5"></i>
-                </div>
-            </div>
-        </div>
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $emailParts = explode('@', $row['EMail']);
+                $username = $emailParts[0];
+                echo '<div class="uploads-container">
+                    <div class="username-title">
+                        <h3 class="username">' . htmlspecialchars($username) . '</h3>
+                    </div>
+                    <div class="upload">
+                        <div class="image-container">
+                            <img src="' . htmlspecialchars($row['Bilddatei']) . '" alt="' . htmlspecialchars($row['Titel']) . '">
+                        </div>
+                    </div>
+                    <div class="upload-info-container">
+                        <div class="image-description-container">
+                            <span class="image-description">' . htmlspecialchars($row['Titel']) . '</span>
+                        </div>
+                        <div class="rating-container">
+                            <i class="fa fa-star" data-value="1"></i>
+                            <i class="fa fa-star" data-value="2"></i>
+                            <i class="fa fa-star" data-value="3"></i>
+                            <i class="fa fa-star" data-value="4"></i>
+                            <i class="fa fa-star" data-value="5"></i>
+                        </div>
+                    </div>
+                </div>';
+            }
+        } else {
+            echo "Keine Bilder vorhanden.";
+        }
+
+        $conn->close();
+        ?>
 
     </main>
 
