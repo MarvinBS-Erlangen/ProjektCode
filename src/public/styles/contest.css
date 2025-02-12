@@ -74,20 +74,10 @@ main {
 #btn-view-your-uploads:hover,
 #btn-upload-picture:hover {
     cursor: pointer;
+    background-color: #8fbca1;
 }
 
-.rating-container .fa-star {
-    color: rgb(199, 199, 199); /* Initially white-filled */
-    cursor: pointer;
-}
 
-.rating-container .fa-star.filled {
-    color: black; /* Black when filled */
-}
-
-.rating-container i {
-    font-size: 1.5rem;
-}
 
 .uploads-container {
     margin-bottom: 5%;
@@ -100,7 +90,6 @@ main {
 .upload {
     background-color: white;
     /* border: 2px solid black; */
-    padding: 2.5%;
     width: clamp(300px, 500px, 700px);
     height: auto;
     display: flex;
@@ -109,10 +98,10 @@ main {
     margin-top: 0;
 }
 
+
 .upload-info-container {
     position: relative;
     width: 100%;
-    border: 1px solid black;
     height: clamp(30px, 50px, 70px);
 }
 
@@ -126,4 +115,21 @@ main {
     position: absolute;
     bottom: 2%;
     right: 0;
+}
+
+.rating-container{
+    user-select: none;
+}
+
+.rating-container .fa-star {
+    color: rgb(199, 199, 199); /* Initially white-filled */
+    cursor: pointer;
+}
+
+.rating-container .fa-star.filled {
+    color: black; /* Black when filled */
+}
+
+.rating-container i {
+    font-size: 1.5rem;
 }

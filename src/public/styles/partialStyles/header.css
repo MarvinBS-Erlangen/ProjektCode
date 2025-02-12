@@ -4,7 +4,7 @@
     align-items: center;
     padding: 1rem;
     background-color: #a8d5ba;
-    width: 100%;
+    width: 100vw;
     color: white;
 }
 
@@ -48,6 +48,7 @@
 
 .cart-icon:hover {
     cursor: pointer;
+    color: grey;
 }
 
 #cart-count {
