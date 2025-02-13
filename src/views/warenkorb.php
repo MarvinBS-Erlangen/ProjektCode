@@ -10,6 +10,10 @@ if (!isset($_SESSION['warenkorb_Menue'])) {
     $_SESSION['warenkorb_Menue'] = [];
 }
 
+if (!isset($_SESSION['UserID'])) {
+    $_SESSION['UserID'] = [];
+}
+
 // Produkt aus dem Warenkorb entfernen
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] == 'remove' && isset($_GET['id']) && isset($_GET['type'])) {
     $id = $_GET['id'];
@@ -36,6 +40,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['act
     header("Location: warenkorb.php");
     exit();
 }
+
+// BenutzerID aus der Session abrufen
+$userID = $_SESSION['UserID'] ?? null;
+
+if ($userID === null) {
+    echo "<p style='color: red;'>Benutzer ist nicht eingeloggt.</p>";
+    exit;
+}
+
+// Lieferadresse abrufen
+$sql = "SELECT k.Nachname, a.Strasse, a.Hausnummer, a.Postleitzahl, a.Stadt FROM adresse a JOIN kunde k ON a.AdresseID = k.AdresseID WHERE k.KundenID = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $userID);
+$stmt->execute();
+$result = $stmt->get_result();
+$adresse = $result->fetch_assoc();
 ?>
 <!DOCTYPE html>
 <html lang="de">
@@ -49,7 +69,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['act
     <link rel="stylesheet" href="../public/styles/partialStyles/header.css">
     <link rel="stylesheet" href="../public/styles/partialStyles/footer.css">
     <title>Warenkorb</title>
-
 </head>
 
 <body>
@@ -114,13 +133,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['act
             </div>
             <div class="section">
                 <h2>Lieferadresse</h2>
-                <input type="text" placeholder="Name">
+                <input type="text" name="name" placeholder="Name" value="<?php echo htmlspecialchars($adresse['Nachname'] ?? ''); ?>" required>
                 <div class="address-container">
-                    <input type="text" name="strasse" placeholder="Straße">
-                    <input type="text" name="hausnummer" placeholder="Hausnummer">
+                    <input type="text" name="strasse" placeholder="Straße" value="<?php echo htmlspecialchars($adresse['Strasse'] ?? ''); ?>" required>
+                    <input type="text" name="hausnummer" placeholder="Hausnummer" value="<?php echo htmlspecialchars($adresse['Hausnummer'] ?? ''); ?>" required>
                 </div>
-                <input type="text" placeholder="PLZ">
-                <input type="text" placeholder="Stadt">
+                <input type="text" name="plz" placeholder="PLZ" value="<?php echo htmlspecialchars($adresse['Postleitzahl'] ?? ''); ?>" required>
+                <input type="text" name="stadt" placeholder="Stadt" value="<?php echo htmlspecialchars($adresse['Stadt'] ?? ''); ?>" required>
             </div>
             <div class="section">
                 <h2>Zahlungsmethode</h2>
