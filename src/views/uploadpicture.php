@@ -36,13 +36,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['upload'])) {
 }
 ?>
 
-<h1>Bild hochladen</h1>
-        <form action="" method="POST" enctype="multipart/form-data">
-            <label for="titel">Titel:</label>
-            <input type="text" name="titel" id="titel" required><br>
+<!DOCTYPE html>
+<html lang="de">
 
-            <label for="bildurl">Bild-URL:</label>
-            <input type="url" name="bildurl" id="bildurl" required><br>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../public/styles/reset.css">
+    <link rel="stylesheet" href="../public/styles/index.css">
+    <link rel="stylesheet" href="../public/styles/uploadpicture.css">
+    <link rel="stylesheet" href="../public/styles/partialStyles/header.css">
+    <link rel="stylesheet" href="../public/styles/partialStyles/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="../handlers/upload-picture-handler.js" defer></script>
+    <title>Bild-Upload</title>
+</head>
 
-            <button type="submit" name="upload">Bild hochladen</button>
-        </form>
+<body>
+
+    <main class="main">
+    <div class="upload-container">
+        <h1>Bild hochladen</h1>
+
+        <input type="text" id="title" placeholder="Titel eingeben">
+        <input type="text" id="image-url" placeholder="Bild-URL eingeben">
+        <div class="upload-buttons">
+            <button class="upload-button preview-button">Vorschau</button>
+            <button class="upload-button upload-submit">Upload</button>
+        </div>
+
+        <div class="preview hidden" id="preview">
+            <img id="preview-image" src="" alt="Vorschau">
+            <h2 id="preview-title"></h2>
+        </div>
+    </div>
+    </main>
+</body>
+
+</html>
