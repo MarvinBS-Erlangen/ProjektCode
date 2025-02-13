@@ -10,23 +10,21 @@ if (session_status() === PHP_SESSION_NONE) {
 // BenutzerID aus der Session abrufen
 $userID = $_SESSION['UserID'] ?? null;
 
-// if ($userID === null) {
-//     echo "<p style='color: red;'>Benutzer ist nicht eingeloggt.</p>";
-//     exit;
-// }
-
+if ($userID === null) {
+    echo "<p style='color: red;'>Benutzer ist nicht eingeloggt.</p>";
+    exit;
+}
 
 // Bild hochladen und speichern
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['upload'])) {
     $titel = $_POST['titel'];
     $bildurl = $_POST['bildurl'];
-    $userID = $_POST['user_id'];
 
     // Validierung der Bild-URL
     if (filter_var($bildurl, FILTER_VALIDATE_URL)) {
         $sql = "INSERT INTO Bild (KundenID, Bilddatei, Titel) VALUES (?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("iss", $KundenID, $bildurl, $titel);
+        $stmt->bind_param("iss", $userID, $bildurl, $titel);
         $stmt->execute();
 
         echo "Bild erfolgreich hochgeladen.";
@@ -50,7 +48,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['upload'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="../handlers/upload-picture-handler.js" defer></script>
     <title>Bild-Upload</title>
 </head>
 
@@ -61,12 +58,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['upload'])) {
         <div class="upload-container">
             <h2>Bild hochladen</h2>
 
-            <input type="text" id="description" placeholder="Beschreibung eingeben">
-            <input type="text" id="image-url" placeholder="Bild-URL eingeben">
-            <div class="upload-buttons">
-                <button class="upload-button preview-button">Vorschau</button>
-                <button class="upload-button upload-submit">Upload</button>
-            </div>
+            <form id="upload-form" method="POST" action="uploadpicture.php">
+                <input type="text" name="titel" id="description" placeholder="Beschreibung eingeben" required>
+                <input type="text" name="bildurl" id="image-url" placeholder="Bild-URL eingeben" required>
+                <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($userID); ?>">
+                <div class="upload-buttons">
+                    <button type="submit" name="upload" class="upload-button upload-submit">Upload</button>
+                </div>
+            </form>
 
             <!-- Error message display -->
             <p id="error-message" style="color: red;"></p>
@@ -78,8 +77,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['upload'])) {
         </div>
     </main>
     <?php include './partials/footer.php'; ?>
-
-
 </body>
 
 </html>
