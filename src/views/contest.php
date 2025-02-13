@@ -34,6 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['bewerten'])) {
         $stmt->bind_param("iii", $istAktiv, $bildID, $userID);
         $stmt->execute();
 
+        echo json_encode(['status' => $istAktiv ? 'activated' : 'deactivated']);
     } else {
         // Neue Bewertung einfügen
         $sql = "INSERT INTO Bewertung (BildID, KundenID, IstAktiv) VALUES (?, ?, 1)";
@@ -41,8 +42,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['bewerten'])) {
         $stmt->bind_param("ii", $bildID, $userID);
         $stmt->execute();
 
-        echo "Bewertung erfolgreich gespeichert.";
+        echo json_encode(['status' => 'activated']);
     }
+    exit;
 }
 ?>
 
@@ -117,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['bewerten'])) {
                             <span class="image-description">' . htmlspecialchars($row['Titel']) . '</span>
                         </div>
                         <div class="rating-container">';
-                            echo '<form method="POST" action="contest.php">
+                            echo '<form method="POST" action="contest.php" class="rating-form">
                                 <input type="hidden" name="bild_id" value="' . htmlspecialchars($row['BildID']) . '">
                                 <input type="hidden" name="bewerten" value="1">';
                             if ($bereitsBewertet) {
@@ -140,6 +142,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['bewerten'])) {
     </main>
 
     <?php include './partials/footer.php'; ?>
+
+    <script>
+        document.querySelectorAll('.rating-form').forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const formData = new FormData(this);
+                const action = this.getAttribute('action');
+
+                fetch(action, {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Handle the response data
+                    console.log(data);
+
+                    // Update the button icon based on the response
+                    const button = this.querySelector('button');
+                    const icon = button.querySelector('i');
+                    if (data.status === 'activated') {
+                        icon.classList.remove('fa-regular');
+                        icon.classList.add('fa-solid');
+                    } else {
+                        icon.classList.remove('fa-solid');
+                        icon.classList.add('fa-regular');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            });
+        });
+    </script>
 
 </body>
 
