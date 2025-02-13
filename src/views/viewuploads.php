@@ -47,7 +47,7 @@ $bilder = $result->fetch_all(MYSQLI_ASSOC);
                 if ($bild['Freigabestatus'] === 1) {
                     $Freigabestatus = "Freigegeben";
                 } else {
-                    $Freigabestatus = "Nicht freigegeben";  
+                    $Freigabestatus = "Nicht freigegeben";
                 }?>
                 <tr>
                     <td><img src="<?php echo htmlspecialchars($bild['Bilddatei']); ?>" alt="<?php echo htmlspecialchars($bild['Titel']); ?>" width="100"></td>
