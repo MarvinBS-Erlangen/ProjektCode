@@ -21,7 +21,6 @@
 
     <main class="main">
         <div class="container">
-            <h1>Zur Kasse</h1>
 
             <!-- Bestellübersicht -->
             <div class="section">

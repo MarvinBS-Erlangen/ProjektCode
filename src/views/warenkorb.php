@@ -36,75 +36,118 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['act
     header("Location: warenkorb.php");
     exit();
 }
-
-// Warenkorb anzeigen
-echo "<h1>Warenkorb</h1>";
-if (!empty($_SESSION['warenkorb_Produkt']) || !empty($_SESSION['warenkorb_Menue'])) {
-    echo "<table border='1'>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Preis</th>
-                <th>Menge</th>
-                <th>Gesamt</th>
-                <th>Aktion</th>
-            </tr>";
-    $gesamtpreis = 0;
-
-    // Produkte anzeigen
-    foreach ($_SESSION['warenkorb_Produkt'] as $produkt_id => $menge) {
-        $sql = "SELECT ProduktID, Produktname, Preis FROM produkt WHERE ProduktID = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("i", $produkt_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $produkt = $result->fetch_assoc();
-
-        if ($produkt) {
-            $gesamt = $produkt['Preis'] * $menge;
-            $gesamtpreis += $gesamt;
-            echo "<tr>
-                    <td>{$produkt['ProduktID']}</td>
-                    <td>{$produkt['Produktname']}</td>
-                    <td>{$produkt['Preis']} €</td>
-                    <td>{$menge}</td>
-                    <td>{$gesamt} €</td>
-                    <td><a href='warenkorb.php?action=remove&id={$produkt['ProduktID']}&type=produkt'>Entfernen</a></td>
-                  </tr>";
-        }
-    }
-
-    // Menüs anzeigen
-    foreach ($_SESSION['warenkorb_Menue'] as $menue_id => $menge) {
-        $sql = "SELECT MenueID, Menuename, DiscountPreis FROM menue WHERE MenueID = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("i", $menue_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $menue = $result->fetch_assoc();
-
-        if ($menue) {
-            $gesamt = $menue['DiscountPreis'] * $menge;
-            $gesamtpreis += $gesamt;
-            echo "<tr>
-                    <td>{$menue['MenueID']}</td>
-                    <td>{$menue['Menuename']}</td>
-                    <td>{$menue['DiscountPreis']} €</td>
-                    <td>{$menge}</td>
-                    <td>{$gesamt} €</td>
-                    <td><a href='warenkorb.php?action=remove&id={$menue['MenueID']}&type=menue'>Entfernen</a></td>
-                  </tr>";
-        }
-    }
-
-    echo "<tr>
-            <td colspan='4'>Gesamtpreis</td>
-            <td>{$gesamtpreis} €</td>
-            <td></td>
-          </tr>";
-    echo "</table>";
-    echo "<br><a href='warenkorb.php?action=clear'><button>Warenkorb leeren</button></a>";
-} else {
-    echo "<p>Ihr Warenkorb ist leer.</p>";
-}
 ?>
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../public/styles/reset.css">
+    <link rel="stylesheet" href="../public/styles/index.css">
+    <link rel="stylesheet" href="../public/styles/warenkorb_new.css">
+    <link rel="stylesheet" href="../public/styles/partialStyles/header.css">
+    <link rel="stylesheet" href="../public/styles/partialStyles/footer.css">
+    <title>Warenkorb</title>
+    <style>
+        .address-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .address-container input[name='strasse'] {
+            flex: 9;
+        }
+
+        .address-container input[name='hausnummer'] {
+            flex: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <?php include './partials/header.php'; ?>
+    <main class="main">
+        <div class="container">
+            <div class="section">
+                <h2>Bestellübersicht</h2>
+                <div class="order-list">
+                    <?php
+                    $gesamtpreis = 0;
+
+                    foreach ($_SESSION['warenkorb_Produkt'] as $produkt_id => $menge) {
+                        $sql = "SELECT ProduktID, Produktname, Preis FROM produkt WHERE ProduktID = ?";
+                        $stmt = $conn->prepare($sql);
+                        $stmt->bind_param("i", $produkt_id);
+                        $stmt->execute();
+                        $result = $stmt->get_result();
+                        $produkt = $result->fetch_assoc();
+
+                        if ($produkt) {
+                            $gesamt = $produkt['Preis'] * $menge;
+                            $gesamtpreis += $gesamt;
+                            echo "<div class='item'>
+                                    <div class='item-details'>
+                                        <p class='item-name'>{$produkt['Produktname']}</p>
+                                        <p class='item-price'>{$produkt['Preis']} €</p>
+                                        <p class='item-quantity'>Menge: {$menge}</p>
+                                        <a href='warenkorb.php?action=remove&id={$produkt['ProduktID']}&type=produkt'>Entfernen</a>
+                                    </div>
+                                  </div>";
+                        }
+                    }
+
+                    foreach ($_SESSION['warenkorb_Menue'] as $menue_id => $menge) {
+                        $sql = "SELECT MenueID, Menuename, DiscountPreis FROM menue WHERE MenueID = ?";
+                        $stmt = $conn->prepare($sql);
+                        $stmt->bind_param("i", $menue_id);
+                        $stmt->execute();
+                        $result = $stmt->get_result();
+                        $menue = $result->fetch_assoc();
+
+                        if ($menue) {
+                            $gesamt = $menue['DiscountPreis'] * $menge;
+                            $gesamtpreis += $gesamt;
+                            echo "<div class='item'>
+                                    <div class='item-details'>
+                                        <p class='item-name'>{$menue['Menuename']}</p>
+                                        <p class='item-price'>{$menue['DiscountPreis']} €</p>
+                                        <p class='item-quantity'>Menge: {$menge}</p>
+                                        <a href='warenkorb.php?action=remove&id={$menue['MenueID']}&type=menue'>Entfernen</a>
+                                    </div>
+                                  </div>";
+                        }
+                    }
+                    ?>
+                </div>
+            </div>
+            <div class="total">
+                <span class="total-label">Gesamt:</span>
+                <span class="total-price"><?php echo $gesamtpreis; ?> €</span>
+            </div>
+            <div class="section">
+                <h2>Lieferadresse</h2>
+                <input type="text" placeholder="Name">
+                <div class="address-container">
+                    <input type="text" name="strasse" placeholder="Straße">
+                    <input type="text" name="hausnummer" placeholder="Hausnummer">
+                </div>
+                <input type="text" placeholder="PLZ">
+                <input type="text" placeholder="Stadt">
+            </div>
+            <div class="section">
+                <h2>Zahlungsmethode</h2>
+                <select>
+                    <option>Kreditkarte</option>
+                    <option>PayPal</option>
+                    <option>Rechnung</option>
+                </select>
+            </div>
+            <a href='warenkorb.php?action=clear'><button>Warenkorb leeren</button></a>
+            <button class="checkout-button">Bestellung abschließen</button>
+        </div>
+    </main>
+    <?php include './partials/footer.php'; ?>
+</body>
+
+</html>
