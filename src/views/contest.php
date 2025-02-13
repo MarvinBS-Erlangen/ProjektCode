@@ -73,7 +73,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['bewerten'])) {
 
     <main class="main">
 
+
         <div class="participate-container">
+            <div class="description">Hi <span id="username"><?php echo ($username) ?></span>, participate in our <span id="funny-dinner-contest">Funny-Dinner-Contest</span>.<br> Share your dinner pics with the community. There's a prize!!<br> Wink Wink</div>
             <div class="button-container">
                 <div class="view-your-uploads-container">
                     <button type="button" id="btn-view-your-uploads">VIEW YOUR UPLOADS</button>
@@ -119,16 +121,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['bewerten'])) {
                             <span class="image-description">' . htmlspecialchars($row['Titel']) . '</span>
                         </div>
                         <div class="rating-container">';
-                            echo '<form method="POST" action="contest.php" class="rating-form">
+                echo '<form method="POST" action="contest.php" class="rating-form">
                                 <input type="hidden" name="bild_id" value="' . htmlspecialchars($row['BildID']) . '">
                                 <input type="hidden" name="bewerten" value="1">';
-                            if ($bereitsBewertet) {
-                                echo '<button type="submit"><i class="fa-solid fa-heart"></i></button>';
-                            } else {
-                                echo '<button type="submit"><i class="fa-regular fa-heart"></i></button>';
-                            }
-                            echo '</form>';
-                        echo '</div>
+                if ($bereitsBewertet) {
+                    echo '<button type="submit"><i class="fa-solid fa-heart"></i></button>';
+                } else {
+                    echo '<button type="submit"><i class="fa-regular fa-heart"></i></button>';
+                }
+                echo '</form>';
+                echo '</div>
                     </div>
                 </div>';
             }
@@ -152,26 +154,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['bewerten'])) {
                 const action = this.getAttribute('action');
 
                 fetch(action, {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    // Handle the response data
-                    console.log(data);
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        // Handle the response data
+                        console.log(data);
 
-                    // Update the button icon based on the response
-                    const button = this.querySelector('button');
-                    const icon = button.querySelector('i');
-                    if (data.status === 'activated') {
-                        icon.classList.remove('fa-regular');
-                        icon.classList.add('fa-solid');
-                    } else {
-                        icon.classList.remove('fa-solid');
-                        icon.classList.add('fa-regular');
-                    }
-                })
-                .catch(error => console.error('Error:', error));
+                        // Update the button icon based on the response
+                        const button = this.querySelector('button');
+                        const icon = button.querySelector('i');
+                        if (data.status === 'activated') {
+                            icon.classList.remove('fa-regular');
+                            icon.classList.add('fa-solid');
+                        } else {
+                            icon.classList.remove('fa-solid');
+                            icon.classList.add('fa-regular');
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
             });
         });
     </script>

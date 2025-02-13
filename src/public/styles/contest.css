@@ -32,6 +32,12 @@ main {
     width: 100%;
 }
 
+#username,#funny-dinner-contest{
+    font-weight: bold;
+}
+
+
+
 .button-container {
     display: flex;
     justify-content: space-between;
@@ -77,8 +83,6 @@ main {
     background-color: #8fbca1;
 }
 
-
-
 .uploads-container {
     margin-bottom: 5%;
 }
@@ -98,7 +102,6 @@ main {
     margin-top: 0;
 }
 
-
 .upload-info-container {
     position: relative;
     width: 100%;
@@ -117,7 +120,7 @@ main {
     right: 0;
 }
 
-.rating-container{
+.rating-container {
     user-select: none;
 }
 
