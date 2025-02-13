@@ -55,8 +55,16 @@ async function uploadImage() {
     try {
         const isValid = await isValidImageUrl(imageUrl); // Check if the image URL is valid
         if (isValid) {
-            alert('Image uploaded successfully!');
+            alert(
+                'We received your image! Waiting for admin approval to upload.'
+            );
+
             // Proceed with the actual upload logic here
+
+            // Redirect to contest.php after a delay
+            setTimeout(() => {
+                window.location.href = 'contest.php';
+            }, 3000); // 3 seconds delay
         } else {
             throw new Error('Invalid image URL.');
         }
