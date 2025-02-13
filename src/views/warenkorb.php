@@ -145,8 +145,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout'])) {
             $gesamtpreis = $_SESSION['gesamtpreis'];
             $sql = "INSERT INTO bestellung (KundenID, Zahlungsart, Gesamtbetrag) VALUES (?, ?, ?)";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("isd", $userID,  $zahlungsart, $gesamtpreis);
+            $stmt->bind_param("isd", $userID, $zahlungsart, $gesamtpreis);
             $stmt->execute();
+            $bestellungID = $stmt->insert_id;
+
+            // Produkte in bestellposten_Produkt speichern
+            foreach ($_SESSION['warenkorb_Produkt'] as $produkt_id => $menge) {
+                $sql = "INSERT INTO bestellposten_Produkt (BestellID, ProduktID, Menge) VALUES (?, ?, ?)";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("iii", $bestellungID, $produkt_id, $menge);
+                $stmt->execute();
+            }
+
+            // Menues in bestellposten_Menue speichern
+            foreach ($_SESSION['warenkorb_Menue'] as $menue_id => $menge) {
+                $sql = "INSERT INTO bestellposten_Menue (BestellID, MenueID, Menge) VALUES (?, ?, ?)";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("iii", $bestellungID, $menue_id, $menge);
+                $stmt->execute();
+            }
 
             echo "<p style='color: green;'>Ihre Bestellung wurde erfolgreich abgeschlossen.</p>";
 
