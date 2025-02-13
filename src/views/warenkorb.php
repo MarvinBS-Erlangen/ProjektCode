@@ -45,24 +45,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['act
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../public/styles/reset.css">
     <link rel="stylesheet" href="../public/styles/index.css">
-    <link rel="stylesheet" href="../public/styles/warenkorb_new.css">
+    <link rel="stylesheet" href="../public/styles/warenkorb.css">
     <link rel="stylesheet" href="../public/styles/partialStyles/header.css">
     <link rel="stylesheet" href="../public/styles/partialStyles/footer.css">
     <title>Warenkorb</title>
-    <style>
-        .address-container {
-            display: flex;
-            gap: 10px;
-        }
 
-        .address-container input[name='strasse'] {
-            flex: 9;
-        }
-
-        .address-container input[name='hausnummer'] {
-            flex: 1;
-        }
-    </style>
 </head>
 
 <body>

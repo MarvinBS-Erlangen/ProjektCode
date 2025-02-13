@@ -1,0 +1,73 @@
+/* Allgemeine Stile */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f8f8f8;
+}
+
+/* Container */
+.upload-container {
+    background-color: white;
+    width: 80%;
+    max-width: 500px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Eingabefelder */
+input {
+    width: calc(100% - 20px);
+    max-width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Upload-Button */
+.upload-button {
+    background-color: #a8d5ba;
+    color: white;
+    width: 48%;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.upload-button:hover {
+    background-color: #8fbca1;
+}
+
+/* Vorschau */
+.preview {
+    margin-top: 20px;
+    text-align: left; /* Aligns the title to the left */
+}
+
+.preview img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+}
+
+.preview h2 {
+    font-size: 18px;
+    color: #333;
+    margin-top: 5px;
+}
+.hidden {
+    display: none;
+}
