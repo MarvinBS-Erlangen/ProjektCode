@@ -16,6 +16,7 @@ async function showPreview() {
     const previewImage = document.getElementById('preview-image'); // Select the image element
     const previewTitle = document.getElementById('preview-title'); // Select the title element
     const errorMessage = document.getElementById('error-message'); // Error message element
+    const uploadButton = document.querySelector('.upload-submit'); // Upload button element
 
     // Reset error message
     errorMessage.textContent = '';
@@ -27,6 +28,7 @@ async function showPreview() {
                 previewImage.src = imageUrl; // Set the image source to the entered URL
                 previewTitle.textContent = title; // Set the text of the title below the image
                 preview.classList.remove('hidden'); // Show the preview section
+                uploadButton.disabled = false; // Enable the upload button
             } else {
                 throw new Error('Invalid image URL.');
             }
@@ -34,6 +36,7 @@ async function showPreview() {
             preview.classList.add('hidden'); // Hide the preview section
             errorMessage.textContent =
                 'The provided image URL is invalid. Please provide a valid image URL.'; // Show error message
+            uploadButton.disabled = true; // Disable the upload button
         }
     }
 }
@@ -81,3 +84,8 @@ document
 
 // Event listener for the upload button
 document.querySelector('.upload-submit').addEventListener('click', uploadImage);
+
+// Disable the upload button by default
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('.upload-submit').disabled = true;
+});
