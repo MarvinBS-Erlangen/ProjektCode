@@ -50,29 +50,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['upload'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <script src="../handlers/upload-picture-handler.js" defer></script>
+    <script src="../handlers/upload-picture-handler.js" defer></script>
     <title>Bild-Upload</title>
 </head>
 
 <body>
+    <?php include './partials/header.php'; ?>
 
     <main class="main">
-    <div class="upload-container">
-        <h1>Bild hochladen</h1>
+        <div class="upload-container">
+            <h2>Bild hochladen</h2>
 
-        <input type="text" id="title" placeholder="Titel eingeben">
-        <input type="text" id="image-url" placeholder="Bild-URL eingeben">
-        <div class="upload-buttons">
-            <button class="upload-button preview-button">Vorschau</button>
-            <button class="upload-button upload-submit">Upload</button>
-        </div>
+            <input type="text" id="description" placeholder="Beschreibung eingeben">
+            <input type="text" id="image-url" placeholder="Bild-URL eingeben">
+            <div class="upload-buttons">
+                <button class="upload-button preview-button">Vorschau</button>
+                <button class="upload-button upload-submit">Upload</button>
+            </div>
 
-        <div class="preview hidden" id="preview">
-            <img id="preview-image" src="" alt="Vorschau">
-            <h2 id="preview-title"></h2>
+            <!-- Error message display -->
+            <p id="error-message" style="color: red;"></p>
+
+            <div class="preview hidden" id="preview">
+                <img id="preview-image" src="" alt="Vorschau">
+                <h2 id="preview-title"></h2>
+            </div>
         </div>
-    </div>
     </main>
+    <?php include './partials/footer.php'; ?>
+
+
 </body>
 
 </html>

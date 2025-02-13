@@ -1,3 +1,11 @@
+.header > .cart-container {
+    display: none;
+}
+
+.section > h2 {
+    font-size: 1.25rem;
+}
+
 /* Container */
 .container {
     background-color: white;
