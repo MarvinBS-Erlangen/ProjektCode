@@ -159,12 +159,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout'])) {
 
             // Menues in bestellposten_Menue speichern
             foreach ($_SESSION['warenkorb_Menue'] as $menue_id => $menge) {
-                $sql = "INSERT INTO bestellposten_Menue (BestellID, MenueID, Menge) VALUES (?, ?, ?)";
+                $sql = "INSERT INTO bestellposten_Menue (BestellungID, MenueID, Menge) VALUES (?, ?, ?)";
                 $stmt = $conn->prepare($sql);
                 $stmt->bind_param("iii", $bestellungID, $menue_id, $menge);
                 $stmt->execute();
             }
 
+            //change echo to a redirect on aktive bestellung page
             echo "<p style='color: green;'>Ihre Bestellung wurde erfolgreich abgeschlossen.</p>";
 
             // Warenkorb leeren
