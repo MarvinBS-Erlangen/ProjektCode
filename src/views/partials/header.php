@@ -22,8 +22,15 @@ function getCartCount()
             <li class="btn-menus"><a href="./menus.php">Menus</a></li>
             <li class="btn-products"><a href="./products.php">Products</a></li>
             <li class="btn-contest"><a href="./contest.php">Contest</a></li>
-            <li class="btn-login"><a href="./login.php">Login</a></li>
-            <li class="btn-signup"><a href="./register.php">Sign Up</a></li>
+
+            <?php if (isset($_SESSION['UserID'])): ?>
+                <!-- Show Logout Button if User is Logged In -->
+                <li class="btn-logout"><a href="logout.php" class="logout-button">Logout</a></li>
+            <?php else: ?>
+                <!-- Show Login and Signup if User is Not Logged In -->
+                <li class="btn-login"><a href="./login.php">Login</a></li>
+                <li class="btn-signup"><a href="./register.php">Sign Up</a></li>
+            <?php endif; ?>
         </ul>
     </div>
     <div class="cart-container">
