@@ -3,13 +3,18 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+// Initialisieren der Session-Arrays, falls sie nicht gesetzt sind
 if (!isset($_SESSION['warenkorb_Produkt'])) {
     $_SESSION['warenkorb_Produkt'] = [];
 }
 
+if (!isset($_SESSION['warenkorb_Menue'])) {
+    $_SESSION['warenkorb_Menue'] = [];
+}
+
 function getCartCount()
 {
-    return (array_sum($_SESSION['warenkorb_Produkt']) + array_sum($_SESSION['warenkorb_Menue']));
+    return array_sum($_SESSION['warenkorb_Produkt']) + array_sum($_SESSION['warenkorb_Menue']);
 }
 ?>
 
