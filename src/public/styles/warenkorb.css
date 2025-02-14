@@ -34,6 +34,38 @@
     border-bottom: 1px solid #ddd;
 }
 
+/* Entfernen-Link mit Icon */
+.remove-item {
+    color: #ff0000; /* Rote Farbe für den Papierkorb */
+    font-size: 20px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Platzierung ganz rechts */
+    padding-left: 10px;
+  }
+
+  .remove-item:hover {
+    color: #d50000; /* Dunkelrote Farbe, wenn das Icon mit der Maus berührt wird */
+  }
+
+  .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+    position: relative; /* Wichtig für das absolute Positionieren des Icons */
+  }
+
+  .item-details {
+    flex-grow: 1;
+  }
+
+  .remove-item i {
+    margin-left: auto; /* Schiebt das Icon nach ganz rechts */
+  }
+
 /* Produktbild */
 .item-image {
     width: 7rem; /* Slightly smaller image */

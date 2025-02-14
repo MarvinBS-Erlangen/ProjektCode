@@ -17,7 +17,7 @@ if (!isset($_SESSION['UserID'])) {
 if (!isset($_SESSION['gesamtpreis'])) {
     $_SESSION['gesamtpreis'] = 0;
 }
- 
+
 
 // Produkt aus dem Warenkorb entfernen
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] == 'remove' && isset($_GET['id']) && isset($_GET['type'])) {
@@ -159,7 +159,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout'])) {
 
             // Menues in bestellposten_Menue speichern
             foreach ($_SESSION['warenkorb_Menue'] as $menue_id => $menge) {
-                $sql = "INSERT INTO bestellposten_Menue (BestellungID, MenueID, Menge) VALUES (?, ?, ?)";
+                $sql = "INSERT INTO bestellposten_Menue (BestellID, MenueID, Menge) VALUES (?, ?, ?)";
                 $stmt = $conn->prepare($sql);
                 $stmt->bind_param("iii", $bestellungID, $menue_id, $menge);
                 $stmt->execute();
@@ -187,6 +187,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout'])) {
     <link rel="stylesheet" href="../public/styles/warenkorb.css">
     <link rel="stylesheet" href="../public/styles/partialStyles/header.css">
     <link rel="stylesheet" href="../public/styles/partialStyles/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Warenkorb</title>
 </head>
 
@@ -208,13 +211,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout'])) {
 
                         if ($produkt) {
                             echo "<div class='item'>
-                                    <div class='item-details'>
-                                        <p class='item-name'>{$produkt['Produktname']}</p>
-                                        <p class='item-price'>{$produkt['Preis']} €</p>
-                                        <p class='item-quantity'>Menge: {$menge}</p>
-                                        <a href='warenkorb.php?action=remove&id={$produkt['ProduktID']}&type=produkt'>Entfernen</a>
-                                    </div>
-                                  </div>";
+<div class='item-details'>
+<p class='item-name'>{$produkt['Produktname']}</p>
+<p class='item-price'>{$produkt['Preis']} €</p>
+<p class='item-quantity'>Menge: {$menge}</p>
+<a href='warenkorb.php?action=remove&id={$produkt['ProduktID']}&type=produkt' class='remove-item'><i class='fa-solid fa-trash'></i></a>
+</div>
+</div>";
                         }
                     }
 
@@ -228,13 +231,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout'])) {
 
                         if ($menue) {
                             echo "<div class='item'>
-                                    <div class='item-details'>
-                                        <p class='item-name'>{$menue['Menuename']}</p>
-                                        <p class='item-price'>{$menue['DiscountPreis']} €</p>
-                                        <p class='item-quantity'>Menge: {$menge}</p>
-                                        <a href='warenkorb.php?action=remove&id={$menue['MenueID']}&type=menue'>Entfernen</a>
-                                    </div>
-                                  </div>";
+<div class='item-details'>
+<p class='item-name'>{$menue['Menuename']}</p>
+<p class='item-price'>{$menue['DiscountPreis']} €</p>
+<p class='item-quantity'>Menge: {$menge}</p>
+<a href='warenkorb.php?action=remove&id={$menue['MenueID']}&type=menue' class='remove-item'><i class='fa-solid fa-trash'></i></a>
+</div>
+</div>";
                         }
                     }
                     ?>
