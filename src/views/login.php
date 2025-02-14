@@ -27,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (password_verify($passwordKunde, $hashedPassword)) {
             echo "<p class='success'>Login erfolgreich!</p>";
             $_SESSION['UserID'] = $kundeID;
+            echo "<script>window.location.href = './menus.php';</script>";
         } else {
             echo "<p class='error'>Ungültiges Passwort. Bitte versuchen Sie es erneut.</p>";
         }

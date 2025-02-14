@@ -29,7 +29,12 @@ function getCartCount()
             <li class="btn-contest"><a href="./contest.php">Contest</a></li>
 
             <?php if (isset($_SESSION['UserID'])): ?>
-                <!-- Show Logout Button if User is Logged In -->
+                <!-- Show User Icon and Logout Button if User is Logged In -->
+                <li class="btn-profile">
+                    <a href="./user_profile.php">
+                        <i class="fa-solid fa-user user-icon"></i>
+                    </a>
+                </li>
                 <li class="btn-logout"><a href="logout.php" class="logout-button">Logout</a></li>
             <?php else: ?>
                 <!-- Show Login and Signup if User is Not Logged In -->

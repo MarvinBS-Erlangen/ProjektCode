@@ -1,0 +1,88 @@
+
+.profile-container {
+    display: flex;
+    width: 80%;
+    max-width: 900px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 80vh; /* Maximale Höhe, damit es nicht zu groß wird */
+}
+
+.profile-info, .order-history {
+    width: 50%;
+    padding: 20px;
+}
+
+.profile-info {
+    border-right: 1px solid #ddd;
+    overflow-y: auto; /* Falls Profilinfos länger werden */
+}
+
+h2 {
+    margin-bottom: 15px;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+}
+
+input {
+    width: calc(100% - 10px);
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: block;
+}
+
+button {
+    background-color: #a8d5ba;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #8fbca1;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Bestell-Historie Bereich */
+#orders-container {
+    max-height: 60vh; /* Scrollbarer Bereich */
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+/* Einzelne Bestellung */
+.order {
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.profile-info {
+    border-right: 1px solid #ddd;
+    overflow-y: auto;
+}
+
+.address-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 5px; /* Abstand zwischen dem "Adresse"-Label und den Feldern */
+}
+
+.address-container input {
+    flex: 1;
+}
