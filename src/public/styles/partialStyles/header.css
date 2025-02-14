@@ -50,6 +50,18 @@
     color: black;
 }
 
+/* Style for User Icon in the Header */
+.user-icon {
+    font-size: 1.5rem;
+    color: white;
+    transition: color 0.3s ease;
+    cursor: pointer;
+}
+
+.user-icon:hover {
+    color: #f1f1f1;
+}
+
 .cart-container {
     display: flex;
     align-items: center;
