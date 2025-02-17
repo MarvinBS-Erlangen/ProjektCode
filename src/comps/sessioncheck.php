@@ -1,5 +1,8 @@
 <?php
-session_start();
+// Session starten, falls noch nicht gestartet
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 // Das Script prueft ob die Globalen Sessions existieren, wenn nicht werden sie angelegt
 // Die Sessions sind in docs SESSION_ID.txt aufgelisted
 // User ID darf NICHT gesetzt werden !!! diese wird nur beim Login des Benutzers gesetzt und wird seperat je Seite ueberprueft
