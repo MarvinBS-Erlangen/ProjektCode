@@ -1,38 +1,16 @@
 <?php
-// Verbindung zur Datenbank herstellen
+//Datenbank verbindung herstellen
 include '../database/connection.php';
-
-// Session starten, falls noch nicht gestartet
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-// BenutzerID aus der Session abrufen
-$userID = $_SESSION['UserID'] ?? null;
-
-if ($userID === null) {
-    echo "<p style='color: red;'>Benutzer ist nicht eingeloggt.</p>";
-    exit;
-}
-
-// Bild hochladen und speichern
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['upload'])) {
-    $titel = $_POST['titel'];
-    $bildurl = $_POST['bildurl'];
-
-    // Validierung der Bild-URL
-    if (filter_var($bildurl, FILTER_VALIDATE_URL)) {
-        $sql = "INSERT INTO Bild (KundenID, Bilddatei, Titel) VALUES (?, ?, ?)";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("iss", $userID, $bildurl, $titel);
-        $stmt->execute();
-
-        echo "Bild erfolgreich hochgeladen.";
-    } else {
-        echo "Fehler: Bitte geben Sie eine gültige Bild-URL ein.";
-    }
-}
+//Start der Session
+//Sessions initialisieren wenn noch nicht gemacht
+include '../comps/sessioncheck.php';
+//Schaue ob der Benuzter eingelogt ist
+include '../comps/usercheck.php';
+//Datenbank Logik einbinden -- POST Requests an die Datenbank + Backend Logik
+include '../database/db_uploadpicture.php';
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="de">
@@ -61,7 +39,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['upload'])) {
             <form id="upload-form" method="POST" action="uploadpicture.php">
                 <input type="text" name="titel" id="description" placeholder="Beschreibung eingeben" required>
                 <input type="text" name="bildurl" id="image-url" placeholder="Bild-URL eingeben" required>
-                <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($userID); ?>">
                 <div class="upload-buttons">
                     <button type="submit" name="upload" class="upload-button upload-submit">Upload</button>
                 </div>
