@@ -1,30 +1,13 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-// Verbindung zur Datenbank herstellen
+//Datenbank verbindung herstellen
 include '../database/connection.php';
-
-if (!isset($_SESSION['warenkorb_Produkt'])) {
-    $_SESSION['warenkorb_Produkt'] = [];
-}
-
-// Funktion zum Hinzufügen eines Produkts zum Warenkorb
-function addToCart($produktID)
-{
-    if (!isset($_SESSION['warenkorb_Produkt'][$produktID])) {
-        $_SESSION['warenkorb_Produkt'][$produktID] = 0;
-    }
-    $_SESSION['warenkorb_Produkt'][$produktID]++;
-}
-
-// Überprüfen, ob ein Produkt zum Warenkorb hinzugefügt werden soll
-if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['id'])) {
-    addToCart($_GET['id']);
-    header("Location: products.php");
-    exit();
-}
+//Start der Session
+//Sessions initialisieren wenn noch nicht gemacht
+include '../comps/sessioncheck.php';
+//Schaue ob der Benuzter eingelogt ist
+include '../comps/usercheck.php';
+//Datenbank Logik einbinden -- POST Requests an die Datenbank + Backend Logik
+include '../database/db_user_profile.php';
 ?>
 
 <!DOCTYPE html>
