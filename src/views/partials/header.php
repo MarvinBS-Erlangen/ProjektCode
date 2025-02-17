@@ -1,16 +1,10 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+//Datenbank verbindung herstellen
+include '../database/connection.php';
+//Start der Session
+//Sessions initialisieren wenn noch nicht gemacht
+include '../comps/sessioncheck.php';
 
-// Initialisieren der Session-Arrays, falls sie nicht gesetzt sind
-if (!isset($_SESSION['warenkorb_Produkt'])) {
-    $_SESSION['warenkorb_Produkt'] = [];
-}
-
-if (!isset($_SESSION['warenkorb_Menue'])) {
-    $_SESSION['warenkorb_Menue'] = [];
-}
 
 function getCartCount()
 {
