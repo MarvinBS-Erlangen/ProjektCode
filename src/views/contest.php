@@ -1,53 +1,16 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-// Datenbankverbindung herstellen
+//Datenbank verbindung herstellen
 include '../database/connection.php';
-
-// BenutzerID aus der Session abrufen
-$userID = $_SESSION['UserID'] ?? null;
-
-if ($userID === null) {
-    echo "<p style='color: red;'>Benutzer ist nicht eingeloggt.</p>";
-    exit;
-}
-
-// Bewertung speichern oder deaktivieren
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['bewerten'])) {
-    $bildID = $_POST['bild_id'];
-
-    // Überprüfen, ob der Benutzer bereits eine Bewertung für dieses Bild abgegeben hat
-    $sql = "SELECT * FROM Bewertung WHERE BildID = ? AND KundenID = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ii", $bildID, $userID);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows > 0) {
-        // Bewertung aktivieren oder deaktivieren
-        $bewertung = $result->fetch_assoc();
-        $istAktiv = $bewertung['IstAktiv'] ? 0 : 1;
-        $sql = "UPDATE Bewertung SET IstAktiv = ? WHERE BildID = ? AND KundenID = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("iii", $istAktiv, $bildID, $userID);
-        $stmt->execute();
-
-        echo json_encode(['status' => $istAktiv ? 'activated' : 'deactivated']);
-    } else {
-        // Neue Bewertung einfügen
-        $sql = "INSERT INTO Bewertung (BildID, KundenID, IstAktiv) VALUES (?, ?, 1)";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ii", $bildID, $userID);
-        $stmt->execute();
-
-        echo json_encode(['status' => 'activated']);
-    }
-    exit;
-}
+//Start der Session
+//Sessions initialisieren wenn noch nicht gemacht
+include '../comps/sessioncheck.php';
+//Schaue ob der Benuzter eingelogt ist
+include '../comps/usercheck.php';
+//Datenbank Logik einbinden -- POST Requests an die Datenbank + Backend Logik
+include '../database/db_contest.php';
 ?>
 
+<!-- Frontend & Database Display -->
 <!DOCTYPE html>
 <html lang="de">
 
@@ -75,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['bewerten'])) {
 
 
         <div class="participate-container">
-            <div class="description">Hi <span id="username"><?php echo ($username) ?></span>, participate in our <span id="funny-dinner-contest">Funny-Dinner-Contest</span>.<br> Share your dinner pics with the community. There's a prize!!<br> Wink Wink</div>
+            <div class="description">Participate in our <span id="funny-dinner-contest">Funny-Dinner-Contest</span>.<br> Share your dinner pics with the community. There's a prize!!<br> Wink Wink</div>
             <div class="button-container">
                 <div class="view-your-uploads-container">
                     <button type="button" id="btn-view-your-uploads">VIEW YOUR UPLOADS</button>
