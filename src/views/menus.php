@@ -5,7 +5,7 @@ include '../database/connection.php';
 //Sessions initialisieren wenn noch nicht gemacht
 include '../comps/sessioncheck.php';
 //Datenbank Logik einbinden -- POST Requests an die Datenbank + Backend Logik
-include '../database/db_register.php';
+include '../database/db_menus.php';
 //Funktion zum hinzufuegen von Produkten in den Warenkorb
 include '../comps/addMenueToCart.php';
 ?>

@@ -8,7 +8,7 @@ if (session_status() === PHP_SESSION_NONE) {
 session_unset();  // Clear all session variables
 session_destroy();  // Destroy the session
 
-// Optionally, you can redirect the user to the homepage or login page after logout
+//redirect the user to the homepage or login page after logout
 header("Location: login.php");
 exit();
 ?>
