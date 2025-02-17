@@ -1,31 +1,15 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-// Verbindung zur Datenbank herstellen
+//Datenbank verbindung herstellen
 include '../database/connection.php';
-
-if (!isset($_SESSION['warenkorb_Menue'])) {
-    $_SESSION['warenkorb_Menue'] = [];
-}
-
-// Funktion zum Hinzufügen eines Menüs zum Warenkorb
-function addToCart($menueID)
-{
-    if (!isset($_SESSION['warenkorb_Menue'][$menueID])) {
-        $_SESSION['warenkorb_Menue'][$menueID] = 0;
-    }
-    $_SESSION['warenkorb_Menue'][$menueID]++;
-}
-
-// Überprüfen, ob ein Menü zum Warenkorb hinzugefügt werden soll
-if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['id'])) {
-    addToCart($_GET['id']);
-    header("Location: menus.php");
-    exit();
-}
+//Start der Session
+//Sessions initialisieren wenn noch nicht gemacht
+include '../comps/sessioncheck.php';
+//Datenbank Logik einbinden -- POST Requests an die Datenbank + Backend Logik
+include '../database/db_register.php';
+//Funktion zum hinzufuegen von Produkten in den Warenkorb
+include '../comps/addMenueToCart.php';
 ?>
+
 
 <!DOCTYPE html>
 <html lang="de">
