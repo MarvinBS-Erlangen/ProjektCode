@@ -1,12 +1,13 @@
 <?php
-//Datenbank verbindung herstellen
+// Datenbank verbindung herstellen
 include '../database/connection.php';
-//Start der Session
-//Sessions initialisieren wenn noch nicht gemacht
+// Start der Session
+// Sessions initialisieren wenn noch nicht gemacht
 include '../comps/sessioncheck.php';
 //Datenbank Logik einbinden -- POST Requests an die Datenbank + Backend Logik
 include '../database/db_register.php';
 ?>
+
 
 <!DOCTYPE html>
 <html lang="de">
@@ -22,41 +23,82 @@ include '../database/db_register.php';
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <title>Registrieren</title>
+    <title>Registrierung</title>
 </head>
 
 <body>
 
     <?php include './partials/header.php'; ?>
 
-    <main>
+    <main class="main">
         <div class="form-container">
-            <h2 class="signup-title">Registrieren</h2>
-            <form action="register.php" method="post">
-                <label for="vorname">Vorname:</label>
-                <input type="text" id="vorname" name="Vorname" required>
-
-                <label for="nachname">Nachname:</label>
-                <input type="text" id="nachname" name="Nachname" required>
-
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="EMail" required>
-
-                <label for="password">Passwort:</label>
-                <input type="password" id="password" name="Password_Hash" required>
-
-                <label for="Confirm_Password">Passwort bestätigen:</label>
-                <input type="password" id="Confirm_Password" name="Confirm_Password" required>
-
-                <div class="agb-container">
-                    <div class="label-container"><label for="agb">Ich stimme den <a href="agb.html" target="_blank">AGB</a> zu:</label></div>
-                    <div class="checkbox-container"><input type="checkbox" id="agb" name="AGB" required></div>
+            <h2 class="signup-title">Registrierung</h2>
+            <form method="POST" action="../controllers/registerController.php">
+                <div class="form-group">
+                    <label for="firstname">Vorname</label>
+                    <input type="text" id="firstname" name="Vorname" required>
                 </div>
 
-                <input type="submit" id="btn-signup" value="Registrieren">
+                <div class="form-group">
+                    <label for="lastname">Nachname</label>
+                    <input type="text" id="lastname" name="Nachname" required>
+                </div>
+
+                <div class="form-group email-group">
+                    <label for="email">E-Mail</label>
+                    <input type="email" id="email" name="Email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Adresse</label>
+                    <input type="text" id="address" name="Strasse" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="house-number">Hausnummer</label>
+                    <input type="text" id="house-number" name="Hausnummer" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="zipcode">PLZ</label>
+                    <input type="text" id="zipcode" name="Postleitzahl" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="city">Stadt</label>
+                    <input type="text" id="city" name="Stadt" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="country">Land</label>
+                    <input type="text" id="country" name="Land" required>
+                </div>
+
+                <div class="form-group phone-group">
+                    <label for="phone">Telefonnummer</label>
+                    <input type="text" id="phone" name="Telefon" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Passwort</label>
+                    <input type="password" id="password" name="Passwort" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirm-password">Passwort bestätigen</label>
+                    <input type="password" id="confirm-password" name="Passwort_bestaetigen" required>
+                </div>
+
+                <div class="form-group agb-container agb-group">
+                    <label for="agb">Ich akzeptiere die <a href="agb.php">AGB:</a></label>
+                    <input type="checkbox" id="agb" name="agb" required>
+                </div>
+
+                <button type="submit" id="btn-signup">Registrieren</button>
             </form>
-            <p class="already-registered">Bereits registriert? <a href="login.php">Anmelden</a></p>
+            <div class="already-registered">
+                <p>Bereits registriert? <a href="./login.php">Hier einloggen</a></p>
+            </div>
         </div>
     </main>
 

@@ -11,16 +11,23 @@ include '../database/db_user_profile.php';
 
 // Benutzerinformationen aus der Datenbank abrufen
 $userId = $_SESSION['UserID'];
+
+// Debugging: Überprüfen der Benutzer-ID
+if (!$userId) {
+    die("Benutzer-ID nicht gefunden in der Session.");
+}
+
 $query = "
     SELECT
-        k.Vorname AS firstName,
-        k.Nachname AS lastName,
-        a.Strasse AS address,
-        a.Hausnummer AS houseNumber,
-        a.Postleitzahl AS zipcode,
-        a.Stadt AS city,
-        a.Land AS country,
-        k.Telefon AS phone
+        k.Vorname,
+        k.Nachname,
+        a.Strasse,
+        a.Hausnummer,
+        a.Postleitzahl,
+        a.Stadt,
+        a.Land,
+        k.Telefon,
+        k.AdresseID
     FROM
         kunde k
     JOIN
@@ -29,19 +36,82 @@ $query = "
         k.KundenID = ?
 ";
 $stmt = $conn->prepare($query);
-$stmt->bind_param("i", $userId);
+$stmt->bind_param("i", $userId); // bind_param fügt die userId an der stelle vom ? in der query ein
 $stmt->execute();
 $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 
-$firstName = $user['firstName'];
-$lastName = $user['lastName'];
-$address = $user['address'];
-$houseNumber = $user['houseNumber'];
-$zipcode = $user['zipcode'];
-$city = $user['city'];
-$country = $user['country'];
-$phone = $user['phone'];
+// Debugging: Überprüfen der Abfrage und der Ergebnisse
+if (!$user) {
+    $firstName = '';
+    $lastName = '';
+    $address = '';
+    $houseNumber = '';
+    $zipcode = '';
+    $city = '';
+    $country = '';
+    $phone = '';
+    $addressId = null;
+} else {
+    $firstName = $user['Vorname'];
+    $lastName = $user['Nachname'];
+    $address = $user['Strasse'];
+    $houseNumber = $user['Hausnummer'];
+    $zipcode = $user['Postleitzahl'];
+    $city = $user['Stadt'];
+    $country = $user['Land'];
+    $phone = $user['Telefon'];
+    $addressId = $user['AdresseID'];
+}
+
+// Verarbeiten der POST-Daten zum Aktualisieren der Benutzerinformationen
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $newFirstName = $_POST['Vorname'];
+    $newLastName = $_POST['Nachname'];
+    $newAddress = $_POST['Strasse'];
+    $newHouseNumber = $_POST['Hausnummer'];
+    $newZipcode = $_POST['Postleitzahl'];
+    $newCity = $_POST['Stadt'];
+    $newCountry = $_POST['Land'];
+    $newPhone = $_POST['Telefon'];
+
+    // Update des Vor- und Nachnamens
+    $updateFirstAndLastNameQuery = "
+    UPDATE kunde
+    SET Vorname = ?, Nachname = ?
+    WHERE KundenID = ?";
+
+    $stmt = $conn->prepare($updateFirstAndLastNameQuery);
+    $stmt->bind_param("ssi", $newFirstName, $newLastName, $userId);
+    $stmt->execute();
+
+
+    if ($addressId) {
+        // Update der Adresse
+        $updateAddressQuery = "
+        UPDATE adresse
+        SET Strasse = ?, Hausnummer = ?, Postleitzahl = ?, Stadt = ?, Land = ?
+        WHERE AdresseID = ?
+    ";
+        $stmt = $conn->prepare($updateAddressQuery);
+        $stmt->bind_param("sssssi", $newAddress, $newHouseNumber, $newZipcode, $newCity, $newCountry, $addressId);
+        $stmt->execute();
+    }
+
+    // Update der Telefonnummer
+    $updatePhoneQuery = "
+    UPDATE kunde
+    SET Telefon = ?
+    WHERE KundenID = ?
+";
+    $stmt = $conn->prepare($updatePhoneQuery);
+    $stmt->bind_param("si", $newPhone, $userId);
+    $stmt->execute();
+
+    // Seite neu laden, um die aktualisierten Daten anzuzeigen
+    header("Location: user_profile.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -72,33 +142,35 @@ $phone = $user['phone'];
             <!-- Linke Seite: Benutzerprofil -->
             <div class="profile-info">
                 <h2>Profilinformationen</h2>
-                <label for="firstname">Vorname</label>
-                <input type="text" id="firstname" value="<?php echo htmlspecialchars($firstName); ?>" disabled>
+                <form method="POST" action="user_profile.php" id="profile-form">
+                    <label for="firstname">Vorname</label>
+                    <input type="text" id="firstname" name="Vorname" value="<?php echo htmlspecialchars($firstName); ?>" disabled>
 
-                <label for="lastname">Nachname</label>
-                <input type="text" id="lastname" value="<?php echo htmlspecialchars($lastName); ?>" disabled>
+                    <label for="lastname">Nachname</label>
+                    <input type="text" id="lastname" name="Nachname" value="<?php echo htmlspecialchars($lastName); ?>" disabled>
 
-                <label for="address">Adresse</label>
-                <div class="address-container">
-                    <input type="text" id="address" value="<?php echo htmlspecialchars($address); ?>" disabled>
-                    <input type="text" id="house-number" value="<?php echo htmlspecialchars($houseNumber); ?>" disabled>
-                </div>
+                    <label for="address">Adresse</label>
+                    <div class="address-container">
+                        <input type="text" id="address" name="Strasse" value="<?php echo htmlspecialchars($address); ?>" disabled>
+                        <input type="text" id="house-number" name="Hausnummer" value="<?php echo htmlspecialchars($houseNumber); ?>" disabled>
+                    </div>
 
-                <label for="zipcode">PLZ</label>
-                <input type="text" id="zipcode" value="<?php echo htmlspecialchars($zipcode); ?>" disabled>
+                    <label for="zipcode">PLZ</label>
+                    <input type="text" id="zipcode" name="Postleitzahl" value="<?php echo htmlspecialchars($zipcode); ?>" disabled>
 
-                <label for="city">Stadt</label>
-                <input type="text" id="city" value="<?php echo htmlspecialchars($city); ?>" disabled>
+                    <label for="city">Stadt</label>
+                    <input type="text" id="city" name="Stadt" value="<?php echo htmlspecialchars($city); ?>" disabled>
 
-                <label for="country">Land</label>
-                <input type="text" id="country" value="<?php echo htmlspecialchars($country); ?>" disabled>
+                    <label for="country">Land</label>
+                    <input type="text" id="country" name="Land" value="<?php echo htmlspecialchars($country); ?>" disabled>
 
-                <label for="phone">Telefonnummer</label>
-                <input type="text" id="phone" value="<?php echo htmlspecialchars($phone); ?>" disabled>
+                    <label for="phone">Telefonnummer</label>
+                    <input type="text" id="phone" name="Telefon" value="<?php echo htmlspecialchars($phone); ?>" disabled>
 
-                <button id="edit-btn">Bearbeiten</button>
-                <button id="save-btn" class="hidden">Speichern</button>
-                <button id="cancel-btn" class="hidden">Abbrechen</button>
+                    <button type="button" id="edit-btn">Bearbeiten</button>
+                    <button type="submit" id="save-btn" class="hidden">Speichern</button>
+                    <button type="button" id="cancel-btn" class="hidden">Abbrechen</button>
+                </form>
             </div>
 
             <!-- Rechte Seite: Bestellhistorie -->
@@ -114,6 +186,33 @@ $phone = $user['phone'];
     </main>
 
     <?php include './partials/footer.php'; ?>
+
+    <script>
+        document.getElementById('edit-btn').addEventListener('click', function() {
+            document.querySelectorAll('.profile-info input').forEach(function(input) {
+                input.disabled = false;
+            });
+            document.getElementById('edit-btn').classList.add('hidden');
+            document.getElementById('save-btn').classList.remove('hidden');
+            document.getElementById('cancel-btn').classList.remove('hidden');
+        });
+
+        document.getElementById('cancel-btn').addEventListener('click', function() {
+            document.querySelectorAll('.profile-info input').forEach(function(input) {
+                input.disabled = true;
+            });
+            document.getElementById('edit-btn').classList.remove('hidden');
+            document.getElementById('save-btn').classList.add('hidden');
+            document.getElementById('cancel-btn').classList.add('hidden');
+        });
+
+        // deaktivierte input felder aktivieren, wenn das Formular abgeschickt wird, damit daten aktualisiert werden können
+        document.getElementById('profile-form').addEventListener('submit', function() {
+            document.querySelectorAll('.profile-info input').forEach(function(input) {
+                input.disabled = false;
+            });
+        });
+    </script>
 
 </body>
 

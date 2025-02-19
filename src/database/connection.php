@@ -3,7 +3,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-// $dbname needs to be changed befor staging
+// $dbname needs to be changed before staging
 $dbname = "food_db_test";
 
 // Create connection
