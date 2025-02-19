@@ -1,13 +1,47 @@
 <?php
-//Datenbank verbindung herstellen
+// Datenbank verbindung herstellen
 include '../database/connection.php';
-//Start der Session
-//Sessions initialisieren wenn noch nicht gemacht
+// Start der Session
+// Sessions initialisieren wenn noch nicht gemacht
 include '../comps/sessioncheck.php';
-//Schaue ob der Benuzter eingelogt ist
+// Schaue ob der Benutzer eingeloggt ist
 include '../comps/usercheck.php';
-//Datenbank Logik einbinden -- POST Requests an die Datenbank + Backend Logik
+// Datenbank Logik einbinden -- POST Requests an die Datenbank + Backend Logik
 include '../database/db_user_profile.php';
+
+// Benutzerinformationen aus der Datenbank abrufen
+$userId = $_SESSION['UserID'];
+$query = "
+    SELECT
+        k.Vorname AS firstName,
+        k.Nachname AS lastName,
+        a.Strasse AS address,
+        a.Hausnummer AS houseNumber,
+        a.Postleitzahl AS zipcode,
+        a.Stadt AS city,
+        a.Land AS country,
+        k.Telefon AS phone
+    FROM
+        kunde k
+    JOIN
+        adresse a ON k.AdresseID = a.AdresseID
+    WHERE
+        k.KundenID = ?
+";
+$stmt = $conn->prepare($query);
+$stmt->bind_param("i", $userId);
+$stmt->execute();
+$result = $stmt->get_result();
+$user = $result->fetch_assoc();
+
+$firstName = $user['firstName'];
+$lastName = $user['lastName'];
+$address = $user['address'];
+$houseNumber = $user['houseNumber'];
+$zipcode = $user['zipcode'];
+$city = $user['city'];
+$country = $user['country'];
+$phone = $user['phone'];
 ?>
 
 <!DOCTYPE html>
@@ -39,28 +73,28 @@ include '../database/db_user_profile.php';
             <div class="profile-info">
                 <h2>Profilinformationen</h2>
                 <label for="firstname">Vorname</label>
-                <input type="text" id="firstname" value="Max" disabled>
+                <input type="text" id="firstname" value="<?php echo htmlspecialchars($firstName); ?>" disabled>
 
                 <label for="lastname">Nachname</label>
-                <input type="text" id="lastname" value="Mustermann" disabled>
+                <input type="text" id="lastname" value="<?php echo htmlspecialchars($lastName); ?>" disabled>
 
                 <label for="address">Adresse</label>
                 <div class="address-container">
-                    <input type="text" id="address" value="Musterstraße" disabled>
-                    <input type="text" id="house-number" value="12" disabled>
+                    <input type="text" id="address" value="<?php echo htmlspecialchars($address); ?>" disabled>
+                    <input type="text" id="house-number" value="<?php echo htmlspecialchars($houseNumber); ?>" disabled>
                 </div>
 
                 <label for="zipcode">PLZ</label>
-                <input type="text" id="zipcode" value="12345" disabled>
+                <input type="text" id="zipcode" value="<?php echo htmlspecialchars($zipcode); ?>" disabled>
 
                 <label for="city">Stadt</label>
-                <input type="text" id="city" value="Berlin" disabled>
+                <input type="text" id="city" value="<?php echo htmlspecialchars($city); ?>" disabled>
 
                 <label for="country">Land</label>
-                <input type="text" id="country" value="Deutschland" disabled>
+                <input type="text" id="country" value="<?php echo htmlspecialchars($country); ?>" disabled>
 
                 <label for="phone">Telefonnummer</label>
-                <input type="text" id="phone" value="+49 170 1234567" disabled>
+                <input type="text" id="phone" value="<?php echo htmlspecialchars($phone); ?>" disabled>
 
                 <button id="edit-btn">Bearbeiten</button>
                 <button id="save-btn" class="hidden">Speichern</button>
