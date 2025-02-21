@@ -10,6 +10,8 @@
 
 .header-title {
     flex: 1;
+    font-size: 1.2rem;
+    font-weight: bold;
 }
 
 .nav-links {
@@ -28,10 +30,17 @@
 
 .nav-links ul li {
     margin-right: 1rem;
+    font-size: 1.2rem;
 }
 
 .nav-links ul li a:hover {
     color: black;
+}
+
+ul.user-list{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Style for Logout Button */
@@ -49,6 +58,8 @@
     background-color: #ff1a1a;
     color: black;
 }
+
+
 
 /* Style for User Icon in the Header */
 .user-icon {
