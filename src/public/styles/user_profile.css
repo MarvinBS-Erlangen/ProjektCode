@@ -40,6 +40,13 @@ input {
     border: 1px solid #ccc;
     border-radius: 5px;
     display: block;
+    transition: background-color 0.3s ease;
+}
+
+
+
+input:disabled{
+    background-color: rgb(195, 195, 195);
 }
 
 button {
@@ -81,14 +88,33 @@ button:hover {
 }
 
 .address-container {
-    display: flex;
-    gap: 10px;
-    margin-top: 5px; /* Abstand zwischen dem "Adresse"-Label und den Feldern */
+    display: grid;
+    grid-template-columns: 4fr 1fr; /* Straße größer als Hausnummer */
+    gap: 1px;
+    width: calc(100% - 10px);
+    align-items: center; /* Vertikale Ausrichtung der Felder */
 }
 
-.address-container input {
-    flex: 1;
+.address-container > input {
+
+    width: calc(100% - 5px);
+    padding: 8px;
+    margin: 5px 0;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
+
+.address-container > input:nth-of-type(2) {
+
+    width: calc(100%);
+    padding: 8px;
+    margin: 5px 0;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+
+
 
 #delete-account-btn{
     position: absolute;
