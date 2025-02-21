@@ -1,3 +1,6 @@
+body {
+    position: relative;
+}
 
 .profile-container {
     display: flex;
@@ -85,4 +88,23 @@ button:hover {
 
 .address-container input {
     flex: 1;
+}
+
+#delete-account-btn{
+    position: absolute;
+    bottom: 10vh;
+    right: 1vw;
+    background-color: #ff4d4d;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#delete-account-btn:hover {
+    background-color: #ff1a1a;
+    color: black;
 }

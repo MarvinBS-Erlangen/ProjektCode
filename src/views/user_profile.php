@@ -27,7 +27,8 @@ $query = "
         a.Stadt,
         a.Land,
         k.Telefon,
-        k.AdresseID
+        k.AdresseID,
+        k.Status
     FROM
         kunde k
     JOIN
@@ -52,6 +53,7 @@ if (!$user) {
     $country = '';
     $phone = '';
     $addressId = null;
+    $state = '';
 } else {
     $firstName = $user['Vorname'];
     $lastName = $user['Nachname'];
@@ -62,55 +64,78 @@ if (!$user) {
     $country = $user['Land'];
     $phone = $user['Telefon'];
     $addressId = $user['AdresseID'];
+    $state = $user['Status'];
 }
 
 // Verarbeiten der POST-Daten zum Aktualisieren der Benutzerinformationen
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $newFirstName = $_POST['Vorname'];
-    $newLastName = $_POST['Nachname'];
-    $newAddress = $_POST['Strasse'];
-    $newHouseNumber = $_POST['Hausnummer'];
-    $newZipcode = $_POST['Postleitzahl'];
-    $newCity = $_POST['Stadt'];
-    $newCountry = $_POST['Land'];
-    $newPhone = $_POST['Telefon'];
+    // Überprüfen, ob der Benutzer sein Konto löschen möchte;
+    // Atttribut name im input feld ist _method und der Wert ist DELETE
+    if (isset($_POST['_method']) && $_POST['_method'] === 'DELETE') {
+        // Löschen des Benutzerkontos
+        $deleteUserQuery = "
+        UPDATE kunde
+        SET Status = ?
+        WHERE KundenID = ?";
 
-    // Update des Vor- und Nachnamens
-    $updateFirstAndLastNameQuery = "
-    UPDATE kunde
-    SET Vorname = ?, Nachname = ?
-    WHERE KundenID = ?";
+        $state = 'gelöscht';
 
-    $stmt = $conn->prepare($updateFirstAndLastNameQuery);
-    $stmt->bind_param("ssi", $newFirstName, $newLastName, $userId);
-    $stmt->execute();
-
-
-    if ($addressId) {
-        // Update der Adresse
-        $updateAddressQuery = "
-        UPDATE adresse
-        SET Strasse = ?, Hausnummer = ?, Postleitzahl = ?, Stadt = ?, Land = ?
-        WHERE AdresseID = ?
-    ";
-        $stmt = $conn->prepare($updateAddressQuery);
-        $stmt->bind_param("sssssi", $newAddress, $newHouseNumber, $newZipcode, $newCity, $newCountry, $addressId);
+        $stmt = $conn->prepare($deleteUserQuery);
+        $stmt->bind_param("si", $state, $userId);
         $stmt->execute();
+        $stmt->close();
+
+        // Session-Varable UserID löschen
+        unset($_SESSION['UserID']);
+
+        header("Location: register.php");
+        exit();
+    } else {
+        $newFirstName = $_POST['Vorname'];
+        $newLastName = $_POST['Nachname'];
+        $newAddress = $_POST['Strasse'];
+        $newHouseNumber = $_POST['Hausnummer'];
+        $newZipcode = $_POST['Postleitzahl'];
+        $newCity = $_POST['Stadt'];
+        $newCountry = $_POST['Land'];
+        $newPhone = $_POST['Telefon'];
+
+        // Update des Vor- und Nachnamens
+        $updateFirstAndLastNameQuery = "
+        UPDATE kunde
+        SET Vorname = ?, Nachname = ?
+        WHERE KundenID = ?";
+
+        $stmt = $conn->prepare($updateFirstAndLastNameQuery);
+        $stmt->bind_param("ssi", $newFirstName, $newLastName, $userId);
+        $stmt->execute();
+
+        if ($addressId) {
+            // Update der Adresse
+            $updateAddressQuery = "
+            UPDATE adresse
+            SET Strasse = ?, Hausnummer = ?, Postleitzahl = ?, Stadt = ?, Land = ?
+            WHERE AdresseID = ?
+        ";
+            $stmt = $conn->prepare($updateAddressQuery);
+            $stmt->bind_param("sssssi", $newAddress, $newHouseNumber, $newZipcode, $newCity, $newCountry, $addressId);
+            $stmt->execute();
+        }
+
+        // Update der Telefonnummer
+        $updatePhoneQuery = "
+        UPDATE kunde
+        SET Telefon = ?
+        WHERE KundenID = ?
+    ";
+        $stmt = $conn->prepare($updatePhoneQuery);
+        $stmt->bind_param("si", $newPhone, $userId);
+        $stmt->execute();
+
+        // Seite neu laden, um die aktualisierten Daten anzuzeigen
+        header("Location: user_profile.php");
+        exit();
     }
-
-    // Update der Telefonnummer
-    $updatePhoneQuery = "
-    UPDATE kunde
-    SET Telefon = ?
-    WHERE KundenID = ?
-";
-    $stmt = $conn->prepare($updatePhoneQuery);
-    $stmt->bind_param("si", $newPhone, $userId);
-    $stmt->execute();
-
-    // Seite neu laden, um die aktualisierten Daten anzuzeigen
-    header("Location: user_profile.php");
-    exit();
 }
 ?>
 
@@ -185,6 +210,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </main>
 
+    <div class="delete-account-container">
+        <!-- The form method is POST because HTML forms do not support the DELETE method directly -->
+        <form method="POST" action="user_profile.php" id="delete-form">
+            <input type="hidden" name="_method" value="DELETE">
+            <button type="submit" id="delete-account-btn">Konto löschen</button>
+        </form>
+    </div>
+
     <?php include './partials/footer.php'; ?>
 
     <script>
@@ -211,6 +244,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             document.querySelectorAll('.profile-info input').forEach(function(input) {
                 input.disabled = false;
             });
+        });
+
+        // Bestätigungsmeldung anzeigen, bevor das Konto gelöscht wird
+        document.getElementById('delete-form').addEventListener('submit', function(event) {
+            var confirmation = confirm("Möchten Sie wirklich Ihr Konto löschen?");
+            if (!confirmation) {
+                event.preventDefault();
+            }
         });
     </script>
 
