@@ -18,6 +18,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die("Passwörter stimmen nicht überein.");
     }
 
+    // Abfrage ob E-Mail-Adresse bereits registriert ist
+    $checkEmailQuery = "SELECT * FROM kunde WHERE EMail = ?";
+    $stmt = $conn->prepare($checkEmailQuery);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        die("Diese E-Mail-Adresse ist bereits registriert.");
+    }
+
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     // Adresse in die Datenbank einfügen
