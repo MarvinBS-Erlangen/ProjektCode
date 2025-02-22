@@ -36,65 +36,67 @@ include '../database/db_register.php';
             <form method="POST" action="../controllers/registerController.php">
                 <div class="form-group">
                     <label for="firstname">Vorname</label>
-                    <input type="text" id="firstname" name="Vorname" required>
+                    <input type="text" id="firstname" name="Vorname" placeholder="Max" required>
                 </div>
 
-                <div class="form-group">
+                <div class=" form-group">
                     <label for="lastname">Nachname</label>
-                    <input type="text" id="lastname" name="Nachname" required>
+                    <input type="text" id="lastname" name="Nachname" placeholder="Mustermann" required>
                 </div>
 
-                <div class="form-group email-group">
+                <div class=" form-group email-group">
                     <label for="email">E-Mail</label>
-                    <input type="email" id="email" name="Email" required>
+                    <input type="email" id="email" name="Email" placeholder="max.mustermann@gmail.com" required>
                 </div>
 
-                <div class="form-group">
+                <div class=" form-group">
                     <label for="address">Adresse</label>
-                    <input type="text" id="address" name="Strasse" required>
+                    <input type="text" id="address" name="Strasse" placeholder="Musterstraße" required>
                 </div>
 
-                <div class="form-group">
+                <div class=" form-group">
                     <label for="house-number">Hausnummer</label>
-                    <input type="text" id="house-number" name="Hausnummer" required>
+                    <input type="text" id="house-number" name="Hausnummer" placeholder="10" required>
                 </div>
 
-                <div class="form-group">
+                <div class=" form-group">
                     <label for="zipcode">PLZ</label>
-                    <input type="text" id="zipcode" name="Postleitzahl" required>
+                    <input type="text" id="zipcode" name="Postleitzahl" placeholder="90401" required>
                 </div>
 
-                <div class="form-group">
+                <div class=" form-group">
                     <label for="city">Stadt</label>
-                    <input type="text" id="city" name="Stadt" required>
+                    <input type="text" id="city" name="Stadt" placeholder="Musterstadt" required>
                 </div>
 
-                <div class="form-group">
+                <div class=" form-group">
                     <label for="country">Land</label>
-                    <input type="text" id="country" name="Land" required>
+                    <input type="text" id="country" name="Land" placeholder="Musterland" required>
                 </div>
 
-                <div class="form-group phone-group">
+                <div class=" form-group phone-group">
                     <label for="phone">Telefonnummer</label>
-                    <input type="text" id="phone" name="Telefon" required>
+                    <input type="text" id="phone" name="Telefon" placeholder="+49 ..." required>
                 </div>
 
-                <div class="form-group">
+                <div class=" form-group">
                     <label for="password">Passwort</label>
-                    <input type="password" id="password" name="Passwort" required>
+                    <input type="password" id="password" name="Passwort" placeholder="**********" required>
                 </div>
 
                 <div class="form-group">
                     <label for="confirm-password">Passwort bestätigen</label>
-                    <input type="password" id="confirm-password" name="Passwort_bestaetigen" required>
+                    <input type="password" id="confirm-password" name="Passwort_bestaetigen" placeholder="**********" required>
                 </div>
 
                 <div class="form-group agb-container agb-group">
-                    <label for="agb">Ich akzeptiere die <a href="agb.php">AGB:</a></label>
+                    <label for="agb">Ich akzeptiere die <a href="agb.php">AGB</a>:</label>
                     <input type="checkbox" id="agb" name="agb" required>
                 </div>
 
-                <button type="submit" id="btn-signup">Registrieren</button>
+                <div class="button-container">
+                    <button type="submit" id="btn-signup">Registrieren</button>
+                </div>
             </form>
             <div class="already-registered">
                 <p>Bereits registriert? <a href="./login.php">Hier einloggen</a></p>

@@ -1,0 +1,37 @@
+Automatisierung mit Windows Aufgabenplanung
+Da du auf einem Windows-System arbeitest (mit XAMPP), ist es sinnvoll, die Windows Aufgabenplanung zu verwenden, um das Backup täglich zu automatisieren.
+
+Öffne die Aufgabenplanung:
+
+Drücke Win + R, gib taskschd.msc ein und drücke Enter, um die Aufgabenplanung zu öffnen.
+Neue Aufgabe erstellen:
+
+Klicke auf „Aufgabe erstellen“ im rechten Bereich.
+Allgemeine Einstellungen:
+
+Gib der Aufgabe einen Namen, z.B. „Datenbank-Backup“.
+Wähle „Mit höchsten Privilegien ausführen“, damit das Skript ohne Einschränkungen ausgeführt wird.
+Trigger (Zeitplan):
+
+Klicke auf „Neu…“, um einen neuen Trigger zu erstellen.
+Wähle „Täglich“ und setze eine Zeit, zu der das Backup jeden Tag ausgeführt werden soll (z.B. um 2:00 Uhr morgens).
+Aktion (Skript ausführen):
+
+Wähle „Aktion: Programm starten“.
+Im Feld „Programm/Skript“ gib den Pfad zu deinem PHP-Interpreter ein, zum Beispiel:
+makefile
+Copy
+Edit
+C:\xampp\php\php.exe
+Im Feld „Argumente hinzufügen (optional)“ gib den Pfad zu deinem PHP-Skript an, zum Beispiel:
+makefile
+Copy
+Edit
+C:\xampp\htdocs\backup_script.php
+Bedingungen und Einstellungen:
+
+Lasse die Standardoptionen, aber stelle sicher, dass die Aufgabe auch bei Deaktivierung des Computers ausgeführt wird.
+Speichern und Fertigstellen:
+
+Klicke auf „OK“, um die Aufgabe zu speichern und zu aktivieren.
+Nun wird das PHP-Skript jeden Tag zur angegebenen Zeit ausgeführt und erstellt ein Backup deiner MySQL-Datenbank!

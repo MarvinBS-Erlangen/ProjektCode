@@ -88,7 +88,7 @@ ul.user-list{
 
 .cart-icon:hover {
     cursor: pointer;
-    color: grey;
+    color: black;
 }
 
 #cart-count {
