@@ -16,6 +16,11 @@ $result = $stmt->get_result();
 // Orders in einem Array speichern
 $orders = [];
 while ($row = $result->fetch_assoc()) {
+    // Format the Bestelldatum
+    $date = new DateTime($row['Bestelldatum']);
+    $row['Bestelldatum'] = $date->format('d.m.Y, H:i');
+    $price = $row['Gesamtbetrag'];
+    $row['Gesamtbetrag'] =  number_format($price, 2, ',', '.');
     $orders[] = $row;
 }
 
