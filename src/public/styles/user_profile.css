@@ -2,6 +2,10 @@ body {
     position: relative;
 }
 
+
+
+
+
 .profile-container {
     display: flex;
     width: 80%;
@@ -11,6 +15,7 @@ body {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     height: 80vh; /* Maximale Höhe, damit es nicht zu groß wird */
+    margin-right: 5%;
 }
 
 .profile-info, .order-history {

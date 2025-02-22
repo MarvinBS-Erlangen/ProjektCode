@@ -88,7 +88,8 @@ include '../database/db_user_orders.php';
                                         </p>
                                         <p class="bestelldatum">
                                             <strong>Bestelldatum:</strong>
-                                            <br> <?php echo htmlspecialchars($order['Bestelldatum']); ?>
+                                            <br> <?php echo htmlspecialchars($order['Bestelldatum']), ' Uhr';
+                                                    ?>
                                         </p>
                                     </div>
                                     <div class="order-details">
