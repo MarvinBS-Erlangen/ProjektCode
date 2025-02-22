@@ -41,35 +41,37 @@ include '../database/db_user_orders.php';
             <!-- Linke Seite: Benutzerprofil -->
             <div class="profile-info">
                 <h2>Profilinformationen</h2>
-                <form method="POST" action="user_profile.php" id="profile-form">
-                    <label for="firstname">Vorname</label>
-                    <input type="text" id="firstname" name="Vorname" value="<?php echo htmlspecialchars($firstName); ?>" disabled>
+                <div class="profile-data">
+                    <form method="POST" action="user_profile.php" id="profile-form">
+                        <label for="firstname">Vorname</label>
+                        <input type="text" id="firstname" name="Vorname" value="<?php echo htmlspecialchars($firstName); ?>" disabled>
 
-                    <label for="lastname">Nachname</label>
-                    <input type="text" id="lastname" name="Nachname" value="<?php echo htmlspecialchars($lastName); ?>" disabled>
+                        <label for="lastname">Nachname</label>
+                        <input type="text" id="lastname" name="Nachname" value="<?php echo htmlspecialchars($lastName); ?>" disabled>
 
-                    <label for="address">Adresse</label>
-                    <div class="address-container">
-                        <input type="text" id="address" name="Strasse" value="<?php echo htmlspecialchars($address); ?>" disabled>
-                        <input type="text" id="house-number" name="Hausnummer" value="<?php echo htmlspecialchars($houseNumber); ?>" disabled>
-                    </div>
+                        <label for="address">Adresse</label>
+                        <div class="address-container">
+                            <input type="text" id="address" name="Strasse" value="<?php echo htmlspecialchars($address); ?>" disabled>
+                            <input type="text" id="house-number" name="Hausnummer" value="<?php echo htmlspecialchars($houseNumber); ?>" disabled>
+                        </div>
 
-                    <label for="zipcode">PLZ</label>
-                    <input type="text" id="zipcode" name="Postleitzahl" value="<?php echo htmlspecialchars($zipcode); ?>" disabled>
+                        <label for="zipcode">PLZ</label>
+                        <input type="text" id="zipcode" name="Postleitzahl" value="<?php echo htmlspecialchars($zipcode); ?>" disabled>
 
-                    <label for="city">Stadt</label>
-                    <input type="text" id="city" name="Stadt" value="<?php echo htmlspecialchars($city); ?>" disabled>
+                        <label for="city">Stadt</label>
+                        <input type="text" id="city" name="Stadt" value="<?php echo htmlspecialchars($city); ?>" disabled>
 
-                    <label for="country">Land</label>
-                    <input type="text" id="country" name="Land" value="<?php echo htmlspecialchars($country); ?>" disabled>
+                        <label for="country">Land</label>
+                        <input type="text" id="country" name="Land" value="<?php echo htmlspecialchars($country); ?>" disabled>
 
-                    <label for="phone">Telefonnummer</label>
-                    <input type="text" id="phone" name="Telefon" value="<?php echo htmlspecialchars($phone); ?>" disabled>
+                        <label for="phone">Telefonnummer</label>
+                        <input type="text" id="phone" name="Telefon" value="<?php echo htmlspecialchars($phone); ?>" disabled>
 
-                    <button type="button" id="edit-btn">Bearbeiten</button>
-                    <button type="submit" id="save-btn" class="hidden">Speichern</button>
-                    <button type="button" id="cancel-btn" class="hidden">Abbrechen</button>
-                </form>
+                        <button type="button" id="edit-btn">Bearbeiten</button>
+                        <button type="submit" id="save-btn" class="hidden">Speichern</button>
+                        <button type="button" id="cancel-btn" class="hidden">Abbrechen</button>
+                    </form>
+                </div>
             </div>
 
             <!-- Rechte Seite: Bestellhistorie -->

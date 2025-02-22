@@ -20,7 +20,14 @@ body {
 
 .profile-info {
     border-right: 1px solid #ddd;
-    overflow-y: auto; /* Falls Profilinfos länger werden */
+    /* overflow-y: auto; Falls Profilinfos länger werden */
+}
+
+.profile-data{
+    overflow-y: auto;
+    max-height: 60vh;
+    overflow-y: auto;
+    padding-right: 10px;
 }
 
 h2 {
@@ -67,7 +74,6 @@ button:hover {
     display: none;
 }
 
-/* Bestell-Historie Bereich */
 /* Bestell-Historie Bereich */
 #orders-container {
     max-height: 60vh;
