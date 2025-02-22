@@ -7,4 +7,21 @@ if (!$userId) {
     die("Benutzer-ID nicht gefunden in der Session.");
 }
 
-$getUserOrdersQuery = "SELECT " 
+$getUserOrdersQuery = "SELECT BestellID, Bestelldatum, Gesamtbetrag, Zahlungsart FROM Bestellung WHERE KundenID = ?";
+$stmt = $conn->prepare($getUserOrdersQuery);
+$stmt->bind_param("i", $userId);
+$stmt->execute();
+$result = $stmt->get_result();
+
+// Orders in einem Array speichern
+$orders = [];
+while ($row = $result->fetch_assoc()) {
+    $orders[] = $row;
+}
+
+// Übergabe der Bestellungen an das Frontend
+// Speichern der Bestellinformationen in Variablen
+$bestellID = $orders[0]['BestellID'] ?? '';
+$bestelldatum = $orders[0]['Bestelldatum'] ?? '';
+$gesamtbetrag = $orders[0]['Gesamtbetrag'] ?? '';
+$zahlungsart = $orders[0]['Zahlungsart'] ?? '';

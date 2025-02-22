@@ -8,6 +8,9 @@ include '../comps/sessioncheck.php';
 include '../comps/usercheck.php';
 // Datenbank Logik einbinden -- POST Requests an die Datenbank + Backend Logik
 include '../database/db_user_profile.php';
+
+// Bestellungen vom User abrufen
+include '../database/db_user_orders.php';
 ?>
 
 <!DOCTYPE html>
@@ -74,10 +77,35 @@ include '../database/db_user_profile.php';
                 <h2>Vorherige Bestellungen</h2>
                 <div id="orders-container">
                     <div id="orders">
-                        <!-- Bestellungen werden hier per JavaScript eingefügt -->
+                        <?php if (!empty($orders)): ?>
+                            <?php foreach ($orders as $order): ?>
+                                <div class="order-item">
+                                    <div class="order-header">
+                                        <p class="bestell-id">
+                                            <strong>Bestell-ID:</strong> <?php echo htmlspecialchars($order['BestellID']); ?>
+                                        </p>
+                                        <p class="bestelldatum">
+                                            <strong>Bestelldatum:</strong>
+                                            <br> <?php echo htmlspecialchars($order['Bestelldatum']); ?>
+                                        </p>
+                                    </div>
+                                    <div class="order-details">
+                                        <p class="gesamtbetrag">
+                                            <strong>Gesamtbetrag:</strong> <?php echo htmlspecialchars($order['Gesamtbetrag']); ?> €
+                                        </p>
+                                        <p class="zahlungsart">
+                                            <strong>Zahlungsart:</strong> <?php echo htmlspecialchars($order['Zahlungsart']); ?>
+                                        </p>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <p>Es wurden keine Bestellungen gefunden.</p>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
+
         </div>
     </main>
 
