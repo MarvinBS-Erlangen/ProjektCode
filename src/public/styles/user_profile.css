@@ -1,3 +1,10 @@
+body {
+    position: relative;
+}
+
+
+
+
 
 .profile-container {
     display: flex;
@@ -8,6 +15,7 @@
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     height: 80vh; /* Maximale Höhe, damit es nicht zu groß wird */
+    margin-right: 5%;
 }
 
 .profile-info, .order-history {
@@ -17,7 +25,14 @@
 
 .profile-info {
     border-right: 1px solid #ddd;
-    overflow-y: auto; /* Falls Profilinfos länger werden */
+    /* overflow-y: auto; Falls Profilinfos länger werden */
+}
+
+.profile-data{
+    overflow-y: auto;
+    max-height: 60vh;
+    overflow-y: auto;
+    padding-right: 10px;
 }
 
 h2 {
@@ -37,6 +52,13 @@ input {
     border: 1px solid #ccc;
     border-radius: 5px;
     display: block;
+    transition: background-color 0.3s ease;
+}
+
+
+
+input:disabled{
+    background-color: rgb(195, 195, 195);
 }
 
 button {
@@ -59,30 +81,114 @@ button:hover {
 
 /* Bestell-Historie Bereich */
 #orders-container {
-    max-height: 60vh; /* Scrollbarer Bereich */
+    max-height: 60vh;
     overflow-y: auto;
     padding-right: 10px;
 }
 
 /* Einzelne Bestellung */
-.order {
-    background-color: #f4f4f4;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.order-item {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    transition: background-color 0.3s ease;
+    margin: 1% 1% 3%;
 }
+
+.order-item:hover {
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+
+/* Header Bereich der Bestellung */
+.order-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.order-header .bestell-id{
+    margin-bottom: 1%;
+}
+
+/* Details der Bestellung */
+.order-details {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Bestell-ID und Bestelldatum */
+.bestell-id,
+.bestelldatum {
+    font-weight: bold;
+    font-size: 1rem;
+    width: 100%;
+}
+
+.bestelldatum {
+    font-weight: 400;
+}
+
+/* Gesamtbetrag und Zahlungsart */
+.gesamtbetrag,
+.zahlungsart {
+    font-size: 1rem;
+    margin-top: 5px;
+}
+
+
 .profile-info {
     border-right: 1px solid #ddd;
     overflow-y: auto;
 }
 
 .address-container {
-    display: flex;
-    gap: 10px;
-    margin-top: 5px; /* Abstand zwischen dem "Adresse"-Label und den Feldern */
+    display: grid;
+    grid-template-columns: 4fr 1fr; /* Straße größer als Hausnummer */
+    gap: 1px;
+    width: calc(100% - 10px);
+    align-items: center; /* Vertikale Ausrichtung der Felder */
 }
 
-.address-container input {
-    flex: 1;
+.address-container > input {
+
+    width: calc(100% - 5px);
+    padding: 8px;
+    margin: 5px 0;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.address-container > input:nth-of-type(2) {
+
+    width: calc(100%);
+    padding: 8px;
+    margin: 5px 0;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+
+
+
+#delete-account-btn{
+    position: absolute;
+    bottom: 10vh;
+    right: 1vw;
+    background-color: #ff4d4d;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#delete-account-btn:hover {
+    background-color: #ff1a1a;
+    color: black;
 }

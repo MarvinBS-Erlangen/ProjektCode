@@ -21,6 +21,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['act
     exit();
 }
 
+// Produkt zum Warenkorb hinzufügen
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['id']) && isset($_GET['type'])) {
+    $id = $_GET['id'];
+    $type = $_GET['type'];
+    if ($type == 'produkt') {
+        if (isset($_SESSION['warenkorb_Produkt'][$id])) {
+            $_SESSION['warenkorb_Produkt'][$id]++;
+        } else {
+            $_SESSION['warenkorb_Produkt'][$id] = 1;
+        }
+    } elseif ($type == 'menue') {
+        if (isset($_SESSION['warenkorb_Menue'][$id])) {
+            $_SESSION['warenkorb_Menue'][$id]++;
+        } else {
+            $_SESSION['warenkorb_Menue'][$id] = 1;
+        }
+    }
+    header("Location: warenkorb.php");
+    exit();
+}
+
 // Warenkorb leeren
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] === 'clear') {
     $_SESSION['warenkorb_Produkt'] = [];
@@ -151,4 +172,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout'])) {
         }
     }
 }
-?>

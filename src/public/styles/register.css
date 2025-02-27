@@ -1,49 +1,79 @@
-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
-    min-height: 100vh;
-    width: 100vw;
-    font-family: 'Roboto', sans-serif;
-    position: relative;
-}
-
-
 .form-container {
-    border-radius: 8px;  /* Etwas kleinere Abrundung */
-    padding: 15px;  /* Etwas weniger Padding */
+    border-radius: 8px; /* Etwas kleinere Abrundung */
+    padding: 15px; /* Etwas weniger Padding */
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 300px;  /* Noch kleinere Breite */
+    max-width: 600px; /* Noch kleinere Breite */
     box-sizing: border-box;
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);  /* Dezenterer Schatten */
-    height: auto;  /* Höhe automatisch anpassen */
-    margin: 0 auto;  /* Zentrieren */
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.3); /* Dezenterer Schatten */
+    height: auto; /* Höhe automatisch anpassen */
+    margin: 5% auto; /* Zentrieren */
+}
+
+.form-container form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.form-group {
+    margin-bottom: 10px;
+    width: 48%;
+}
+
+.form-group.email-group,
+.form-group.agb-group {
+    flex-basis: 100%;
+    width: 48%;
+}
+
+.form-group.email-group{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.form-group.email-group > input{
+    width: 48%;
+}
+
+@media (max-width: 600px) {
+    .form-group {
+        width: 100%; /* Bei kleinen Bildschirmen wieder einspaltig */
+    }
 }
 
 label {
-    margin-bottom: 4px;  /* Weniger Abstand zwischen Label und Input */
-    font-size: 12px;  /* Kleinere Schriftgröße */
+    margin-bottom: 4px; /* Weniger Abstand zwischen Label und Input */
+    font-size: 1rem; /* Kleinere Schriftgröße */
 }
 
 input {
     width: 100%;
-    padding: 5px;  /* Weniger Innenabstand für die Inputs */
-    margin-bottom: 8px;  /* Weniger Abstand zwischen den Eingabefeldern */
-    font-size: 12px;  /* Kleinere Schriftgröße */
+    padding: 5px; /* Weniger Innenabstand für die Inputs */
+    margin-bottom: 8px; /* Weniger Abstand zwischen den Eingabefeldern */
+    font-size: 12px; /* Kleinere Schriftgröße */
     box-sizing: border-box;
-    height: 1.5rem;  /* Kleinere Höhe */
+    height: 1.5rem; /* Kleinere Höhe */
     border: 1px solid black;
     border-radius: 3px;
 }
 
 .signup-title {
     text-align: center;
-    margin: 0 auto;
-    font-size: 18px;  /* Kleinere Schriftgröße */
+    margin: 0 auto 10px; /* oben 0 rechts auto unten 10px links auto */
+    font-size: 18px; /* Kleinere Schriftgröße */
+}
+
+.button-container{
+    width: 100%;
+    height: 5vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
 }
 
 #btn-signup {
@@ -51,38 +81,48 @@ input {
     color: white;
     border: none;
     border-radius: 5px;
-    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);  /* Dezenterer Schatten */
-    padding: 6px 10px;  /* Kleinere Button-Padding */
-    font-size: 12px;  /* Kleinere Schriftgröße für den Button */
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3); /* Dezenterer Schatten */
+    padding: 6px 10px; /* Kleinere Button-Padding */
+    font-size: 1rem; /* Kleinere Schriftgröße für den Button */
     height: 30px;
-
+    width: auto;
+    margin-bottom: 1rem;
+    text-align: center;
 }
 
-/* #btn-signup:hover {
+#btn-signup:hover {
     cursor: pointer;
-} */
+}
 
 .already-registered {
     text-align: center;
-    font-size: 12px;  /* Kleinere Schriftgröße für den Text */
+    font-size: 12px; /* Kleinere Schriftgröße für den Text */
 }
 
-.already-registered > a {
+.already-registered > p > a {
     text-decoration: none;
     color: green;
-    font-size: 12px;  /* Gleiche Schriftgröße für den Link */
+    font-size: 12px; /* Gleiche Schriftgröße für den Link */
 }
 
 .agb-container {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    gap: 4px;  /* Weniger Abstand zwischen Label und Checkbox */
+    gap: 4px; /* Weniger Abstand zwischen Label und Checkbox */
+    width: auto;
 }
 
-.checkbox-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+.agb-container label {
+    margin-right: 10px;
+    white-space: nowrap; /*verhindert dass das label umbricht */
+}
+
+.agb-container label a {
+    color: green;
+    text-decoration: underline;
+}
+
+.agb-container input[type='checkbox'] {
+    margin: 0;
+    width: 5%;
 }

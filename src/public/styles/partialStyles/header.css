@@ -1,3 +1,4 @@
+
 .header {
     display: flex;
     justify-content: space-between;
@@ -9,13 +10,15 @@
 }
 
 .header-title {
-    flex: 3;
+    flex: 1;
+    font-size: 1.2rem;
+    font-weight: bold;
 }
 
 .nav-links {
     display: flex;
     align-items: center;
-    flex: 3;
+    flex: 2;
     justify-content: flex-end;
 }
 
@@ -28,10 +31,17 @@
 
 .nav-links ul li {
     margin-right: 1rem;
+    font-size: 1.2rem;
 }
 
 .nav-links ul li a:hover {
     color: black;
+}
+
+ul.user-list{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Style for Logout Button */
@@ -50,6 +60,8 @@
     color: black;
 }
 
+
+
 /* Style for User Icon in the Header */
 .user-icon {
     font-size: 1.5rem;
@@ -59,13 +71,13 @@
 }
 
 .user-icon:hover {
-    color: #f1f1f1;
+    color: black;
 }
 
 .cart-container {
     display: flex;
     align-items: center;
-    flex: 1;
+    flex: 0.5;
     justify-content: flex-end;
 }
 
@@ -76,10 +88,83 @@
 
 .cart-icon:hover {
     cursor: pointer;
-    color: grey;
+    color: black;
 }
 
 #cart-count {
     font-size: 1.2rem;
     font-weight: bold;
+}
+
+/* Style for User Actions */
+.user-actions {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    justify-content: flex-end;
+}
+
+/* Style for User List */
+.user-list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.user-list li {
+    margin-right: 1rem;
+}
+
+/* Style for Guest Actions */
+.guest-actions {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    justify-content: flex-end;
+}
+
+/* Style for Guest List */
+.guest-list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.guest-list li {
+    margin-right: 1rem;
+}
+
+.guest-list li a {
+    font-size: 1.2rem;
+    border: 2px solid white;
+    padding: 0 .5rem;
+    white-space: nowrap; 
+    border-radius: 5px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+    background-color: white;
+    color: black;
+    width: 80px;
+}
+
+.guest-list li.btn-signup a{
+    background-color: black;
+    color: white;
+    border: 2px solid black;
+}
+
+/* Hover styles for Login and Sign Up */
+.guest-list li a:hover {
+    color: black;
+    background-color: rgb(236, 236, 236);
+    border: 2px solid rgb(236, 236, 236);
+} 
+
+.guest-list li.btn-signup a:hover{
+    color: white;
+    background-color: rgb(34, 34, 34);
+    border: 2px solid rgb(34, 34, 34);
 }

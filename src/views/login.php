@@ -23,7 +23,7 @@ include '../database/db_login.php';
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <script src="../handlers/login-handler.js" defer></script>
+    <script src="../handlers/login-handler.js" defer></script>
     <title>Login</title>
 </head>
 
@@ -41,7 +41,9 @@ include '../database/db_login.php';
                 <label for="password">Passwort:</label>
                 <input type="password" id="password" name="Password" required>
 
-                <input type="submit" id="btn-login" value="Login">
+                <div class="button-container">
+                    <input type="submit" id="btn-login" value="Login">
+                </div>
             </form>
 
             <p class="not-registered">Noch kein Konto? <a href="register.php">Registrieren</a></p>
