@@ -1,8 +1,8 @@
-.header > .cart-container {
+.header>.cart-container {
     display: none;
 }
 
-.section > h2 {
+.section>h2 {
     font-size: 1.25rem;
 }
 
@@ -11,7 +11,8 @@
     background-color: white;
     width: 80%;
     max-width: 600px;
-    padding: 30px 20px; /* Increased padding to avoid overlap */
+    padding: 30px 20px;
+    /* Increased padding to avoid overlap */
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
@@ -22,7 +23,8 @@
 .order-list {
     max-height: 250px;
     overflow-y: auto;
-    padding-right: 10px; /* Ensures button remains clickable */
+    padding-right: 10px;
+    /* Ensures button remains clickable */
 }
 
 /* Einzelnes Produkt */
@@ -34,42 +36,69 @@
     border-bottom: 1px solid #ddd;
 }
 
-/* Entfernen-Link mit Icon */
-.remove-item {
-    color: #ff0000; /* Rote Farbe für den Papierkorb */
+/* Hinzufügen-Link mit Icon */
+.add-item {
+    color: #00b840;
+    /* Grüne Farbe für das Plus Icon */
     font-size: 20px;
     text-decoration: none;
     display: flex;
     align-items: center;
-    justify-content: flex-end; /* Platzierung ganz rechts */
+    justify-content: flex-end;
+    /* Platzierung ganz rechts */
     padding-left: 10px;
-  }
+    margin-bottom: 1%;
+}
 
-  .remove-item:hover {
-    color: #d50000; /* Dunkelrote Farbe, wenn das Icon mit der Maus berührt wird */
-  }
+.add-item:hover {
+    color: #009c37;
+    /* Dunkelgrüne Farbe, wenn das Icon mit der Maus berührt wird */
+}
 
-  .item {
+/* Entfernen-Link mit Icon */
+.remove-item {
+    color: #ff0000;
+    /* Rote Farbe für den Papierkorb */
+    font-size: 20px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    /* Platzierung ganz rechts */
+    padding-left: 10px;
+}
+
+.remove-item:hover {
+    color: #d50000;
+    /* Dunkelrote Farbe, wenn das Icon mit der Maus berührt wird */
+}
+
+.item {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 0;
     border-bottom: 1px solid #ddd;
-    position: relative; /* Wichtig für das absolute Positionieren des Icons */
-  }
+    position: relative;
+    /* Wichtig für das absolute Positionieren des Icons */
+}
 
-  .item-details {
+.item-details {
     flex-grow: 1;
-  }
+}
 
-  .remove-item i {
-    margin-left: auto; /* Schiebt das Icon nach ganz rechts */
-  }
+.add-item,
+.remove-item {
+    margin-left: auto;
+    /* Schiebt das Icon nach ganz rechts */
+}
 
 /* Produktbild */
 .item-image {
-    width: 7rem; /* Slightly smaller image */
-    height: 7rem; /* Slightly smaller image */
+    width: 7rem;
+    /* Slightly smaller image */
+    height: 7rem;
+    /* Slightly smaller image */
     margin-right: 15px;
 }
 
@@ -88,7 +117,8 @@
 
 .item-name {
     margin-top: 0px;
-    font-size: 20px; /* Slightly bigger font size for product name */
+    font-size: 20px;
+    /* Slightly bigger font size for product name */
     color: #333;
 }
 
@@ -118,9 +148,12 @@
     font-size: 18px;
     padding: 5px;
     cursor: pointer;
-    width: 30px; /* Fixed width for buttons */
-    height: 30px; /* Fixed height for buttons */
-    text-align: center; /* Center the "+" or "-" */
+    width: 30px;
+    /* Fixed width for buttons */
+    height: 30px;
+    /* Fixed height for buttons */
+    text-align: center;
+    /* Center the "+" or "-" */
 }
 
 .minus:active,
@@ -182,8 +215,10 @@ select {
 /* Lieferadresse */
 .section {
     width: 100%;
-    max-width: 500px; /* Optional: Begrenze die maximale Breite */
-    margin: 0 auto; /* Zentriert den Abschnitt */
+    max-width: 500px;
+    /* Optional: Begrenze die maximale Breite */
+    margin: 0 auto;
+    /* Zentriert den Abschnitt */
 }
 
 input,
@@ -197,13 +232,15 @@ select {
 
 /* Für die Input-Felder auch eine kleine Korrektur hinzufügen */
 input[type='text'] {
-    box-sizing: border-box; /* Stellt sicher, dass Padding und Border die Breite nicht überschreiten */
+    box-sizing: border-box;
+    /* Stellt sicher, dass Padding und Border die Breite nicht überschreiten */
 }
 
 /* Beispiel für das Layout von Eingabefeldern */
 input,
 select {
-    width: 100%; /* Nimmt die volle Breite des Containers ein */
+    width: 100%;
+    /* Nimmt die volle Breite des Containers ein */
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;

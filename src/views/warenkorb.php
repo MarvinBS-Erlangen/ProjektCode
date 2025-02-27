@@ -46,13 +46,14 @@ include '../database/db_warenkorb.php';
 
                         if ($produkt) {
                             echo "<div class='item'>
-<div class='item-details'>
-<p class='item-name'>{$produkt['Produktname']}</p>
-<p class='item-price'>{$produkt['Preis']} €</p>
-<p class='item-quantity'>Menge: {$menge}</p>
-<a href='warenkorb.php?action=remove&id={$produkt['ProduktID']}&type=produkt' class='remove-item'><i class='fa-solid fa-trash'></i></a>
-</div>
-</div>";
+                                    <div class='item-details'>
+                                    <p class='item-name'>{$produkt['Produktname']}</p>
+                                    <p class='item-price'>{$produkt['Preis']} €</p>
+                                    <p class='item-quantity'>Menge: {$menge}</p>
+                                    <a href='warenkorb.php?action=add&id={$produkt['ProduktID']}&type=produkt'                                   class='add-item'><i class='fa-solid fa-plus'></i></a>
+                                    <a href='warenkorb.php?action=remove&id={$produkt['ProduktID']}&type=produkt'                                   class='remove-item'><i class='fa-solid fa-trash'></i></a>
+                                    </div>
+                                    </div>";
                         }
                     }
 
@@ -66,13 +67,18 @@ include '../database/db_warenkorb.php';
 
                         if ($menue) {
                             echo "<div class='item'>
-<div class='item-details'>
-<p class='item-name'>{$menue['Menuename']}</p>
-<p class='item-price'>{$menue['DiscountPreis']} €</p>
-<p class='item-quantity'>Menge: {$menge}</p>
-<a href='warenkorb.php?action=remove&id={$menue['MenueID']}&type=menue' class='remove-item'><i class='fa-solid fa-trash'></i></a>
-</div>
-</div>";
+                                    <div class='item-details'>
+                                        <p class='item-name'>{$menue['Menuename']}</p>
+                                        <p class='item-price'>{$menue['DiscountPreis']} €</p>
+                                        <p class='item-quantity'>Menge: {$menge}</p>
+                                        <a href='warenkorb.php?action=add&id={$menue['MenueID']}&type=menue' class='add-item'>
+                                            <i class='fa-solid    fa-plus'></i>
+                                        </a>
+                                        <a href='warenkorb.php?action=remove&id={$menue['MenueID']}&type=menue' class='remove-item'>
+                                            <i class='fa-solid  fa-trash'></i>
+                                        </a>
+                                    </div>
+                                </div>";
                         }
                     }
                     ?>
