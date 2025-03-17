@@ -1,8 +1,11 @@
 <?php
-// Admin check Script aufrufen
-// include '../../comps/admincheck.php';
-// Verbindung zur Datenbank herstellen
+//Datenbank verbindung herstellen
 include '../../database/connection.php';
+//Start der Session
+//Sessions initialisieren wenn noch nicht gemacht
+include '../../comps/sessioncheck.php';
+// Admin check Script aufrufen
+include '../../comps/admincheck.php';
 
 // Verarbeitung des Post-Requests zum Hinzufügen oder Löschen eines Menüs
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
