@@ -1,7 +1,9 @@
 <?php
-session_start();
-
+//Datenbank verbindung herstellen
 include '../../database/connection.php';
+//Start der Session
+//Sessions initialisieren wenn noch nicht gemacht
+include '../../comps/sessioncheck.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
     $benutzername = $_POST['benutzername'];

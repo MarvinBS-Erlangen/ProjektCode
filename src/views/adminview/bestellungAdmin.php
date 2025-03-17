@@ -1,8 +1,11 @@
 <?php
+//Datenbank verbindung herstellen
+include '../../database/connection.php';
+//Start der Session
+//Sessions initialisieren wenn noch nicht gemacht
+include '../../comps/sessioncheck.php';
 // Admin check Script aufrufen
 include '../../comps/admincheck.php';
-// Verbindung zur Datenbank herstellen
-include '../../database/connection.php';
 
 // Verarbeitung des Post-Requests zum Ändern des Status einer Bestellung
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_status'])) {

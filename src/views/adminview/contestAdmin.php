@@ -1,8 +1,11 @@
 <?php
+//Datenbank verbindung herstellen
+include '../../database/connection.php';
+//Start der Session
+//Sessions initialisieren wenn noch nicht gemacht
+include '../../comps/sessioncheck.php';
 // Admin check Script aufrufen
 include '../../comps/admincheck.php';
-// Datenbankverbindung herstellen
-include '../../database/connection.php';
 
 // Freischalten-Logik
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['freischalten'])) {
