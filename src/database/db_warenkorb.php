@@ -50,6 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['act
     exit();
 }
 
+
 // Lieferadresse abrufen
 $sql = "SELECT k.Nachname, a.Strasse, a.Hausnummer, a.Postleitzahl, a.Stadt, k.AdresseID FROM adresse a JOIN kunde k ON a.AdresseID = k.AdresseID WHERE k.KundenID = ?";
 $stmt = $conn->prepare($sql);
@@ -77,8 +78,6 @@ foreach ($_SESSION['warenkorb_Produkt'] as $produkt_id => $menge) {
     $result = $stmt->get_result();
     $produkt = $result->fetch_assoc();
 
-
-
     if ($produkt) {
         $gesamt = $produkt['Preis'] * $menge;
         $gesamtpreis += $gesamt;
@@ -99,10 +98,7 @@ foreach ($_SESSION['warenkorb_Menue'] as $menue_id => $menge) {
     }
 }
 
-
-
-
-$_SESSION['gesamtpreis'] = number_format($gesamtpreis, 2, ',', '');
+$_SESSION['gesamtpreis'] = $gesamtpreis;
 
 // Bestellung abschließen
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout'])) {
@@ -142,8 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout'])) {
 
             // Bestellung speichern und Bestellposten fuer Produkte und Menues speichern
             // Verknuepfen der Bestellpostenid mit der Bestellung
-            $zahlungsart = $_POST['zahlungsart'] ??
-                $zahlungsart = $_POST['zahlungsart'] ?? '';
+            $zahlungsart = $_POST['zahlungsart'] ?? '';
             $gesamtpreis = $_SESSION['gesamtpreis'];
             $sql = "INSERT INTO bestellung (KundenID, Zahlungsart, Gesamtbetrag) VALUES (?, ?, ?)";
             $stmt = $conn->prepare($sql);
