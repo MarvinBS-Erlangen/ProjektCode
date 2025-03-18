@@ -35,3 +35,30 @@ include '../comps/usercheck.php';
 </body>
 
 </html>
+<style>
+/* Container für die Bestellungsabschluss-Nachricht */
+.complete-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Überschrift - Bestellung abgeschlossen */
+h1 {
+    font-size: 2.5rem;
+    color: #28a745; /* Grüner Erfolgston */
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+/* Beschreibungstext */
+p {
+    font-size: 1.2rem;
+    color: #555555; /* Dunkleres Grau für den Text */
+    line-height: 1.6;
+    margin-top: 10px;
+}
+
+</style>
