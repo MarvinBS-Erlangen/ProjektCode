@@ -34,6 +34,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'logout') {
         <li><a href="ZutatAdmin.php">Zutat Admin</a></li>
         <li><a href="ProduktZutatAdmin.php">Produkt_Zutat</a></li>
         <li><a href="bestellungAdmin.php">Bestellungen</a></li>
+        <li><a href="csvDownload.php">DatenCSV</a></li>
         <li><a href="adminDashboard.php?action=logout">Abmelden</a></li>
     </ul>
 </body>
