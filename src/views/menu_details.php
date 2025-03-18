@@ -15,6 +15,20 @@ if (isset($_GET['id'])) {
 } else {
     die("Menü nicht gefunden.");
 }
+
+
+// Gesamt-Energiewert berechnen
+$sql_energy = "SELECT SUM(p.Energiewert * mp.Menge) AS GesamtEnergie
+               FROM menue_produkt mp
+               JOIN produkt p ON mp.ProduktID = p.ProduktID
+               WHERE mp.MenueID = ?";
+$stmt = $conn->prepare($sql_energy);
+$stmt->bind_param("i", $menueID);
+$stmt->execute();
+$result_energy = $stmt->get_result();
+$energy = $result_energy->fetch_assoc();
+$gesamtEnergie = $energy['GesamtEnergie'] ?? 0;
+
 ?>
 
 <!DOCTYPE html>
@@ -52,14 +66,16 @@ if (isset($_GET['id'])) {
                     <span class="old-price"><?php echo $menu['NormalPreis']; ?> €</span>
                 </div>
 
+                <p class="energy-info"><strong><?php echo $gesamtEnergie; ?> kcal</strong></p>
+
+
                 <p class="description">
                     <?php echo $menu['Beschreibung']; ?>
                 </p>
 
-                <p class="energy-info"><strong><?php echo $menu['Energiewert']; ?> kcal</strong></p>
 
                 <a href="menus.php?action=add&id=<?php echo $menu['MenueID']; ?>" class="cart-icon">
-                    <i class="fa-solid fa-cart-shopping"></i> In den Warenkorb
+                    <i class="fa-solid fa-cart-shopping menu-cart-icon"></i>
                 </a>
             </div>
         </div>

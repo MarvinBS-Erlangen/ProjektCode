@@ -22,6 +22,7 @@ main {
     max-width: 1500px;
     gap: 50px;
     flex-wrap: wrap;
+    position: relative;
 }
 
 .menu-image-container {
@@ -36,9 +37,25 @@ main {
     object-fit: cover;
 }
 
+
+
 .menu-details {
     max-width: 600px;
     flex: 1;
+}
+
+/* Cart Icon */
+.menu-cart-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: black;
+    cursor: pointer;
+}
+
+.menu-cart-icon:hover {
+    color: grey;
 }
 
 .menu-title {
