@@ -1,6 +1,4 @@
 <?php
-session_start(); // Stelle sicher, dass die Session gestartet ist
-
 // BenutzerID aus der Session abrufen
 $userID = $_SESSION['UserID'] ?? null;
 

@@ -1,9 +1,4 @@
 <?php
-// Starten der Session, falls sie noch nicht gestartet wurde
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-
 // Das Script prüft, ob der User eingeloggt ist
 if (!isset($_SESSION['UserID'])) {
     // Fehlermeldung in der Session speichern
