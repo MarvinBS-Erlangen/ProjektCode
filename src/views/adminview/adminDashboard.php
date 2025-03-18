@@ -12,7 +12,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'logout') {
     session_unset();
     session_destroy();
     // Umleitung auf den Login screen
-    //Kann noch entfernt werden wenn noetig
+    // Kann noch entfernt werden wenn nötig
     header("Location: loginAdmin.php");
     exit();
 }
