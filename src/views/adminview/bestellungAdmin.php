@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_status'])) {
 
     // SQL-Befehl zum Aktualisieren des Status einer Bestellung
     $sql = "UPDATE bestellung SET Status = ? WHERE BestellID = ?";
-    
+
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("si", $status, $bestellID);
     $stmt->execute();
@@ -29,6 +29,7 @@ $bestellungen = $result->fetch_all(MYSQLI_ASSOC);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Bestellungen verwalten</title>
@@ -50,7 +51,7 @@ $bestellungen = $result->fetch_all(MYSQLI_ASSOC);
                     } else {
                         tr[i].style.display = "none";
                     }
-                }       
+                }
             }
         }
 
@@ -71,7 +72,7 @@ $bestellungen = $result->fetch_all(MYSQLI_ASSOC);
                     } else {
                         tr[i].style.display = "none";
                     }
-                }       
+                }
             }
         }
 
@@ -92,11 +93,12 @@ $bestellungen = $result->fetch_all(MYSQLI_ASSOC);
                     } else {
                         tr[i].style.display = "none";
                     }
-                }       
+                }
             }
         }
     </script>
 </head>
+
 <body>
     <h1>Bestellungen verwalten</h1>
 
@@ -126,27 +128,28 @@ $bestellungen = $result->fetch_all(MYSQLI_ASSOC);
             <th>Aktion</th>
         </tr>
         <?php foreach ($bestellungen as $bestellung): ?>
-        <tr>
-            <td><?php echo htmlspecialchars($bestellung['BestellID']); ?></td>
-            <td><?php echo htmlspecialchars($bestellung['KundenID']); ?></td>
-            <td><?php echo htmlspecialchars($bestellung['Bestelldatum']); ?></td>
-            <td><?php echo htmlspecialchars($bestellung['Gesamtbetrag']); ?></td>
-            <td><?php echo htmlspecialchars($bestellung['Zahlungsart']); ?></td>
-            <td><?php echo htmlspecialchars($bestellung['Status']); ?></td>
-            <td>
-                <form method="POST" action="bestellungAdmin.php" style="display:inline;">
-                    <input type="hidden" name="update_status" value="1">
-                    <input type="hidden" name="bestell_id" value="<?php echo htmlspecialchars($bestellung['BestellID']); ?>">
-                    <select name="status">
-                        <option value="Bestellt" <?php if ($bestellung['Status'] == 'Bestellt') echo 'selected'; ?>>Bestellt</option>
-                        <option value="In Zubereitung" <?php if ($bestellung['Status'] == 'In Zubereitung') echo 'selected'; ?>>In Zubereitung</option>
-                        <option value="Abgeschlossen" <?php if ($bestellung['Status'] == 'Abgeschlossen') echo 'selected'; ?>>Abgeschlossen</option>
-                    </select>
-                    <button type="submit">Aktualisieren</button>
-                </form>
-            </td>
-        </tr>
+            <tr>
+                <td><?php echo htmlspecialchars($bestellung['BestellID']); ?></td>
+                <td><?php echo htmlspecialchars($bestellung['KundenID']); ?></td>
+                <td><?php echo htmlspecialchars($bestellung['Bestelldatum']); ?></td>
+                <td><?php echo htmlspecialchars($bestellung['Gesamtbetrag']); ?></td>
+                <td><?php echo htmlspecialchars($bestellung['Zahlungsart']); ?></td>
+                <td><?php echo htmlspecialchars($bestellung['Status']); ?></td>
+                <td>
+                    <form method="POST" action="bestellungAdmin.php" style="display:inline;">
+                        <input type="hidden" name="update_status" value="1">
+                        <input type="hidden" name="bestell_id" value="<?php echo htmlspecialchars($bestellung['BestellID']); ?>">
+                        <select name="status">
+                            <option value="Bestellt" <?php if ($bestellung['Status'] == 'Bestellt') echo 'selected'; ?>>Bestellt</option>
+                            <option value="In Zubereitung" <?php if ($bestellung['Status'] == 'In Zubereitung') echo 'selected'; ?>>In Zubereitung</option>
+                            <option value="Abgeschlossen" <?php if ($bestellung['Status'] == 'Abgeschlossen') echo 'selected'; ?>>Abgeschlossen</option>
+                        </select>
+                        <button type="submit">Aktualisieren</button>
+                    </form>
+                </td>
+            </tr>
         <?php endforeach; ?>
     </table>
 </body>
+
 </html>

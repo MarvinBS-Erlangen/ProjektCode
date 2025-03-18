@@ -32,7 +32,7 @@ include '../comps/addProductToCart.php';
     <?php include './partials/header.php'; ?>
 
     <main class="main">
-  
+
 
         <div class="product-container">
             <?php

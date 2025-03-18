@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -6,12 +7,12 @@
     <link rel="stylesheet" href="../public/styles/reset.css">
     <link rel="stylesheet" href="../public/styles/index.css">
     <link rel="stylesheet" href="../public/styles/product_details.css">
+    <link rel="stylesheet" href="../public/styles/fetch_product_details.css">
     <link rel="stylesheet" href="../public/styles/partialStyles/header.css">
     <link rel="stylesheet" href="../public/styles/partialStyles/footer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="../handlers/product-details-cart-handler.js" defer></script>
     <title>Product Details</title>
 </head>
 
@@ -23,7 +24,7 @@
             <!-- Image -->
             <div class="image-container">
                 <img src="https://assets-au-01.kc-usercontent.com/ab37095e-a9cb-025f-8a0d-c6d89400e446/17d49270-1b2a-4511-80a8-1c5dbd41e8c8/article-cat-vet-visit-guide.jpg"
-                    alt="Nachos Snackers">
+                    alt="Nachos Snackers" class="product-image" data-product-id="1">
             </div>
 
             <!-- Product Details -->
@@ -46,11 +47,13 @@
             <i class="fa-solid fa-cart-shopping product-cart-icon"></i>
         </div>
 
-    </main>
-
-    <?php include './partials/footer.php'; ?>
-
-
+        <!-- Modal -->
+        <div id="product-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div id="modal-body"></div>
+            </div>
+            <?php include './partials/footer.php'; ?>
 </body>
 
 </html>
