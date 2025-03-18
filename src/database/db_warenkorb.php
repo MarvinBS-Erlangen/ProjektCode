@@ -162,15 +162,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout'])) {
                 $stmt->execute();
             }
 
-            // Redirect to bestellungcomplete.php after successful order completion
             // Warenkorb leeren
             $_SESSION['warenkorb_Produkt'] = [];
             $_SESSION['warenkorb_Menue'] = [];
             $_SESSION['gesamtpreis'] = 0;
-            header("Location: ../views/bestellungcomplete.php");
+            header("Location: bestellungcomplete.php");
             exit();
-
-            
         }
     }
 }

@@ -14,9 +14,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['upload'])) {
         $stmt->bind_param("iss", $userID, $bildurl, $titel);
         $stmt->execute();
 
-        echo "Bild erfolgreich hochgeladen.";
+        $_SESSION['success_message'] = "Bild erfolgreich hochgeladen!"; // Erfolgsmeldung in Session speichern
+        header("Location: contest.php"); // Weiterleitung zur Contest-Seite
+        exit();
     } else {
-        echo "Fehler: Bitte geben Sie eine gültige Bild-URL ein.";
+        $_SESSION['error_message'] = "Fehler: Bitte geben Sie eine gültige Bild-URL ein.";
+        header("Location: contest.php"); // Weiterleitung zur Contest-Seite
+        exit();
     }
 }
 ?>
+

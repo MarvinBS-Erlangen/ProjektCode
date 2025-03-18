@@ -1,66 +1,54 @@
-/* Welcome Section */
-.welcome-container {
-    width: 100vw;
-    height: 100vh;
-    background-color: #a8d5ba; /* Pale green */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap");
+
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #ffffff; /* Weißer Hintergrund für ein sauberes Design */
+    color: #2d3e1f;
+    text-align: center;
+}
+.hero {
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    text-align: center;
+    align-items: center;
+    height: 100vh;
+    background: url('https://source.unsplash.com/1600x900/?healthy-food,vegetables') no-repeat center center/cover;
     color: white;
     padding: 20px;
+    position: relative;
 }
-
-/* Heading & Text */
+.overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+}
+.hero-content {
+    position: relative;
+    z-index: 2;
+    width: 100%; /* Volle Breite, damit der Text in einer Reihe bleibt */
+}
 h1 {
-    font-size: 6rem;
-    margin-bottom: 10px;
-}
-h2 {
     font-size: 3rem;
     margin-bottom: 10px;
+    white-space: nowrap; /* Verhindert den Zeilenumbruch */
 }
-
 p {
-    font-size: 2.5em;
-    margin-bottom: 90px;
+    font-size: 1.3rem;
+    margin-bottom: 20px;
 }
-
-/* Button */
 .btn {
-    background-color: none;
+    display: inline-block;
+    background: #a8d5ba; /* Grüner Button */
     color: white;
+    padding: 15px 30px;
+    border-radius: 30px;
+    font-size: 1.2rem;
     text-decoration: none;
-    padding: 12px 100px;
-    border-radius: 25px;
-    font-size: 2rem;
-    font-weight: bold;
-    transition: 0.5s;
-    border: 2px solid white;
-    border-radius: 25px;
+    transition: 0.3s;
 }
-
 .btn:hover {
-    background-color: white;
-    color: #a8d5ba;
-}
-
-/* Fade-in Animation */
-.fade-in {
-    opacity: 0;
-    transform: translateY(10px);
-    animation: fadeIn 1s forwards;
-}
-
-.fade-in.delay {
-    animation-delay: 0.5s;
-}
-
-/* Animation Keyframes */
-@keyframes fadeIn {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    background: #a8d5ba;
+    transform: scale(1.05);
 }

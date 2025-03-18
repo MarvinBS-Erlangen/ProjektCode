@@ -30,15 +30,37 @@ include '../database/db_contest.php';
 </head>
 
 <body>
-
+    <?php
+    // Wenn der Benutzer auf "X" klickt, die Nachricht aus der Session löschen
+    if (isset($_GET['close_message'])) {
+        unset($_SESSION['success_message']);
+        unset($_SESSION['error_message']);
+        
+        // Verhindert, dass der URL-Parameter in der Adresszeile bleibt
+        header("Location: " . strtok($_SERVER["REQUEST_URI"], '?'));
+        exit();
+    }
+    ?>
     <?php include './partials/header.php'; ?>
+    <?php if (isset($_SESSION['success_message'])): ?>
+        <div class="success-banner">
+            <?php echo $_SESSION['success_message']; ?>
+            <a href="?close_message=1" class="close-btn">X</a>
+        </div>
+    <?php endif; ?>
 
+    <?php if (isset($_SESSION['error_message'])): ?>
+        <div class="error-banner">
+            <?php echo $_SESSION['error_message']; ?>
+            <a href="?close_message=1" class="close-btn">X</a>
+        </div>
+    <?php endif; ?>
 
     <main class="main">
 
 
         <div class="participate-container">
-            <div class="description">Participate in our <span id="funny-dinner-contest">Funny-Dinner-Contest</span>.<br> Share your dinner pics with the community. There's a prize!!<br> Wink Wink</div>
+            <div class="description">Participate in our <span id="funny-dinner-contest">Funny-Dinner-Contest</span>.<br> Share your dinner pics with the community. There's a prize!!<br> Wink Wink </div>
             <div class="button-container">
                 <div class="view-your-uploads-container">
                     <button type="button" id="btn-view-your-uploads">VIEW YOUR UPLOADS</button>
@@ -142,5 +164,47 @@ include '../database/db_contest.php';
     </script>
 
 </body>
-
 </html>
+
+<style>
+/* Erfolgsmeldung-Banner */
+.success-banner {
+    width: 100%;
+    background-color: #4CAF50; /* Grüner Hintergrund für Erfolg */
+    color: white;
+    text-align: center;
+    padding: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    position: relative;
+    margin-top: 0px;
+}
+
+/* Fehlermeldung-Banner */
+.error-banner {
+    width: 100%;
+    background-color: #FF5733; /* Roter Hintergrund für Fehler */
+    color: white;
+    text-align: center;
+    padding: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    position: relative;
+    margin-top: 0px;
+    
+}
+/* Close Button */
+.close-btn {
+    position: absolute;
+    top: 50%;
+    right: 5px; /* Keep it 5px from the right */
+    transform: translateY(-50%); /* Center vertically */
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 5px;
+    cursor: pointer;
+}
+
+</style>
