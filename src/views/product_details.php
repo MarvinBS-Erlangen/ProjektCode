@@ -1,4 +1,35 @@
-<html lang="en">
+<?php
+//Datenbank verbindung herstellen
+include '../database/connection.php';
+// Start der Session
+// Sessions initialisieren, falls noch nicht gemacht
+include '../comps/sessioncheck.php';
+
+// Produkt-ID aus der URL holen
+$productID = isset($_GET['id']) ? $_GET['id'] : null;
+
+if ($productID) {
+    // Abrufen der Produktdetails aus der Datenbank
+    $sql = "SELECT ProduktID, Produktname, Beschreibung, Preis, Energiewert, BildURL FROM produkt WHERE ProduktID = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $productID);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    if ($result->num_rows > 0) {
+        $product = $result->fetch_assoc();
+    } else {
+        echo "<p>Produkt nicht gefunden.</p>";
+        exit;
+    }
+} else {
+    echo "<p>Keine Produkt-ID angegeben.</p>";
+    exit;
+}
+?>
+
+<!DOCTYPE html>
+<html lang="de">
 
 <head>
     <meta charset="UTF-8">
@@ -12,7 +43,7 @@
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="../handlers/product-details-cart-handler.js" defer></script>
-    <title>Product Details</title>
+    <title>Produktdetails</title>
 </head>
 
 <body>
@@ -22,35 +53,27 @@
         <div class="container">
             <!-- Image -->
             <div class="image-container">
-                <img src="https://assets-au-01.kc-usercontent.com/ab37095e-a9cb-025f-8a0d-c6d89400e446/17d49270-1b2a-4511-80a8-1c5dbd41e8c8/article-cat-vet-visit-guide.jpg"
-                    alt="Nachos Snackers">
+                <img src="<?php echo $product['BildURL']; ?>" alt="<?php echo $product['Produktname']; ?>">
             </div>
 
             <!-- Product Details -->
             <div class="product-details">
-                <h1 class="product-title">NACHOS SNACKERS</h1>
+                <h1 class="product-title"><?php echo $product['Produktname']; ?></h1>
                 <div class="pricing">
-                    <!-- <span class="old-price">12.99 €</span> -->
-                    <span class="new-price">12.99 €</span>
+                    <span class="new-price"><?php echo number_format($product['Preis'], 2); ?> €</span>
                 </div>
 
-                <p class="energy-info"><strong>1026 kJ | 246 kcal</strong></p>
+                <p class="energy-info"><strong><?php echo $product['Energiewert']; ?> kcal</strong></p>
 
                 <p class="description">
-                    Viva los Snackers: Was ist <span class="bold">knackig</span>, <span class="bold">cremig</span> und würzig gleichzeitig?
-                    <span class="bold">Correcto</span>, unsere verführerischen Nacho Cheese Snackers.
-                    Mit ihrer einmalig knusprigen Panade mit Tortilla Chips aus purem Maismehl und einem herzhaften,
-                    zartschmelzenden Kern – da muss man einfach zugreifen. Dazu gibt’s mittlere Pommes und 0,4l Softdrink.
+                    <?php echo $product['Beschreibung']; ?>
                 </p>
             </div>
             <i class="fa-solid fa-cart-shopping product-cart-icon"></i>
         </div>
-
     </main>
 
     <?php include './partials/footer.php'; ?>
-
-
 </body>
 
 </html>

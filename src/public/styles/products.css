@@ -1,10 +1,10 @@
 .product-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 products per row */
-    gap: 20px; /* Add a little more space between products */
+    grid-template-columns: repeat(4, 1fr); /* 4 Produkte pro Zeile */
+    gap: 20px; /* Etwas mehr Abstand zwischen den Produkten */
     padding: 20px;
-    max-width: 1200px; /* Restrict max width */
-    margin: auto; /* Center products on the page */
+    max-width: 1200px; /* Maximalbreite */
+    margin: auto; /* Zentriere die Produkte auf der Seite */
 }
 
 .product {
@@ -18,8 +18,8 @@
 
 .product img {
     width: 100%;
-    height: 200px; /* Adjusted height of the image */
-    object-fit: cover; /* Maintains aspect ratio without stretching */
+    height: 200px; /* Höhe des Produktbildes */
+    object-fit: cover; /* Beibehaltung des Seitenverhältnisses */
     border-radius: 5px;
 }
 
@@ -31,7 +31,7 @@
 }
 
 .product-name {
-    font-size: 1rem; /* Slightly bigger text */
+    font-size: 1rem;
     font-weight: bold;
 }
 
@@ -40,9 +40,9 @@
     color: #4a7c59;
 }
 
-/* Cart Icon positioned bottom right */
+/* Cart-Icon am unteren rechten Rand */
 .product .cart-icon {
-    font-size: 1.3rem; /* Adjusted cart icon size */
+    font-size: 1.3rem;
     color: black;
     cursor: pointer;
     position: absolute;
@@ -55,15 +55,15 @@
     color: grey;
 }
 
-/* Responsive Design */
+/* Responsives Design */
 @media (max-width: 1024px) {
     .product-container {
-        grid-template-columns: repeat(2, 1fr); /* 2 products per row on tablets */
+        grid-template-columns: repeat(2, 1fr); /* 2 Produkte pro Zeile auf Tablets */
     }
 }
 
 @media (max-width: 600px) {
     .product-container {
-        grid-template-columns: repeat(1, 1fr); /* 1 product per row on mobile */
+        grid-template-columns: repeat(1, 1fr); /* 1 Produkt pro Zeile auf Handys */
     }
 }
