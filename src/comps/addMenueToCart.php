@@ -11,7 +11,7 @@ function addToCart($menueID)
 // Überprüfen, ob ein Menü zum Warenkorb hinzugefügt werden soll
 if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['id'])) {
     addToCart($_GET['id']);
-    header("Location: menus.php");
+    header("Location: menu_details.php?id={$_GET['id']}");
     exit();
 }
 ?>
