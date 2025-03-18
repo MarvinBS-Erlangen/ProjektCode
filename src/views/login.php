@@ -31,6 +31,17 @@ include '../database/db_login.php';
 
     <?php include './partials/header.php'; ?>
 
+    <?php
+    // Überprüfen, ob eine Fehlermeldung in der Session vorhanden ist
+    if (isset($_SESSION['error_message'])) {
+        // Fehlermeldung anzeigen
+        echo "<div class='error-banner'>" . $_SESSION['error_message'] . "</div>";
+        
+        // Fehlermeldung nach der Anzeige aus der Session löschen
+        unset($_SESSION['error_message']);
+    }
+    ?>
+
     <main>
         <div class="form-container">
             <h2 class="login-title">Login</h2>
@@ -55,3 +66,31 @@ include '../database/db_login.php';
 </body>
 
 </html>
+
+<style>
+/* Fehlermeldung-Banner */
+.error-banner {
+    width: 100%;
+    background-color: #FF5733; /* Roter Hintergrund für Fehler */
+    color: white;
+    text-align: center;
+    padding: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    position: relative;
+    margin-top: 0px;
+    
+}
+.error-banner a {
+    color: #721c24; /* Gleiche Farbe wie der Text */
+    text-decoration: underline; /* Unterstrichen, damit es wie ein Link aussieht */
+}
+
+.error-banner a:hover {
+    color: #004085; /* Dunkleres Blau für den Hover-Effekt */
+    text-decoration: none; /* Entfernt Unterstreichung beim Hover */
+}
+
+
+
+</style>
