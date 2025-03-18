@@ -63,7 +63,7 @@ if ($productID) {
                     <span class="new-price"><?php echo number_format($product['Preis'], 2); ?> €</span>
                 </div>
 
-                <p class="energy-info"><strong><?php echo $product['Energiewert']; ?></strong></p>
+                <p class="energy-info"><strong><?php echo $product['Energiewert']; ?> kcal</strong></p>
 
                 <p class="description">
                     <?php echo $product['Beschreibung']; ?>
