@@ -40,7 +40,7 @@ p {
 }
 .btn {
     display: inline-block;
-    background: #4CAF50; /* Grüner Button */
+    background: #a8d5ba; /* Grüner Button */
     color: white;
     padding: 15px 30px;
     border-radius: 30px;
@@ -49,6 +49,6 @@ p {
     transition: 0.3s;
 }
 .btn:hover {
-    background: #45a049;
+    background: #a8d5ba;
     transform: scale(1.05);
 }
