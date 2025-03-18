@@ -2,10 +2,6 @@ body {
     position: relative;
 }
 
-
-
-
-
 .profile-container {
     display: flex;
     width: 80%;
@@ -26,6 +22,8 @@ body {
 .profile-info {
     border-right: 1px solid #ddd;
     /* overflow-y: auto; Falls Profilinfos länger werden */
+    position: relative;
+
 }
 
 .profile-data{
@@ -172,12 +170,10 @@ button:hover {
 }
 
 
-
-
 #delete-account-btn{
-    position: absolute;
+    /* position: absolute;
     bottom: 10vh;
-    right: 1vw;
+    right: 1vw; */
     background-color: #ff4d4d;
     color: white;
     padding: 10px;
@@ -191,4 +187,8 @@ button:hover {
 #delete-account-btn:hover {
     background-color: #ff1a1a;
     color: black;
+}
+
+button {
+    width: clamp(100px, 130px, 150px);
 }
