@@ -69,7 +69,9 @@ if ($productID) {
                     <?php echo $product['Beschreibung']; ?>
                 </p>
             </div>
-            <i class="fa-solid fa-cart-shopping product-cart-icon"></i>
+                <a href="products.php?action=add&id=<?php echo $product['ProduktID']; ?>" class="cart-icon">
+                    <i class="fa-solid fa-cart-shopping product-cart-icon"></i>
+                </a>
         </div>
     </main>
 
