@@ -1,8 +1,8 @@
 <?php
-//Datenbank verbindung herstellen
+// Datenbankverbindung herstellen
 include '../../database/connection.php';
-//Start der Session
-//Sessions initialisieren wenn noch nicht gemacht
+// Start der Session
+// Sessions initialisieren, falls noch nicht gemacht
 include '../../comps/sessioncheck.php';
 // Admin check Script aufrufen
 include '../../comps/admincheck.php';
@@ -14,12 +14,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_status'])) {
 
     // SQL-Befehl zum Aktualisieren des Status einer Bestellung
     $sql = "UPDATE bestellung SET Status = ? WHERE BestellID = ?";
-    
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("si", $status, $bestellID);
     $stmt->execute();
     echo "<p style='color: green;'>Status erfolgreich aktualisiert.</p>";
+
+    // Wenn der Status auf "Abgeschlossen" geändert wurde, erstellen wir eine Rechnung
+    if ($status === 'Abgeschlossen') {
+        // Abrufen der Bestellinformationen (nur die notwendigen Spalten)
+        $sql = "SELECT BestellID, Gesamtbetrag FROM bestellung WHERE BestellID = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $bestellID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        if ($result->num_rows > 0) {
+            $bestellung = $result->fetch_assoc();
+
+            // Erstellen einer neuen Rechnung (nur die relevanten Spalten befüllen)
+            $rechnung_sql = "INSERT INTO rechnung (BestellID, Rechnungsdatum, Betrag)
+                             VALUES (?, NOW(), ?)";
+            $rechnung_stmt = $conn->prepare($rechnung_sql);
+            $rechnung_stmt->bind_param("is", $bestellung['BestellID'], $bestellung['Gesamtbetrag']);
+            $rechnung_stmt->execute();
+            echo "<p style='color: green;'>Rechnung erfolgreich erstellt.</p>";
+        } else {
+            echo "<p style='color: red;'>Fehler: Bestellung nicht gefunden.</p>";
+        }
+    }
 }
+
 
 // Abrufen der existierenden Bestellungen
 $sql = "SELECT BestellID, KundenID, Bestelldatum, Gesamtbetrag, Zahlungsart, Status FROM bestellung";
