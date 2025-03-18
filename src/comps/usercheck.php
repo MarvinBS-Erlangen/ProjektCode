@@ -1,10 +1,17 @@
 <?php
-// Das Script prüft, ob der User eingeloggt ist, wenn nicht, gibt er eine Fehlermeldung
+// Starten der Session, falls sie noch nicht gestartet wurde
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Das Script prüft, ob der User eingeloggt ist
 if (!isset($_SESSION['UserID'])) {
-    echo "<div style='text-align: center; margin-top: 50px;'>";
-    echo "<h2>Sie müssen als User eingeloggt sein, um diese Seite zu sehen.</h2>";
-    echo "<p><a href='login.php' style='color: blue; text-decoration: underline;'>Anmelden</a></p>";
-    echo "</div>";
-    die();
+    // Fehlermeldung in der Session speichern
+    $_SESSION['error_message'] = "Sie müssen als User eingeloggt sein, um diese Seite zu sehen.";
+
+    // Weiterleitung zur Login-Seite
+    header("Location: login.php");
+    exit();
 }
 ?>
+
