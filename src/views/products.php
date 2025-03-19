@@ -70,6 +70,8 @@ include '../comps/addProductToCart.php';
     </main>
 
     <?php include './partials/footer.php'; ?>
+
+
 </body>
 
 </html>
