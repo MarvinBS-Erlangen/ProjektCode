@@ -93,10 +93,7 @@ button:hover {
     margin: 1% 1% 3%;
 }
 
-.order-item:hover {
-    background-color: #f0f0f0;
-    cursor: pointer;
-}
+
 
 /* Header Bereich der Bestellung */
 .order-header {
