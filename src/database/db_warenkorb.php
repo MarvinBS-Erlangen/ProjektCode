@@ -104,7 +104,7 @@ $_SESSION['gesamtpreis'] = $gesamtpreis;
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout'])) {
     // Überprüfen, ob der Warenkorb leer ist
     if (empty($_SESSION['warenkorb_Produkt']) && empty($_SESSION['warenkorb_Menue'])) {
-        echo "<p style='color: red;'>Ihr Warenkorb ist leer.</p>";
+        $_SESSION['error_message_cart'] = "Ihr Warenkorb ist leer!";
     } else {
         // Überprüfen, ob die Adresse angegeben wurde
         $name = $_POST['name'] ?? '';
