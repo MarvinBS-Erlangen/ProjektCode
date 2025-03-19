@@ -1,12 +1,12 @@
 <?php
 //Datenbank verbindung herstellen
 include '../database/connection.php';
-//Start der Session
-//Sessions initialisieren wenn noch nicht gemacht
+// Start der Session
+// Sessions initialisieren, falls noch nicht gemacht
 include '../comps/sessioncheck.php';
-//Datenbank Logik einbinden -- POST Requests an die Datenbank + Backend Logik
+// Datenbank Logik einbinden -- POST Requests an die Datenbank + Backend Logik
 include '../database/db_products.php';
-//Funktion zum hinzufuegen von Produkten in den Warenkorb
+// Funktion zum hinzufuegen von Produkten in den Warenkorb
 include '../comps/addProductToCart.php';
 ?>
 
@@ -38,8 +38,6 @@ include '../comps/addProductToCart.php';
     }
     ?>
     <main class="main">
-  
-
         <div class="product-container">
             <?php
             $sql = "SELECT ProduktID, Produktname, Beschreibung, Preis, Energiewert, BildURL FROM produkt";
@@ -47,17 +45,21 @@ include '../comps/addProductToCart.php';
 
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
+                    // Machen Sie das gesamte Produkt klickbar und leiten Sie zum Produktdetails weiter
                     echo "<div class='product'>
-                            <div class='product-image'>
-                                <img src='../public/assets/test1.png' alt='{$row['Produktname']}'>
-                            </div>
-                            <div class='product-info'>
-                                <div class='product-name'>{$row['Produktname']}</div>
-                                <div class='product-price'>{$row['Preis']} €</div>
-                                <a href='products.php?action=add&id={$row['ProduktID']}' class='cart-icon'>
-                                    <i class='fa-solid fa-cart-shopping'></i>
-                                </a>
-                            </div>
+                            <a href='product_details.php?id={$row['ProduktID']}' class='product-link'>
+                                <div class='product-image'>
+                                    <img src='../public/assets/test1.png' alt='{$row['Produktname']}'>
+                                </div>
+                                <div class='product-info'>
+                                    <div class='product-name'>{$row['Produktname']}</div>
+                                    <div class='product-price'>{$row['Preis']} €</div>
+                                </div>
+                            </a>
+                            <!-- Cart Icon positioned bottom right -->
+                            <a href='products.php?action=add&id={$row['ProduktID']}' class='cart-icon'>
+                                <i class='fa-solid fa-cart-shopping'></i>
+                            </a>
                           </div>";
                 }
             } else {

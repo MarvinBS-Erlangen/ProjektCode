@@ -13,7 +13,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['id'])) {
     addToCart($_GET['id']);
     // Wenn das Menü hinzugefügt wird
     $_SESSION['success_message'] = "Menü erfolgreich im Warenkorb hinzugefügt!";
-    header("Location: menus.php");
+    header("Location: menu_details.php?id={$_GET['id']}");
     exit();
 }
 ?>

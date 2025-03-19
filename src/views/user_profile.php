@@ -72,6 +72,15 @@ include '../database/db_user_orders.php';
                         <button type="button" id="cancel-btn" class="hidden">Abbrechen</button>
                     </form>
                 </div>
+
+                <div class="delete-account-container">
+                    <!-- The form method is POST because HTML forms do not support the DELETE method directly -->
+                    <form method="POST" action="user_profile.php" id="delete-form">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit" id="delete-account-btn">Konto löschen</button>
+                    </form>
+                </div>
+
             </div>
 
             <!-- Rechte Seite: Bestellhistorie -->
@@ -108,17 +117,14 @@ include '../database/db_user_orders.php';
                     </div>
                 </div>
             </div>
+                            
+            
+
 
         </div>
     </main>
 
-    <div class="delete-account-container">
-        <!-- The form method is POST because HTML forms do not support the DELETE method directly -->
-        <form method="POST" action="user_profile.php" id="delete-form">
-            <input type="hidden" name="_method" value="DELETE">
-            <button type="submit" id="delete-account-btn">Konto löschen</button>
-        </form>
-    </div>
+    
 
     <?php include './partials/footer.php'; ?>
 
