@@ -14,6 +14,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $country = $_POST['Land'];
     $phone = $_POST['Telefon'];
 
+    // Passwort-Regex (mindestens 8 Zeichen, 1 Zahl, 1 Großbuchstabe, 1 Sonderzeichen)
+    $passwordRegex = "/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/";
+
+    // Überprüfen, ob das Passwort den Kriterien entspricht
+    if (!preg_match($passwordRegex, $passwordKundeUnhashed)) {
+        $_SESSION['error_message'] = "Das Passwort muss mindestens 8 Zeichen lang sein, einen Großbuchstaben, eine Zahl und ein Sonderzeichen enthalten.";
+        header("Location: register.php");
+        
+    }
+    
     if ($password !== $confirmPassword) {
         die("Passwörter stimmen nicht überein.");
     }

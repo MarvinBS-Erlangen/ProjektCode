@@ -30,7 +30,13 @@ include '../comps/addProductToCart.php';
 
 <body>
     <?php include './partials/header.php'; ?>
-
+   
+    <?php
+    if (isset($_SESSION['success_message'])) {
+        echo "<div class='success-banner'>" . $_SESSION['success_message'] . "</div>";
+        unset($_SESSION['success_message']);
+    }
+    ?>
     <main class="main">
         <div class="product-container">
             <?php
@@ -67,3 +73,30 @@ include '../comps/addProductToCart.php';
 </body>
 
 </html>
+<style>
+/* Erfolgsmeldung-Banner */
+.success-banner {
+    width: 100%;
+    background-color: #4CAF50; /* Grüner Hintergrund für Erfolg */
+    color: white;
+    text-align: center;
+    padding: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    position: relative;
+    margin-top: 0px;
+    animation: fadeOut 3s forwards; /* Fade-out animation */
+}
+
+@keyframes fadeOut {
+0% {
+    opacity: 1;
+}
+99% {
+    opacity: 1;
+}
+100% {
+    opacity: 0;
+}
+}
+</style>
