@@ -11,6 +11,8 @@ function addToCart($produktID)
 // Überprüfen, ob ein Produkt zum Warenkorb hinzugefügt werden soll
 if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['id'])) {
     addToCart($_GET['id']);
+    // Wenn Produkt hinzugefügt wird
+    $_SESSION['success_message'] = "Produkt erfolgreich im Warenkorb hinzugefügt!";
     header("Location: product_details.php?id={$_GET['id']}");
     exit();
 }

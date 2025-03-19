@@ -6,6 +6,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $passwordKundeUnhashed = $_POST['Password_Hash'];
     $passwordKunde = password_hash($_POST['Password_Hash'], PASSWORD_DEFAULT);
     $confirmPassword = $_POST['Confirm_Password'];
+    
+  
 
     // Überprüfen, ob die Passwörter übereinstimmen
     if ($passwordKundeUnhashed !== $confirmPassword) {
