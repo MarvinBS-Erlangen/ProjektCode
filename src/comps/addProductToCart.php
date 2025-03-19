@@ -17,5 +17,3 @@ if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['id'])) {
     header("Location: products.php");
     exit();
 }
-?>
-
