@@ -10,7 +10,7 @@ body {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    height: 80vh; /* Maximale Höhe, damit es nicht zu groß wird */
+    height: 75vh; /* Maximale Höhe, damit es nicht zu groß wird */
     margin-right: 5%;
 }
 
@@ -23,12 +23,12 @@ body {
     border-right: 1px solid #ddd;
     /* overflow-y: auto; Falls Profilinfos länger werden */
     position: relative;
-
+    padding-bottom: 0;
 }
 
 .profile-data{
     overflow-y: auto;
-    max-height: 60vh;
+    max-height: 48vh;
     overflow-y: auto;
     padding-right: 10px;
 }
@@ -52,8 +52,6 @@ input {
     display: block;
     transition: background-color 0.3s ease;
 }
-
-
 
 input:disabled{
     background-color: rgb(195, 195, 195);
@@ -171,9 +169,6 @@ button:hover {
 
 
 #delete-account-btn{
-    /* position: absolute;
-    bottom: 10vh;
-    right: 1vw; */
     background-color: #ff4d4d;
     color: white;
     padding: 10px;
