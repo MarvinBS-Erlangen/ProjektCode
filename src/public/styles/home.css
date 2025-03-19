@@ -1,5 +1,72 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap");
 
+/* Welcome Section */
+.welcome-container {
+    width: 100vw;
+    height: 100vh;
+    background-color: #a8d5ba; /* Pale green */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    padding: 20px;
+}
+
+/* Heading & Text */
+h1 {
+    font-size: 6rem;
+    margin-bottom: 10px;
+}
+h2 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 2.5em;
+    margin-bottom: 90px;
+}
+
+/* Button */
+.btn {
+    background-color: none;
+    color: white;
+    text-decoration: none;
+    padding: 12px 100px;
+    border-radius: 25px;
+    font-size: 2rem;
+    font-weight: bold;
+    transition: 0.5s;
+    border: 2px solid white;
+    border-radius: 25px;
+}
+
+.btn:hover {
+    background-color: white;
+    color: #a8d5ba;
+}
+
+/* Fade-in Animation */
+.fade-in {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeIn 1s forwards;
+}
+
+.fade-in.delay {
+    animation-delay: 0.5s;
+}
+
+/* Animation Keyframes */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 
 body {
     margin: 0;
@@ -52,3 +119,4 @@ p {
     background: #a8d5ba;
     transform: scale(1.05);
 }
+

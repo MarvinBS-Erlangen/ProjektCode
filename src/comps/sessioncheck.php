@@ -18,6 +18,3 @@ if (!isset($_SESSION['warenkorb_Menue'])) {
 if (!isset($_SESSION['gesamtpreis'])) {
     $_SESSION['gesamtpreis'] = 0;
 }
-
-
-?>
