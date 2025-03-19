@@ -15,7 +15,7 @@ if ($productID) {
     $stmt->bind_param("i", $productID);
     $stmt->execute();
     $result = $stmt->get_result();
-    
+
     if ($result->num_rows > 0) {
         $product = $result->fetch_assoc();
     } else {
@@ -53,7 +53,7 @@ if ($productID) {
         <div class="container">
             <!-- Image -->
             <div class="image-container">
-                <img src="<?php echo $product['BildURL']; ?>" alt="<?php echo $product['Produktname']; ?>">
+                <img src="<?php echo $product['BildURL']; ?>" alt="<?php echo $product['Produktname']; ?>" onerror="this.src='https://cdn3.iconfinder.com/data/icons/it-and-ui-mixed-filled-outlines/48/default_image-1024.png';">
             </div>
 
             <!-- Product Details -->
@@ -69,9 +69,9 @@ if ($productID) {
                     <?php echo $product['Beschreibung']; ?>
                 </p>
             </div>
-                <a href="products.php?action=add&id=<?php echo $product['ProduktID']; ?>" class="cart-icon">
-                    <i class="fa-solid fa-cart-shopping product-cart-icon"></i>
-                </a>
+            <a href="products.php?action=add&id=<?php echo $product['ProduktID']; ?>" class="cart-icon">
+                <i class="fa-solid fa-cart-shopping product-cart-icon"></i>
+            </a>
         </div>
     </main>
 

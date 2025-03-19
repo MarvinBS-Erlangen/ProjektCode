@@ -52,6 +52,21 @@
     display: none;
 }
 
+/* Cart-Icon am unteren rechten Rand */
+.menu .cart-icon {
+    font-size: 1.3rem;
+    color: black;
+    cursor: pointer;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    transition: 0.3s;
+}
+
+.menu .cart-icon:hover {
+    color: grey;
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
     .menu-container {

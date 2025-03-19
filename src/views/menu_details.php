@@ -55,7 +55,7 @@ $gesamtEnergie = $energy['GesamtEnergie'] ?? 0;
         <div class="container">
             <!-- Bild -->
             <div class="menu-image-container">
-                <img src="<?php echo $menu['BildURL']; ?>" alt="<?php echo $menu['Menuename']; ?>">
+                <img src="<?php echo $menu['BildURL']; ?>" alt="<?php echo $menu['Menuename']; ?>" onerror="this.src='https://cdn3.iconfinder.com/data/icons/it-and-ui-mixed-filled-outlines/48/default_image-1024.png';">
             </div>
 
             <!-- Menüdetails -->
