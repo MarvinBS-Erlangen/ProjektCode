@@ -30,29 +30,20 @@ include '../database/db_contest.php';
 </head>
 
 <body>
-    <?php
-    // Wenn der Benutzer auf "X" klickt, die Nachricht aus der Session löschen
-    if (isset($_GET['close_message'])) {
-        unset($_SESSION['success_message_pic']);
-        unset($_SESSION['error_message_pic']);
-        
-        // Verhindert, dass der URL-Parameter in der Adresszeile bleibt
-        header("Location: " . strtok($_SERVER["REQUEST_URI"], '?'));
-        exit();
-    }
-    ?>
+    
     <?php include './partials/header.php'; ?>
     <?php if (isset($_SESSION['success_message_pic'])): ?>
         <div class="success-banner">
-            <?php echo $_SESSION['success_message_pic']; ?>
-            <a href="?close_message=1" class="close-btn">X</a>
+            <?php echo $_SESSION['success_message_pic'];
+             unset($_SESSION['success_message_pic']); ?>
         </div>
+
     <?php endif; ?>
 
     <?php if (isset($_SESSION['error_message_pic'])): ?>
         <div class="error-banner">
-            <?php echo $_SESSION['error_message_pic']; ?>
-            <a href="?close_message=1" class="close-btn">X</a>
+            <?php echo $_SESSION['error_message_pic']; 
+            unset($_SESSION['error_message_pic']); ?>
         </div>
     <?php endif; ?>
 
@@ -206,18 +197,6 @@ include '../database/db_contest.php';
         opacity: 0;
     }
 }
-/* Close Button */
-.close-btn {
-    position: absolute;
-    top: 50%;
-    right: 5px; /* Keep it 5px from the right */
-    transform: translateY(-50%); /* Center vertically */
-    text-decoration: none;
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
-    padding: 5px;
-    cursor: pointer;
-}
+
 
 </style>
