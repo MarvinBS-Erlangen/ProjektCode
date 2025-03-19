@@ -24,7 +24,7 @@ include '../comps/addMenueToCart.php';
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="../handlers/menu-cart-icon-handler.js" defer></script>
-    <script src="../handlers/menu-details-handler.js" defer></script> 
+    <script src="../handlers/menu-details-handler.js" defer></script>
     <title>Menüs</title>
 </head>
 
@@ -47,12 +47,16 @@ include '../comps/addMenueToCart.php';
                 while ($row = $result->fetch_assoc()) {
                     echo "<div class='menu' data-id='{$row['MenueID']}'>
                             <div class='menu-image'>
-                                <img src='{$row['BildURL']}' alt='{$row['Menuename']}'>
+                                <img src='{$row['BildURL']}' alt='{$row['Menuename']}' onerror='this.src=\"https://cdn3.iconfinder.com/data/icons/it-and-ui-mixed-filled-outlines/48/default_image-1024.png\";'>
                             </div>
                             <div class='menu-info'>
                                 <div class='menu-name'>{$row['Menuename']}</div>
                                 <div class='menu-price'>{$row['DiscountPreis']} €</div>
                             </div>
+                            <!-- Cart Icon positioned bottom right -->
+                            <a href='menus.php?action=add&id={$row['MenueID']}' class='cart-icon'>
+                                <i class='fa-solid fa-cart-shopping menu-cart-icon'></i>
+                            </a>
                           </div>";
                 }
             } else {
@@ -64,6 +68,7 @@ include '../comps/addMenueToCart.php';
 
     <?php include './partials/footer.php'; ?>
 </body>
+
 
 </html>
 <style>

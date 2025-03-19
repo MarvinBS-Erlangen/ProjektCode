@@ -49,7 +49,7 @@ include '../comps/addProductToCart.php';
                     echo "<div class='product'>
                             <a href='product_details.php?id={$row['ProduktID']}' class='product-link'>
                                 <div class='product-image'>
-                                    <img src='../public/assets/test1.png' alt='{$row['Produktname']}'>
+                                    <img src='{$row['BildURL']}' alt='{$row['Produktname']}' onerror='this.src=\"https://cdn3.iconfinder.com/data/icons/it-and-ui-mixed-filled-outlines/48/default_image-1024.png\";'>
                                 </div>
                                 <div class='product-info'>
                                     <div class='product-name'>{$row['Produktname']}</div>
@@ -100,3 +100,4 @@ include '../comps/addProductToCart.php';
 }
 }
 </style>
+
