@@ -16,7 +16,6 @@ if (isset($_GET['id'])) {
     die("Menü nicht gefunden.");
 }
 
-
 // Gesamt-Energiewert berechnen
 $sql_energy = "SELECT SUM(p.Energiewert * mp.Menge) AS GesamtEnergie
                FROM menue_produkt mp
@@ -29,6 +28,19 @@ $result_energy = $stmt->get_result();
 $energy = $result_energy->fetch_assoc();
 $gesamtEnergie = $energy['GesamtEnergie'] ?? 0;
 
+// Produkte im Menü abrufen
+$sql_products = "SELECT p.Produktname
+                 FROM menue_produkt mp
+                 JOIN produkt p ON mp.ProduktID = p.ProduktID
+                 WHERE mp.MenueID = ?";
+$stmt = $conn->prepare($sql_products);
+$stmt->bind_param("i", $menueID);
+$stmt->execute();
+$result_products = $stmt->get_result();
+$produkte = [];
+while ($row = $result_products->fetch_assoc()) {
+    $produkte[] = $row['Produktname'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -68,11 +80,18 @@ $gesamtEnergie = $energy['GesamtEnergie'] ?? 0;
 
                 <p class="energy-info"><strong><?php echo $gesamtEnergie; ?> kcal</strong></p>
 
-
                 <p class="description">
                     <?php echo $menu['Beschreibung']; ?>
                 </p>
 
+                <p class="included-products">
+                    <strong>In diesem Menü enthalten:</strong>
+                <ul class="included-products-list">
+                    <?php foreach ($produkte as $produkt) {
+                        echo "<li>$produkt</li>";
+                    } ?>
+                </ul>
+                </p>
 
                 <a href="menus.php?action=add&id=<?php echo $menu['MenueID']; ?>" class="cart-icon">
                     <i class="fa-solid fa-cart-shopping menu-cart-icon"></i>
