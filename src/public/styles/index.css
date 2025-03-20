@@ -10,6 +10,8 @@ body {
     padding: 0;
     display: flex;
     flex-direction: column;
+    overflow-y: scroll; 
+    scrollbar-width: none; 
 }
 
 body {
@@ -17,6 +19,10 @@ body {
     flex-direction: column;
     height: 100vh;
     overflow-x: hidden;
+}
+
+body::-webkit-scrollbar {
+    width: 0; 
 }
 
 main {
