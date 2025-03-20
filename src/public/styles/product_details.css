@@ -98,10 +98,27 @@ footer {
 
 .included-ingredients {
     margin-top: 20px;
+    display: grid;
 }
+
+.included-ingredients .title{
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.included-ingredients-list{
+    font-size: 1.25rem;
+}
+
+
 
 .included-ingredients-list li:nth-child(1) {
     margin-top: 10px;
+}
+
+.included-ingredients-list li {
+    margin:  10px 0;
+    font-weight: bold;
 }
 
 @media (max-width: 768px) {

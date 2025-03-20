@@ -83,15 +83,15 @@ if ($productID) {
                 </p>
 
                 <p class="included-ingredients">
-                    <strong>In diesem Produkt enthaltene Zutaten:</strong>
-                <ul class="included-ingredients-list">
-                    <?php foreach ($zutaten as $zutat) {
-                        echo "<li>$zutat</li>";
-                    } ?>
-                </ul>
+                    <strong class="title">In diesem Produkt enthaltene Zutaten:</strong>
+                    <br>
+                    <span class="included-ingredients-list">
+                        <?php echo implode(', ', $zutaten); ?>
+                    </span>
                 </p>
+
             </div>
-            <a href="products.php?action=add&id=<?php echo $product['ProduktID']; ?>" class="cart-icon">
+            <a href=" products.php?action=add&id=<?php echo $product['ProduktID']; ?>" class="cart-icon">
                 <i class="fa-solid fa-cart-shopping product-cart-icon"></i>
             </a>
         </div>

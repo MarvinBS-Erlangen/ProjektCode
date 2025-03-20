@@ -104,6 +104,20 @@ footer {
     margin-top: 20px;
 }
 
+.included-products .title{
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
 .included-products-list li:nth-child(1) {
     margin-top: 10px;
+}
+
+.included-products-list li {
+    margin:  10px 0;
+    font-weight: bold;
+}
+
+.zutaten {
+    font-weight: 400;
 }

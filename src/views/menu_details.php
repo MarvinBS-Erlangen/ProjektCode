@@ -29,7 +29,7 @@ $energy = $result_energy->fetch_assoc();
 $gesamtEnergie = $energy['GesamtEnergie'] ?? 0;
 
 // Produkte und Zutaten im Menü abrufen
-$sql_products = "SELECT p.Produktname, z.Zutatenname
+$sql_products = "SELECT p.Produktname, z.Zutatenname, mp.Menge AS ProduktMenge
                  FROM menue_produkt mp
                  JOIN produkt p ON mp.ProduktID = p.ProduktID
                  LEFT JOIN produkt_zutat pz ON p.ProduktID = pz.ProduktID
@@ -41,7 +41,8 @@ $stmt->execute();
 $result_products = $stmt->get_result();
 $produkte = [];
 while ($row = $result_products->fetch_assoc()) {
-    $produkte[$row['Produktname']][] = $row['Zutatenname'];
+    $produkte[$row['Produktname']]['menge'] = $row['ProduktMenge'];
+    $produkte[$row['Produktname']]['zutaten'][] = $row['Zutatenname'];
 }
 ?>
 
@@ -87,11 +88,11 @@ while ($row = $result_products->fetch_assoc()) {
                 </p>
 
                 <p class="included-products">
-                    <strong>In diesem Menü enthalten:</strong>
+                    <strong class="title">In diesem Menü enthalten:</strong>
                 <ul class="included-products-list">
-                    <?php foreach ($produkte as $produkt => $zutaten) {
-                        $zutatenListe = implode(', ', array_filter($zutaten));
-                        echo "<li>$produkt ($zutatenListe)</li>";
+                    <?php foreach ($produkte as $produkt => $details) {
+                        $zutatenListe = implode(', ', array_filter($details['zutaten']));
+                        echo "<li>{$details['menge']}x $produkt <span class='zutaten'>($zutatenListe)</span></li>";
                     } ?>
                 </ul>
                 </p>
