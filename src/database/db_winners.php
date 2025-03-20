@@ -1,12 +1,15 @@
 <?php
-// SQL-Abfrage: Ermittelt das Bild mit den meisten Likes
+// Datenbankverbindung herstellen
+include '../database/connection.php';
+
+// SQL-Abfrage, um das Bild mit den meisten Likes zu erhalten
 $sql = "
-    SELECT b.Bilddatei, k.Vorname, COUNT(bw.BildID) AS likes
+    SELECT b.Bilddatei, k.Vorname, COUNT(bw.BewertungsID) AS likes
     FROM bewertung AS bw
     JOIN bild AS b ON bw.BildID = b.BildID
-    JOIN kunde AS k ON bw.KundenID = k.KundenID
+    JOIN kunde AS k ON b.KundenID = k.KundenID
     WHERE bw.IstAktiv = 1
-    GROUP BY bw.BildID, k.Vorname
+    GROUP BY b.BildID, k.Vorname
     ORDER BY likes DESC
     LIMIT 1
 ";
