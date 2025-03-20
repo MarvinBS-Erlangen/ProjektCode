@@ -29,7 +29,8 @@ include '../database/db_warenkorb.php';
 </head>
 
 <body>
-    <?php include './partials/header.php'; ?>
+    <?php include './partials/header.php'; // Header einfügen ?>
+
     <?php
     // Überprüfen, ob eine Fehlermeldung in der Session vorhanden ist
     if (isset($_SESSION['error_message_cart'])) {
@@ -40,12 +41,14 @@ include '../database/db_warenkorb.php';
         unset($_SESSION['error_message_cart']);
     }
     ?>
+
     <main class="main">
         <div class="container">
             <div class="section">
                 <h2>Bestellübersicht</h2>
                 <div class="order-list">
                     <?php
+                    // Produkte aus dem Warenkorb anzeigen
                     foreach ($_SESSION['warenkorb_Produkt'] as $produkt_id => $menge) {
                         $sql = "SELECT ProduktID, Produktname, Preis FROM produkt WHERE ProduktID = ?";
                         $stmt = $conn->prepare($sql);
@@ -60,13 +63,14 @@ include '../database/db_warenkorb.php';
                                     <p class='item-name'>{$produkt['Produktname']}</p>
                                     <p class='item-price'>{$produkt['Preis']} €</p>
                                     <p class='item-quantity'>Menge: {$menge}</p>
-                                    <a href='warenkorb.php?action=add&id={$produkt['ProduktID']}&type=produkt'                                   class='add-item'><i class='fa-solid fa-plus'></i></a>
-                                    <a href='warenkorb.php?action=remove&id={$produkt['ProduktID']}&type=produkt'                                   class='remove-item'><i class='fa-solid fa-trash'></i></a>
+                                    <a href='warenkorb.php?action=add&id={$produkt['ProduktID']}&type=produkt' class='add-item'><i class='fa-solid fa-plus'></i></a>
+                                    <a href='warenkorb.php?action=remove&id={$produkt['ProduktID']}&type=produkt' class='remove-item'><i class='fa-solid fa-trash'></i></a>
                                     </div>
                                     </div>";
                         }
                     }
 
+                    // Menüs aus dem Warenkorb anzeigen
                     foreach ($_SESSION['warenkorb_Menue'] as $menue_id => $menge) {
                         $sql = "SELECT MenueID, Menuename, DiscountPreis FROM menue WHERE MenueID = ?";
                         $stmt = $conn->prepare($sql);
@@ -81,12 +85,8 @@ include '../database/db_warenkorb.php';
                                         <p class='item-name'>{$menue['Menuename']}</p>
                                         <p class='item-price'>{$menue['DiscountPreis']} €</p>
                                         <p class='item-quantity'>Menge: {$menge}</p>
-                                        <a href='warenkorb.php?action=add&id={$menue['MenueID']}&type=menue' class='add-item'>
-                                            <i class='fa-solid    fa-plus'></i>
-                                        </a>
-                                        <a href='warenkorb.php?action=remove&id={$menue['MenueID']}&type=menue' class='remove-item'>
-                                            <i class='fa-solid  fa-trash'></i>
-                                        </a>
+                                        <a href='warenkorb.php?action=add&id={$menue['MenueID']}&type=menue' class='add-item'><i class='fa-solid fa-plus'></i></a>
+                                        <a href='warenkorb.php?action=remove&id={$menue['MenueID']}&type=menue' class='remove-item'><i class='fa-solid fa-trash'></i></a>
                                     </div>
                                 </div>";
                         }
@@ -122,7 +122,7 @@ include '../database/db_warenkorb.php';
             </div>
         </div>
     </main>
-    <?php include './partials/footer.php'; ?>
+    <?php include './partials/footer.php'; // Footer einfügen ?>
 </body>
 
 </html>
