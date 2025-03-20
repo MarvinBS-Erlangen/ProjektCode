@@ -126,3 +126,23 @@ input {
     margin: 0;
     width: 5%;
 }
+
+.error-message{
+    font-size: .7rem;
+    color: red;
+    font-style: italic;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.875em;
+    margin-top: 0.25em;
+}
+
+.error-message.inaktiv {
+    display: none;
+}
+
+.error-message.aktiv {
+    display: block;
+}
