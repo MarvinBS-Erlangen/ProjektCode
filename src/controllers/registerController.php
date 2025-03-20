@@ -17,24 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $country = $_POST['Land'];
     $phone = $_POST['Telefon'];
 
-    // // Regex-Patterns zur Validierung
-    // $regexPatterns = [
-    //     'Vorname' => '/^[A-Za-zÄÖÜäöüß\-]+$/u',
-    //     'Nachname' => '/^[A-Za-zÄÖÜäöüß\-]+$/u',
-    //     'Email' => '/^[a-zA-Z0-9._%+-]+@(gmail\.com|gmx\.de|gmx\.net|web\.de|yahoo\.com|hotmail\.com)$/',
-    //     'Hausnummer' => '/^[0-9]+[a-zA-Z]?$/',
-    //     'Postleitzahl' => '/^\d{5}$/',
-    //     'Stadt' => '/^[A-Za-zÄÖÜäöüß\- ]+$/u',
-    //     'Telefon' => '/^(?:\+49\s?|0)(?:\d{3,4}\s?\d{3,5}\s?\d{4})$/',
-    //     'Passwort' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/'
-    // ];
 
-    // // Validierung durchführen
-    // foreach ($regexPatterns as $field => $pattern) {
-    //     if (!preg_match($pattern, $_POST[$field])) {
-    //         die("Ungültiges Format für $field.");
-    //     }
-    // }
 
     // Überprüfung des Passworts
     if ($password !== $confirmPassword) {

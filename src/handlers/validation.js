@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         phone: {
             regex: /^\+?[0-9\s-]{7,15}$/, 
-            message: "Bitte eine gültige Telefonnummer eingeben (mindestens 7 Ziffern)."
+            message: "Bitte eine gültige Telefonnummer eingeben (mindestens 7 Ziffern, maximal 15 Ziffern)."
         },
         password: {
             regex: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/, 
@@ -42,72 +42,81 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     };
 
+    const form = document.getElementById("register-form");
+
     Object.keys(fields).forEach(fieldId => {
         const field = document.getElementById(fieldId);
         let userInteracted = false;
 
         field.addEventListener("click", function () {
             userInteracted = true;
-            console.log(`Feld ${fieldId} angeklickt`); // Log, wenn das Feld angeklickt wird
         });
 
         field.addEventListener("input", function () {
             userInteracted = true;
-            console.log(`Eingabe im Feld ${fieldId}: ${field.value}`); // Log, wenn Eingabe erfolgt
             validateField(field, fields[fieldId]);
         });
 
         field.addEventListener("blur", function () {
             if (!userInteracted) return;
-            console.log(`Feld ${fieldId} hat den Fokus verlassen`); // Log, wenn das Feld den Fokus verliert
             validateField(field, fields[fieldId]);
         });
     });
 
+    form.addEventListener("submit", function (event) {
+        let formIsValid = true;
+
+        Object.keys(fields).forEach(fieldId => {
+            const field = document.getElementById(fieldId);
+            if (!validateField(field, fields[fieldId])) {
+                formIsValid = false;
+            }
+        });
+
+        if (!formIsValid) {
+            event.preventDefault();
+            alert("Bitte korrigieren Sie die Fehler in den Formularfeldern.");
+        }
+    });
+
     function validateField(field, fieldConfig) {
-        console.log(`Validierung für Feld ${field.id} gestartet`); // Log für die Validierung
         let errorSpan = field.nextElementSibling;
         if (!errorSpan || !errorSpan.classList.contains('error-message')) {
             errorSpan = document.createElement("span");
             errorSpan.className = "error-message inaktiv";
             field.parentNode.insertBefore(errorSpan, field.nextSibling);
-            console.log(`Fehlermeldungs-Span für ${field.id} erstellt`); // Log, wenn der Fehler-Span erstellt wird
         }
 
         if (!field.value.trim()) {
-            console.log(`Feld ${field.id} ist leer, keine Validierung nötig`); // Log, wenn das Feld leer ist
             errorSpan.classList.remove('aktiv');
             errorSpan.classList.add('inaktiv');
             errorSpan.textContent = "";
-            return;
+            return false;
         }
 
-        // Log für Regex-Validierung
-        console.log(`Feld ${field.id} Regex: ${fieldConfig.regex}`);
         if (fieldConfig.regex && !fieldConfig.regex.test(field.value)) {
-            console.log(`Feld ${field.id} hat die Regex-Prüfung nicht bestanden: ${field.value}`); // Log, wenn die Regex-Prüfung fehlschlägt
             errorSpan.classList.remove('inaktiv');
             errorSpan.classList.add('aktiv');
             errorSpan.textContent = fieldConfig.message;
+            return false;
         } else if (fieldConfig.matchField) {
             const matchField = document.getElementById(fieldConfig.matchField);
-            console.log(`Feld ${field.id} und ${fieldConfig.matchField} vergleichen: ${field.value} === ${matchField.value}`);
             if (field.value !== matchField.value) {
-                console.log(`Passwörter stimmen nicht überein: ${field.value} !== ${matchField.value}`); // Log, wenn Passwörter nicht übereinstimmen
                 errorSpan.classList.remove('inaktiv');
                 errorSpan.classList.add('aktiv');
                 errorSpan.textContent = fieldConfig.message;
+                return false;
             } else {
-                console.log(`Passwörter stimmen überein`); // Log, wenn Passwörter übereinstimmen
                 errorSpan.classList.remove('aktiv');
                 errorSpan.classList.add('inaktiv');
                 errorSpan.textContent = "";
+                return true;
             }
         } else {
-            console.log(`Feld ${field.id} ist gültig`); // Log, wenn das Feld gültig ist
             errorSpan.classList.remove('aktiv');
             errorSpan.classList.add('inaktiv');
             errorSpan.textContent = "";
+            return true;
         }
     }
 });
