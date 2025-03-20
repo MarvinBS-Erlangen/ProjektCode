@@ -12,4 +12,3 @@ $sql = "
 ";
 
 $result = $conn->query($sql);
-?>

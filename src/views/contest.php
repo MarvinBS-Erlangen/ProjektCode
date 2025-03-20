@@ -26,23 +26,24 @@ include '../database/db_contest.php';
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="../handlers/rating-handler.js" defer></script>
     <script src="../handlers/btns-view-upload-handlers.js" defer></script>
+    <script src="../handlers/btn-best-rated-food.js" defer></script>
     <title>Bild hochladen und bewerten</title>
 </head>
 
 <body>
-    
+
     <?php include './partials/header.php'; ?>
     <?php if (isset($_SESSION['success_message_pic'])): ?>
         <div class="success-banner">
             <?php echo $_SESSION['success_message_pic'];
-             unset($_SESSION['success_message_pic']); ?>
+            unset($_SESSION['success_message_pic']); ?>
         </div>
 
     <?php endif; ?>
 
     <?php if (isset($_SESSION['error_message_pic'])): ?>
         <div class="error-banner">
-            <?php echo $_SESSION['error_message_pic']; 
+            <?php echo $_SESSION['error_message_pic'];
             unset($_SESSION['error_message_pic']); ?>
         </div>
     <?php endif; ?>
@@ -54,10 +55,14 @@ include '../database/db_contest.php';
             <div class="description">Participate in our <span id="funny-dinner-contest">Funny-Dinner-Contest</span>.<br> Share your dinner pics with the community. There's a prize!!<br> Wink Wink </div>
             <div class="button-container">
                 <div class="view-your-uploads-container">
-                    <button type="button" id="btn-view-your-uploads">VIEW YOUR UPLOADS</button>
+                    <button type="button" id="btn-view-your-uploads">UPLOADS ANZEIGEN</button>
                 </div>
                 <div class="upload-picture-container">
-                    <button type="button" id="btn-upload-picture">UPLOAD PICTURE</button>
+                    <button type="button" id="btn-upload-picture">BILD
+                        <br> HOCHLADEN</button>
+                </div>
+                <div class="current-best-rated-food-container">
+                    <button type="button" id="btn-current-best-rated-food">AKTUELL BESTER</button>
                 </div>
             </div>
         </div>
@@ -155,48 +160,52 @@ include '../database/db_contest.php';
     </script>
 
 </body>
+
 </html>
 
 <style>
-/* Erfolgsmeldung-Banner */
-.success-banner {
-    width: 100%;
-    background-color: #4CAF50; /* Grüner Hintergrund für Erfolg */
-    color: white;
-    text-align: center;
-    padding: 5px;
-    font-size: 16px;
-    font-weight: bold;
-    position: relative;
-    margin-top: 0px;
-    animation: fadeOut 3s forwards;
-}
-
-/* Fehlermeldung-Banner */
-.error-banner {
-    width: 100%;
-    background-color: #FF5733; /* Roter Hintergrund für Fehler */
-    color: white;
-    text-align: center;
-    padding: 5px;
-    font-size: 16px;
-    font-weight: bold;
-    position: relative;
-    margin-top: 0px;
-    animation: fadeOut 3s forwards; /* Fade-out animation */
-}
-
-@keyframes fadeOut {
-    0% {
-        opacity: 1;
+    /* Erfolgsmeldung-Banner */
+    .success-banner {
+        width: 100%;
+        background-color: #4CAF50;
+        /* Grüner Hintergrund für Erfolg */
+        color: white;
+        text-align: center;
+        padding: 5px;
+        font-size: 16px;
+        font-weight: bold;
+        position: relative;
+        margin-top: 0px;
+        animation: fadeOut 3s forwards;
     }
-    99% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-    }
-}
 
+    /* Fehlermeldung-Banner */
+    .error-banner {
+        width: 100%;
+        background-color: #FF5733;
+        /* Roter Hintergrund für Fehler */
+        color: white;
+        text-align: center;
+        padding: 5px;
+        font-size: 16px;
+        font-weight: bold;
+        position: relative;
+        margin-top: 0px;
+        animation: fadeOut 3s forwards;
+        /* Fade-out animation */
+    }
 
+    @keyframes fadeOut {
+        0% {
+            opacity: 1;
+        }
+
+        99% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0;
+        }
+    }
 </style>
