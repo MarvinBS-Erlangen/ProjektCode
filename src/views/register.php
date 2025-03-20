@@ -35,6 +35,7 @@ $countries = explode("','", $matches[1]);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script defer src="../handlers/validation.js" defer></script>
     <title>Registrierung</title>
 </head>
 
@@ -45,38 +46,38 @@ $countries = explode("','", $matches[1]);
     <main class="main">
         <div class="form-container">
             <h2 class="signup-title">Registrierung</h2>
-            <form method="POST" action="../controllers/registerController.php">
+            <form method="POST" action="../controllers/registerController.php" id="register-form">
                 <div class="form-group">
                     <label for="firstname">Vorname</label>
                     <input type="text" id="firstname" name="Vorname" placeholder="Max" required>
                 </div>
 
-                <div class=" form-group">
+                <div class="form-group">
                     <label for="lastname">Nachname</label>
                     <input type="text" id="lastname" name="Nachname" placeholder="Mustermann" required>
                 </div>
 
-                <div class=" form-group email-group">
+                <div class="form-group">
                     <label for="email">E-Mail</label>
                     <input type="email" id="email" name="Email" placeholder="max.mustermann@gmail.com" required>
                 </div>
 
-                <div class=" form-group">
+                <div class="form-group">
                     <label for="address">Adresse</label>
                     <input type="text" id="address" name="Strasse" placeholder="Musterstraße" required>
                 </div>
 
-                <div class=" form-group">
+                <div class="form-group">
                     <label for="house-number">Hausnummer</label>
                     <input type="text" id="house-number" name="Hausnummer" placeholder="10" required>
                 </div>
 
-                <div class=" form-group">
+                <div class="form-group">
                     <label for="zipcode">PLZ</label>
                     <input type="text" id="zipcode" name="Postleitzahl" placeholder="90401" required>
                 </div>
 
-                <div class=" form-group">
+                <div class="form-group">
                     <label for="city">Stadt</label>
                     <input type="text" id="city" name="Stadt" placeholder="Musterstadt" required>
                 </div>
@@ -91,12 +92,12 @@ $countries = explode("','", $matches[1]);
                     </select>
                 </div>
 
-                <div class=" form-group phone-group">
+                <div class="form-group">
                     <label for="phone">Telefonnummer</label>
                     <input type="text" id="phone" name="Telefon" placeholder="+49 ..." required>
                 </div>
 
-                <div class=" form-group">
+                <div class="form-group">
                     <label for="password">Passwort</label>
                     <input type="password" id="password" name="Passwort" placeholder="**********" required>
                 </div>
