@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['upload'])) {
     $bildurl = $_POST['bildurl'];
 
     // Validierung der Bild-URL
-    if (filter_var($bildurl, FILTER_VALIDATE_URL)) {
+    if (filter_var($bildurl, FILTER_VALIDATE_URL) && preg_match('/\.(jpg|jpeg|png|gif|webp)$/i', $bildurl)) {
         $sql = "INSERT INTO Bild (KundenID, Bilddatei, Titel) VALUES (?, ?, ?)";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("iss", $userID, $bildurl, $titel);
@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['upload'])) {
         header("Location: contest.php"); // Weiterleitung zur Contest-Seite
         exit();
     } else {
-        $_SESSION['error_message_pic'] = "Fehler: Bitte geben Sie eine gültige Bild-URL ein.";
+        $_SESSION['error_message_pic'] = "Fehler: Bitte geben Sie eine gültige Bild-URL ein";
         header("Location: contest.php"); // Weiterleitung zur Contest-Seite
         exit();
     }
