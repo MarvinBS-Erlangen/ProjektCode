@@ -1,8 +1,7 @@
 <?php
-//Datenbank verbindung herstellen
+// Datenbankverbindung herstellen
 include '../database/connection.php';
 // Start der Session
-// Sessions initialisieren, falls noch nicht gemacht
 include '../comps/sessioncheck.php';
 
 // Produkt-ID aus der URL holen
@@ -21,6 +20,20 @@ if ($productID) {
     } else {
         echo "<p>Produkt nicht gefunden.</p>";
         exit;
+    }
+
+    // Zutaten für das Produkt abrufen
+    $sql_ingredients = "SELECT z.Zutatenname
+                        FROM produkt_zutat pz
+                        JOIN zutat z ON pz.ZutatID = z.ZutatID
+                        WHERE pz.ProduktID = ?";
+    $stmt = $conn->prepare($sql_ingredients);
+    $stmt->bind_param("i", $productID);
+    $stmt->execute();
+    $result_ingredients = $stmt->get_result();
+    $zutaten = [];
+    while ($row = $result_ingredients->fetch_assoc()) {
+        $zutaten[] = $row['Zutatenname'];
     }
 } else {
     echo "<p>Keine Produkt-ID angegeben.</p>";
@@ -51,12 +64,12 @@ if ($productID) {
 
     <main class="main">
         <div class="container">
-            <!-- Image -->
+            <!-- Bild -->
             <div class="image-container">
                 <img src="<?php echo $product['BildURL']; ?>" alt="<?php echo $product['Produktname']; ?>" onerror="this.src='https://cdn3.iconfinder.com/data/icons/it-and-ui-mixed-filled-outlines/48/default_image-1024.png';">
             </div>
 
-            <!-- Product Details -->
+            <!-- Produktdetails -->
             <div class="product-details">
                 <h1 class="product-title"><?php echo $product['Produktname']; ?></h1>
                 <div class="pricing">
@@ -67,6 +80,15 @@ if ($productID) {
 
                 <p class="description">
                     <?php echo $product['Beschreibung']; ?>
+                </p>
+
+                <p class="included-ingredients">
+                    <strong>In diesem Produkt enthaltene Zutaten:</strong>
+                <ul class="included-ingredients-list">
+                    <?php foreach ($zutaten as $zutat) {
+                        echo "<li>$zutat</li>";
+                    } ?>
+                </ul>
                 </p>
             </div>
             <a href="products.php?action=add&id=<?php echo $product['ProduktID']; ?>" class="cart-icon">
