@@ -29,6 +29,7 @@ include '../database/db_user_orders.php';
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="../handlers/product-cart-icon-handler.js" defer></script>
     <script src="../handlers/user-profile-handlers.js" defer></script>
+    <script src="../handlers/validation_user_profile.js" defer></script>
     <title>Benutzerprofil</title>
 </head>
 

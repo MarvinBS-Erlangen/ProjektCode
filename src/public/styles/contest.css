@@ -58,6 +58,47 @@ main {
     align-items: center;
     width: 100%;
 }
+/* Styles for the participate-container */
+.participate-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.participate-container .description {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.participate-container .button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.participate-container .button-container .view-your-uploads-container,
+.participate-container .button-container .upload-picture-container,
+.participate-container .button-container .current-best-rated-food-container {
+    display: inline-block;
+}
+
+.participate-container .button-container button {
+    background-color: #a8d5ba; /* Green background */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.participate-container .button-container button:hover {
+    background-color: #8fbca1; /* Darker green */
+}
 
 #btn-view-your-uploads {
     padding: 5px 10px;
@@ -69,6 +110,16 @@ main {
 }
 
 #btn-upload-picture {
+    padding: 5px 10px;
+    color: white;
+    background-color: #a8d5ba;
+    width: 95%;
+    border-radius: 4px;
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 1);
+}
+
+
+#btn-current-best-rated-food {
     padding: 5px 10px;
     color: white;
     background-color: #a8d5ba;
