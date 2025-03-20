@@ -8,6 +8,18 @@ include '../comps/sessioncheck.php';
 include '../database/db_register.php';
 ?>
 
+<?php
+
+// Fetch countries from the database
+$query = "SHOW COLUMNS FROM adresse LIKE 'Land'";
+$result = $conn->query($query);
+$row = $result->fetch_assoc();
+$type = $row['Type'];
+preg_match("/^enum\(\'(.*)\'\)$/", $type, $matches);
+$countries = explode("','", $matches[1]);
+
+?>
+
 
 <!DOCTYPE html>
 <html lang="de">
@@ -69,9 +81,14 @@ include '../database/db_register.php';
                     <input type="text" id="city" name="Stadt" placeholder="Musterstadt" required>
                 </div>
 
-                <div class=" form-group">
-                    <label for="country">Land</label>
-                    <input type="text" id="country" name="Land" placeholder="Musterland" required>
+                <div class="form-group">
+                    <label for="Land">Land:</label>
+                    <br>
+                    <select id="Land" name="Land" required>
+                        <?php foreach ($countries as $country): ?>
+                            <option value="<?php echo $country; ?>"><?php echo $country; ?></option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
 
                 <div class=" form-group phone-group">
