@@ -10,14 +10,14 @@ include '../../comps/admincheck.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['download_csv'])) {
     // SQL-Abfrage zum Abrufen der Produktbestellungen aller Benutzer
     $sql = "
-        SELECT k.KundenID, k.Vorname, k.Nachname, p.Produktname, COUNT(bp.ProduktID) AS Anzahl
+        SELECT k.KundenID, k.Vorname, k.Nachname, p.Produktname, SUM(bp.Menge) AS Anzahl
         FROM bestellposten_produkt AS bp
         JOIN produkt AS p ON bp.ProduktID = p.ProduktID
         JOIN bestellung AS b ON bp.BestellID = b.BestellID
         JOIN kunde AS k ON b.KundenID = k.KundenID
         GROUP BY k.KundenID, p.ProduktID
         UNION
-        SELECT k.KundenID, k.Vorname, k.Nachname, m.MenueName AS Produktname, COUNT(bm.MenueID) AS Anzahl
+        SELECT k.KundenID, k.Vorname, k.Nachname, m.MenueName AS Produktname, SUM(bm.Menge) AS Anzahl
         FROM bestellposten_menue AS bm
         JOIN menue AS m ON bm.MenueID = m.MenueID
         JOIN bestellung AS b ON bm.BestellID = b.BestellID
