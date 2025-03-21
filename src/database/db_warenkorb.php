@@ -50,7 +50,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['act
     exit();
 }
 
-
 // Lieferadresse abrufen
 $sql = "SELECT k.Nachname, a.Strasse, a.Hausnummer, a.Postleitzahl, a.Stadt, k.AdresseID FROM adresse a JOIN kunde k ON a.AdresseID = k.AdresseID WHERE k.KundenID = ?";
 $stmt = $conn->prepare($sql);
@@ -105,6 +104,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout'])) {
     // Überprüfen, ob der Warenkorb leer ist
     if (empty($_SESSION['warenkorb_Produkt']) && empty($_SESSION['warenkorb_Menue'])) {
         $_SESSION['error_message_cart'] = "Ihr Warenkorb ist leer!";
+    } elseif ($_SESSION['gesamtpreis'] > 200) {
+        $_SESSION['error_message_cart'] = "Der Gesamtbetrag Ihres Warenkorbs darf 200€ nicht überschreiten.";
     } else {
         // Überprüfen, ob die Adresse angegeben wurde
         $name = $_POST['name'] ?? '';
@@ -171,3 +172,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout'])) {
         }
     }
 }
+?>
