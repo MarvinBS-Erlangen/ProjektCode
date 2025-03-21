@@ -5,6 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../public/styles/agb.css">
+    <link rel="stylesheet" href="../public/styles/back_button.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="../handlers/btn-back-handler.js" defer></script>
+
     <title>AGB</title>
 </head>
 
@@ -49,6 +55,9 @@
         <p>Sollte eine Bestimmung dieser AGB unwirksam sein, so bleibt der Vertrag im Übrigen wirksam. Anstelle der unwirksamen Bestimmung gelten die einschlägigen gesetzlichen Vorschriften.</p>
 
         <p>Stand: 2025</p>
+
+        <button class="btn-back"><i class="fa-solid fa-arrow-left"></i> Zurück</button>
+
     </main>
 </body>
 

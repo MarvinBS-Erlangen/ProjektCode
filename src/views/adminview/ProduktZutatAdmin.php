@@ -60,7 +60,7 @@ $zutaten = $result->fetch_all(MYSQLI_ASSOC);
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <title>Produkt-Zutat Zuweisung</title>

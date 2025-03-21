@@ -45,28 +45,28 @@ include '../database/db_user_orders.php';
                 <div class="profile-data">
                     <form method="POST" action="user_profile.php" id="profile-form">
                         <label for="firstname">Vorname</label>
-                        <input type="text" id="firstname" name="Vorname" value="<?php echo htmlspecialchars($firstName); ?>" disabled>
+                        <input type="text" id="firstname" name="Vorname" placeholder="Vorname" value="<?php echo htmlspecialchars($firstName); ?>" disabled>
 
                         <label for="lastname">Nachname</label>
-                        <input type="text" id="lastname" name="Nachname" value="<?php echo htmlspecialchars($lastName); ?>" disabled>
+                        <input type="text" id="lastname" name="Nachname" placeholder="Nachname" value="<?php echo htmlspecialchars($lastName); ?>" disabled>
 
                         <label for="address">Adresse</label>
                         <div class="address-container">
-                            <input type="text" id="address" name="Strasse" value="<?php echo htmlspecialchars($address); ?>" disabled>
-                            <input type="text" id="house-number" name="Hausnummer" value="<?php echo htmlspecialchars($houseNumber); ?>" disabled>
+                            <input type="text" id="address" name="Strasse" placeholder="Straße" value="<?php echo htmlspecialchars($address); ?>" disabled>
+                            <input type="text" id="house-number" name="Hausnummer" placeholder="Nr." value="<?php echo htmlspecialchars($houseNumber); ?>" disabled>
                         </div>
 
                         <label for="zipcode">PLZ</label>
-                        <input type="text" id="zipcode" name="Postleitzahl" value="<?php echo htmlspecialchars($zipcode); ?>" disabled>
+                        <input type="text" id="zipcode" name="Postleitzahl" placeholder="PLZ" value="<?php echo htmlspecialchars($zipcode); ?>" disabled>
 
                         <label for="city">Stadt</label>
-                        <input type="text" id="city" name="Stadt" value="<?php echo htmlspecialchars($city); ?>" disabled>
+                        <input type="text" id="city" name="Stadt" placeholder="Stadt" value="<?php echo htmlspecialchars($city); ?>" disabled>
 
                         <label for="country">Land</label>
-                        <input type="text" id="country" name="Land" value="<?php echo htmlspecialchars($country); ?>" disabled>
+                        <input type="text" id="country" name="Land" placeholder="Land" value="<?php echo htmlspecialchars($country); ?>" disabled>
 
                         <label for="phone">Telefonnummer</label>
-                        <input type="text" id="phone" name="Telefon" value="<?php echo htmlspecialchars($phone); ?>" disabled>
+                        <input type="text" id="phone" name="Telefon" placeholder="Telefonnummer" value="<?php echo htmlspecialchars($phone); ?>" disabled>
 
                         <button type="button" id="edit-btn">Bearbeiten</button>
                         <button type="submit" id="save-btn" class="hidden">Speichern</button>

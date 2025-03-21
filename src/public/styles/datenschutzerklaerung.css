@@ -5,3 +5,8 @@ body {
     margin: 20px auto;
     padding: 20px;
 }
+
+
+main{
+    position: relative;
+}
