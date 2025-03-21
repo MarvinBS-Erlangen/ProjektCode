@@ -1,17 +1,4 @@
-<?php
-// Datenbank verbindung herstellen
-include '../database/connection.php';
-// Start der Session
-// Sessions initialisieren wenn noch nicht gemacht
-include '../comps/sessioncheck.php';
-// Schaue ob der Benutzer eingeloggt ist
-include '../comps/usercheck.php';
-// Datenbank Logik einbinden -- POST Requests an die Datenbank + Backend Logik
-include '../database/db_user_profile.php';
 
-// Bestellungen vom User abrufen
-include '../database/db_user_orders.php';
-?>
 
 <?php
 // Datenbank verbindung herstellen
@@ -65,7 +52,7 @@ include '../database/db_user_orders.php';
                         <input type="text" id="Nachname" name="Nachname" value="<?php echo htmlspecialchars($lastName); ?>" disabled>
                         <span class="error-message inaktiv"></span>
 
-                        <label for="Strasse">Adresse</label>
+                        <label for="Strasse">Straße</label>
                         <div class="address-container">
                             <input type="text" id="Strasse" name="Strasse" value="<?php echo htmlspecialchars($address); ?>" disabled>
                             <span class="error-message inaktiv"></span>
@@ -83,12 +70,19 @@ include '../database/db_user_orders.php';
                         <span class="error-message inaktiv"></span>
 
                         <label for="Land">Land</label>
-                        <input type="text" id="Land" name="Land" value="<?php echo htmlspecialchars($country); ?>" disabled>
+                        <select id="Land" name="Land" disabled>
+                            <?php foreach ($countries as $countryOption): ?>
+                                <option value="<?php echo htmlspecialchars($countryOption); ?>" <?php echo $countryOption === $country ? 'selected' : ''; ?>>
+                                    <?php echo htmlspecialchars($countryOption); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
                         <span class="error-message inaktiv"></span>
 
                         <label for="Telefon">Telefonnummer</label>
                         <input type="text" id="Telefon" name="Telefon" value="<?php echo htmlspecialchars($phone); ?>" disabled>
                         <span class="error-message inaktiv"></span>
+                        <br>
 
                         <button type="button" id="edit-btn">Bearbeiten</button>
                         <button type="submit" id="save-btn" class="hidden">Speichern</button>
@@ -153,7 +147,7 @@ include '../database/db_user_orders.php';
 
     <script>
         document.getElementById('edit-btn').addEventListener('click', function() {
-            document.querySelectorAll('.profile-info input').forEach(function(input) {
+            document.querySelectorAll('.profile-info input, .profile-info select').forEach(function(input) {
                 input.disabled = false;
             });
             document.getElementById('edit-btn').classList.add('hidden');
@@ -162,7 +156,7 @@ include '../database/db_user_orders.php';
         });
 
         document.getElementById('cancel-btn').addEventListener('click', function() {
-            document.querySelectorAll('.profile-info input').forEach(function(input) {
+            document.querySelectorAll('.profile-info input, .profile-info select').forEach(function(input) {
                 input.disabled = true;
             });
             document.getElementById('edit-btn').classList.remove('hidden');
@@ -172,7 +166,7 @@ include '../database/db_user_orders.php';
 
         // deaktivierte input felder aktivieren, wenn das Formular abgeschickt wird, damit daten aktualisiert werden können
         document.getElementById('profile-form').addEventListener('submit', function() {
-            document.querySelectorAll('.profile-info input').forEach(function(input) {
+            document.querySelectorAll('.profile-info input, .profile-info select').forEach(function(input) {
                 input.disabled = false;
             });
         });

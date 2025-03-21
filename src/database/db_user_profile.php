@@ -58,6 +58,14 @@ if (!$user) {
     $state = $user['Status'];
 }
 
+// Länder aus der Datenbank abrufen
+$countriesQuery = "SELECT DISTINCT Land FROM adresse ORDER BY Land";
+$countriesResult = $conn->query($countriesQuery);
+$countries = [];
+while ($row = $countriesResult->fetch_assoc()) {
+    $countries[] = $row['Land'];
+}
+
 // Verarbeiten der POST-Daten zum Aktualisieren der Benutzerinformationen
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Überprüfen, ob der Benutzer sein Konto löschen möchte;
@@ -128,3 +136,4 @@ WHERE KundenID = ?
         exit();
     }
 }
+?>
