@@ -52,7 +52,9 @@ include '../database/db_contest.php';
 
 
         <div class="participate-container">
-            <div class="description">Participate in our <span id="funny-dinner-contest">Funny-Dinner-Contest</span>.<br> Share your dinner pics with the community. There's a prize!!<br> Wink Wink </div>
+            <div class="description">Mach mit bei unserem <span id="funny-dinner-contest">Funny-Dinner-Contest</span>.<br>
+                Teile deine Essens-Fotos mit der Community. Es gibt einen Preis!! <br>
+                Zwinker Zwinker 😉</div>
             <div class="button-container">
                 <div class="view-your-uploads-container">
                     <button type="button" id="btn-view-your-uploads">UPLOADS ANZEIGEN</button>

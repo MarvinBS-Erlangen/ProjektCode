@@ -117,6 +117,7 @@ p {
 }
 .btn:hover {
     background: #a8d5ba;
+    color: white;
     transform: scale(1.05);
 }
 
