@@ -7,8 +7,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['upload'])) {
     $titel = $_POST['titel'];
     $bildurl = $_POST['bildurl'];
 
+    // Regex für gültige Bild-URLs
+    $imageUrlPattern = '/\.(jpeg|jpg|png|gif|bmp|webp)$/i';
+
     // Validierung der Bild-URL
-    if (filter_var($bildurl, FILTER_VALIDATE_URL)) {
+    if (filter_var($bildurl, FILTER_VALIDATE_URL) && preg_match($imageUrlPattern, $bildurl)) {
         $sql = "INSERT INTO Bild (KundenID, Bilddatei, Titel) VALUES (?, ?, ?)";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("iss", $userID, $bildurl, $titel);
