@@ -128,6 +128,11 @@ main {
     box-shadow: 3px 3px 8px rgba(0, 0, 0, 1);
 }
 
+#btn-current-best-rated-food:hover {
+    cursor: pointer;
+    background-color: #8fbca1;
+}
+
 #btn-view-your-uploads:hover,
 #btn-upload-picture:hover {
     cursor: pointer;
@@ -187,3 +192,4 @@ main {
 .rating-container i {
     font-size: 1.5rem;
 }
+

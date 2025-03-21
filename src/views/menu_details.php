@@ -79,8 +79,8 @@ while ($row = $result_products->fetch_assoc()) {
             <div class="menu-details">
                 <h1 class="menu-title"><?php echo $menu['Menuename']; ?></h1>
                 <div class="pricing">
-                    <span class="new-price"><?php echo $menu['DiscountPreis']; ?> €</span>
                     <span class="old-price"><?php echo $menu['NormalPreis']; ?> €</span>
+                    <span class="new-price"><?php echo $menu['DiscountPreis']; ?> €</span>
                 </div>
 
                 <p class="energy-info"><strong><?php echo $gesamtEnergie; ?> kcal</strong></p>
