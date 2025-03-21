@@ -48,6 +48,10 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!formIsValid) {
             event.preventDefault();
             alert("Bitte korrigieren Sie die Fehler in den Formularfeldern.");
+        } else {
+            event.preventDefault();
+            alert("Nachricht erfolgreich abgeschickt!");
+            window.location.href = window.location.href; // Reload the page
         }
     });
 

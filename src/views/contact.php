@@ -9,9 +9,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <script src="../handlers/btn-back-handler.js" defer></script>
-        <script src="../handlers/validation_contact.js" defer></script>
-        <title>Kontakt – MACaPPLE</title>
+    <script src="../handlers/btn-back-handler.js" defer></script>
+    <script src="../handlers/validation_contact.js" defer></script>
+    <title>Kontakt – MACaPPLE</title>
 </head>
 
 <body>
@@ -34,12 +34,15 @@
                 <form action="kontakt.php" method="POST">
                     <label for="name">Dein Name</label>
                     <input type="text" id="name" name="name" required>
+                    <span class="error-message inaktiv"></span>
 
                     <label for="email">Deine E-Mail</label>
                     <input type="email" id="email" name="email" required>
+                    <span class="error-message inaktiv"></span>
 
                     <label for="message">Deine Nachricht</label>
                     <textarea id="message" name="message" rows="5" required></textarea>
+                    <span class="error-message inaktiv"></span>
 
                     <button type="submit">Absenden</button>
                 </form>
