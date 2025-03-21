@@ -32,13 +32,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif (isset($_POST['delete_product'])) {
         $produktID = $_POST['produkt_id'];
 
-        // SQL-Befehl zum Löschen eines Produkts
-        $sql = "DELETE FROM produkt WHERE ProduktID = ?";
-        
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("i", $produktID);
-        $stmt->execute();
-        echo "<p style='color: green;'>Produkt erfolgreich gelöscht.</p>";
+        // Überprüfen, ob das Produkt in einem Menü vorkommt
+        $checkSql = "SELECT COUNT(*) AS count FROM menue_produkt WHERE ProduktID = ?";
+        $checkStmt = $conn->prepare($checkSql);
+        $checkStmt->bind_param("i", $produktID);
+        $checkStmt->execute();
+        $checkResult = $checkStmt->get_result();
+        $row = $checkResult->fetch_assoc();
+
+        if ($row['count'] > 0) {
+            // Warnung ausgeben, wenn das Produkt in einem Menü vorkommt
+            echo "<p style='color: red;'>Das Produkt kann nicht gelöscht werden, da es in einem Menü verwendet wird. Entfernen Sie es zuerst aus dem Menü.</p>";
+        } else {
+            // SQL-Befehl zum Löschen eines Produkts
+            $sql = "DELETE FROM produkt WHERE ProduktID = ?";
+            
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("i", $produktID);
+            $stmt->execute();
+            echo "<p style='color: green;'>Produkt erfolgreich gelöscht.</p>";
+        }
     }
 }
 
