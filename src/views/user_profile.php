@@ -13,6 +13,21 @@ include '../database/db_user_profile.php';
 include '../database/db_user_orders.php';
 ?>
 
+<?php
+// Datenbank verbindung herstellen
+include '../database/connection.php';
+// Start der Session
+// Sessions initialisieren wenn noch nicht gemacht
+include '../comps/sessioncheck.php';
+// Schaue ob der Benutzer eingeloggt ist
+include '../comps/usercheck.php';
+// Datenbank Logik einbinden -- POST Requests an die Datenbank + Backend Logik
+include '../database/db_user_profile.php';
+
+// Bestellungen vom User abrufen
+include '../database/db_user_orders.php';
+?>
+
 <!DOCTYPE html>
 <html lang="de">
 
@@ -27,8 +42,6 @@ include '../database/db_user_orders.php';
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="../handlers/product-cart-icon-handler.js" defer></script>
-    <script src="../handlers/user-profile-handlers.js" defer></script>
     <script src="../handlers/validation_user_profile.js" defer></script>
     <title>Benutzerprofil</title>
 </head>
@@ -44,29 +57,38 @@ include '../database/db_user_orders.php';
                 <h2>Profilinformationen</h2>
                 <div class="profile-data">
                     <form method="POST" action="user_profile.php" id="profile-form">
-                        <label for="firstname">Vorname</label>
-                        <input type="text" id="firstname" name="Vorname" placeholder="Vorname" value="<?php echo htmlspecialchars($firstName); ?>" disabled>
+                        <label for="Vorname">Vorname</label>
+                        <input type="text" id="Vorname" name="Vorname" value="<?php echo htmlspecialchars($firstName); ?>" disabled>
+                        <span class="error-message inaktiv"></span>
 
-                        <label for="lastname">Nachname</label>
-                        <input type="text" id="lastname" name="Nachname" placeholder="Nachname" value="<?php echo htmlspecialchars($lastName); ?>" disabled>
+                        <label for="Nachname">Nachname</label>
+                        <input type="text" id="Nachname" name="Nachname" value="<?php echo htmlspecialchars($lastName); ?>" disabled>
+                        <span class="error-message inaktiv"></span>
 
-                        <label for="address">Adresse</label>
+                        <label for="Strasse">Adresse</label>
                         <div class="address-container">
-                            <input type="text" id="address" name="Strasse" placeholder="Straße" value="<?php echo htmlspecialchars($address); ?>" disabled>
-                            <input type="text" id="house-number" name="Hausnummer" placeholder="Nr." value="<?php echo htmlspecialchars($houseNumber); ?>" disabled>
+                            <input type="text" id="Strasse" name="Strasse" value="<?php echo htmlspecialchars($address); ?>" disabled>
+                            <span class="error-message inaktiv"></span>
+                            <label for="Hausnummer">Hausnummer</label>
+                            <input type="text" id="Hausnummer" name="Hausnummer" value="<?php echo htmlspecialchars($houseNumber); ?>" disabled>
+                            <span class="error-message inaktiv"></span>
                         </div>
 
-                        <label for="zipcode">PLZ</label>
-                        <input type="text" id="zipcode" name="Postleitzahl" placeholder="PLZ" value="<?php echo htmlspecialchars($zipcode); ?>" disabled>
+                        <label for="Postleitzahl">PLZ</label>
+                        <input type="text" id="Postleitzahl" name="Postleitzahl" value="<?php echo htmlspecialchars($zipcode); ?>" disabled>
+                        <span class="error-message inaktiv"></span>
 
-                        <label for="city">Stadt</label>
-                        <input type="text" id="city" name="Stadt" placeholder="Stadt" value="<?php echo htmlspecialchars($city); ?>" disabled>
+                        <label for="Stadt">Stadt</label>
+                        <input type="text" id="Stadt" name="Stadt" value="<?php echo htmlspecialchars($city); ?>" disabled>
+                        <span class="error-message inaktiv"></span>
 
-                        <label for="country">Land</label>
-                        <input type="text" id="country" name="Land" placeholder="Land" value="<?php echo htmlspecialchars($country); ?>" disabled>
+                        <label for="Land">Land</label>
+                        <input type="text" id="Land" name="Land" value="<?php echo htmlspecialchars($country); ?>" disabled>
+                        <span class="error-message inaktiv"></span>
 
-                        <label for="phone">Telefonnummer</label>
-                        <input type="text" id="phone" name="Telefon" placeholder="Telefonnummer" value="<?php echo htmlspecialchars($phone); ?>" disabled>
+                        <label for="Telefon">Telefonnummer</label>
+                        <input type="text" id="Telefon" name="Telefon" value="<?php echo htmlspecialchars($phone); ?>" disabled>
+                        <span class="error-message inaktiv"></span>
 
                         <button type="button" id="edit-btn">Bearbeiten</button>
                         <button type="submit" id="save-btn" class="hidden">Speichern</button>
