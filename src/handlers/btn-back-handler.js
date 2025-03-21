@@ -16,6 +16,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     case 'contact.php':
                     case 'datenschutzerklaerung.php':
                     case 'agb.php':
+                    case 'menu_details.php':
+                    case 'product_details.php':
                     case 'impressum.php':
                         // Geht zur vorherigen Seite im Verlauf zurück
                         window.history.back();

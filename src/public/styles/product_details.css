@@ -6,6 +6,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    position: relative;
 }
 
 main {
@@ -168,4 +169,13 @@ footer {
     .new-price, .energy-info, .description {
         font-size: 0.875rem;
     }
+}
+
+.btn-back {
+    position: absolute;
+    top: 12%;
+    left: 10px;
+    padding: 6px 10px;
+    max-width: 100px;
+    white-space: nowrap;
 }

@@ -6,6 +6,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    position: relative;
 }
 
 main {
@@ -120,4 +121,13 @@ footer {
 
 .zutaten {
     font-weight: 400;
+}
+
+.btn-back {
+    position: absolute;
+    top: 12%;
+    left: 10px;
+    padding: 6px 10px;
+    max-width: 100px;
+    white-space: nowrap;
 }
