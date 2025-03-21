@@ -26,7 +26,7 @@ input {
 
 /* Upload-Button */
 .upload-button {
-    background-color: #a8d5ba;
+    background-color: #74a286;
     color: white;
     width: 48%;
     padding: 12px;
@@ -39,7 +39,7 @@ input {
 }
 
 .upload-button:hover {
-    background-color: #8fbca1;
+    background-color: #74a286;
 }
 
 /* Vorschau */
