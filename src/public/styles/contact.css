@@ -8,9 +8,6 @@ body {
     position: relative;
 }
 
-
-
-
 /* Header */
 header {
     text-align: center;
@@ -92,8 +89,29 @@ header {
     .contact-container {
         grid-template-columns: 1fr;
     }
+
+    .btn-back {
+        position: absolute;
+        top: 10%;
+    }
 }
 
-.btn-back{
+.btn-back {
+    position: absolute;
     top: 32%;
+}
+
+
+.error-message {
+    color: red;
+    font-size: 0.875em;
+    margin-top: 0.25em;
+}
+
+.error-message.inaktiv {
+    display: none;
+}
+
+.error-message.aktiv {
+    display: block;
 }
