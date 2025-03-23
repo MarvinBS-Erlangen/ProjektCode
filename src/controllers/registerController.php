@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bind_param("sssss", $address, $houseNumber, $zipcode, $city, $country);
         $stmt->execute();
 
-        $addressId = $stmt->insert_id;
+        $addressId = $stmt->insert_id; // abrufen der adressId aus der zuletzt hinzugefügten Zeile zur Datenbank
 
         $insertUserQuery = "INSERT INTO kunde (Vorname, Nachname, EMail, Password_Hash, Telefon, AdresseID, Status) VALUES (?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($insertUserQuery);
